@@ -1,0 +1,21 @@
+ideas: not a list, but "cards" (option to upload/link image?),
+each card has project name, media/type, category, state (idea/in-progress/revision/
+completed/submitted/accepted).
+
+ex)
+name: basalt
+genre: writing (options: do i give them? or allow them to create? writing/visual art)
+type/media: essay (they input this)
+state: revision (options: idea)
+completed: false
+submitted: false
+accepted: false
+
+onclick--opens to see details (like notes, etc) and also edit
+or add more info if they want, or move to new list (w/ button!)
+
+will also have a submit button to take them to submittable (i hope,
+not sure if this is allowed, will have to read their docs)
+
+drop-down menus/buttons will allow them to filter/see their lists by...
+genre, state, maybe type, too, but would have to be dynamic from backend
