@@ -1,3 +1,7 @@
+/* font-family: 'Quattrocento Sans', sans-serif;
+font-family: 'Khula', sans-serif;
+font-family: 'Open Sans', sans-serif; */
+
 body {
   margin: 0;
   padding: 0;
@@ -12,3 +16,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
