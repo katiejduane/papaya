@@ -15,7 +15,9 @@ class Layout extends Component {
             <Aux>
                 <Header />
                 <MainNav />
-                
+                <main className="Content">
+                    {this.props.children}
+                </main>
             </Aux>
         )
     }

@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import './MainNav.css'
+import React from 'react';
+import './MainNav.css';
+import NavItems from '../../../components/NavItems/NavItems';
 
-class MainNav extends Component{
 
-
-    render(){
-        return(
-            <MainNav className="MainNav">
-
-            </MainNav>
-        )
-    }
-}
+const MainNav = (props) => (
+    <header className="MainNav">
+        <div className="MainNavLogo"></div>
+        <nav className="deskTopOnly">
+           <NavItems />
+        </nav>
+    </header>
+)
 
 export default MainNav;
