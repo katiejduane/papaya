@@ -1,0 +1,7 @@
+.MainNav{
+    width: 100%;
+    position: fixed;
+    top: 6rem;
+    height: 2rem;
+    background-color: darkcyan;
+}
