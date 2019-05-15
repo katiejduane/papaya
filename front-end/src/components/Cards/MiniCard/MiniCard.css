@@ -1,0 +1,8 @@
+.MiniCard{
+    width: 175px;
+    height: 225px;
+    background-color: #F7F4DB;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-family: 'Work Sans', sans-serif;
+}

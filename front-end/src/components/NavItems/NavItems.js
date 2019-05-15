@@ -7,9 +7,8 @@ const navItems = () => (
   <ul className="NavItems">
     <NavItem>All</NavItem>
     <NavItem>Type</NavItem>
-    <NavItem>Category</NavItem>
     <NavItem>Status</NavItem>
-    <NavItem>Acct</NavItem>
+    <NavItem>Me</NavItem>
   </ul>
 );
 

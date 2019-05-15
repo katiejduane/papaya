@@ -1,0 +1,11 @@
+*{
+    font-family: 'Work Sans', sans-serif;
+    outline:none;
+}
+
+.MiniCardBtn{
+    background-color: #3A8366;
+    color: white;
+    font-size: 12pt;
+    border: none;
+}
