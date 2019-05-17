@@ -1,8 +1,26 @@
 .MiniCard{
     width: 175px;
     height: 225px;
-    background-color: #ebeeb4;
+    background-color: #eaf2df;
     padding: 1rem;
     box-sizing: border-box;
     font-family: 'Work Sans', sans-serif;
+    border-radius: 0 10px 10px 10px;
+    color: rgb(84, 72, 69);
+}
+
+.MiniCard:hover{
+    border-bottom: 5px solid #3A8366;
+}
+
+.MiniCard-Title{
+    margin: 1rem 0;
+}
+
+.MiniCard-Type{
+    margin: 1rem 0;
+}
+
+.MiniCard-Status{
+    margin: 1rem 0;
 }

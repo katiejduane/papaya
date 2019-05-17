@@ -6,11 +6,12 @@
     height: 100%;
     padding: 2rem;
     display: flex;
+    background-color: rgb(250, 247, 242);
 }
 
-.CardTitle{
+/* .CardTitle{
     font-family: 'Work Sans', sans-serif;
-}
+} */
 
 .List{
     color: rgb(84, 72, 69);
