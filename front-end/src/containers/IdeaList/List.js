@@ -11,6 +11,7 @@ class List extends Component {
     render(){
         return (
           <div className="CardContainer">
+            {/* <h1 classname="CardTitle">Ideas</h1> */}
             <MiniCard title="Kingfisher" type="Poetry" status="In-Progress"/>
           </div>
         );

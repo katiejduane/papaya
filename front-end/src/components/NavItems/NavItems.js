@@ -6,8 +6,8 @@ import NavItem from './NavItem/NavItem';
 const navItems = () => (
   <ul className="NavItems">
     <NavItem>All</NavItem>
-    <NavItem>Type</NavItem>
-    <NavItem>Status</NavItem>
+    <NavItem>By Type</NavItem>
+    <NavItem>By Status</NavItem>
     <NavItem>Me</NavItem>
   </ul>
 );

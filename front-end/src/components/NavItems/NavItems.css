@@ -6,10 +6,11 @@
     flex-flow: column;
     align-items: center;
     height: 100%;
+    width: 100%;
 }
 
 @media (min-width: 500px){
-    .NavItems{
+    /* .NavItems{
         flex-flow: row;
-    }
+    } */
 }
