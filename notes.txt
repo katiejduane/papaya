@@ -19,3 +19,6 @@ not sure if this is allowed, will have to read their docs)
 
 drop-down menus/buttons will allow them to filter/see their lists by...
 genre, state, maybe type, too, but would have to be dynamic from backend
+
+cards could be color-coded by project type? and/or by where they are 
+in the process?
