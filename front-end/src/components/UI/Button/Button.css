@@ -12,5 +12,6 @@
 }
 
 .MiniCardBtn:hover{
-    background-color: #ED8971;
+    /* background-color: #ED8971; */
+    cursor: pointer;
 }

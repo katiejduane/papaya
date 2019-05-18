@@ -11,4 +11,4 @@ exports.getIndex = (req, res, next) => {
         console.log(projects)
     })
     .catch(err => console.log(err))
-}
+};

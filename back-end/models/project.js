@@ -31,8 +31,8 @@ const Project = sequelize.define('project', {
         type: Sequelize.INTEGER(),
         allowNull: false,
     },
-    tid: {
-        type: Sequelize.INTEGER(),
+    type: {
+        type: Sequelize.STRING(55),
         allowNull: false,
     }
 
