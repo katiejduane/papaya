@@ -36,6 +36,9 @@ sequelize
         console.log('unable to connect to DB', err)
     })
 
+// should i use 'hasMany' between users and types and keep the tables separate? i just need
+// to know how to insert to both and retrive from both (tables)
+
 // sequelize
 //     .sync()
 //     .then(result => {

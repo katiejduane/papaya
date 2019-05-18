@@ -8,12 +8,14 @@
     font-family: 'Work Sans', sans-serif;
     border-radius: 0 10px 10px 10px;
     color: rgb(84, 72, 69);
-    transition: border-bottom 0.5s ease;
-    /* box-shadow: 0px 6px 10px -5px rgba(201, 190, 190, 0.817); */
+    transition: background-color, box-shadow 0.5s ease;
+    /* transition: border-bottom 0.5s ease; */
 }
 
 .MiniCard:hover{
-    border-bottom: 5px solid #ED8971;
+    /* border-bottom: 5px solid #ED8971; */
+    background-color: #eff3ea;
+    box-shadow: 5px 5px 8px -5px rgba(201, 190, 190, 0.817);
 }
 
 .MiniCard-Title{
