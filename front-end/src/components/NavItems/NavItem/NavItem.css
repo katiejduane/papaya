@@ -4,7 +4,7 @@
     display: block;
     width: 100%;
     /* transition: background-color 1s ease; */
-    color: rgb(84, 72, 69);
+    color: rgb(82, 73, 80);
     font-family: 'Work Sans', sans-serif;
     font-size: 13pt;
 }
@@ -13,7 +13,7 @@
     margin-bottom: 2rem;
     font-size: 14pt;
     font-weight: bold;
-    color: #ed8a71;
+    color: rgb(245, 129, 141);
     /* transition: color 1s ease; */
 }
 
@@ -49,7 +49,7 @@
     .NavItem:hover,
     .NavItem:active,
     .NavItem a.active {
-        background-color: rgba(237, 138, 113, 0.774);
+        background-color: rgba(245, 129, 137, 0.872);
         cursor: pointer;
     }
 }

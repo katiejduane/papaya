@@ -1,6 +1,7 @@
 .MainNav{
     position: fixed;
-    background-color: rgb(249, 211, 197);
+    /* background-color: rgb(249, 211, 197); */
+    background-color: rgb(254, 218, 223);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -36,7 +37,7 @@
     width: 1.5rem;
     border-radius: 50%;
     margin: 2rem;
-    background-color:#ED8971;
+    background-color:rgb(245, 129, 141);
 }
 
 @media (min-width: 600px){

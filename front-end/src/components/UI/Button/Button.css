@@ -4,14 +4,17 @@
 }
 
 .MiniCardBtn{
-    background-color: #3A8366;
-    color: white;
+    background-color: rgb(246, 246, 250);
+    color: rgb(245, 129, 141);
     font-size: 12pt;
-    border: none;
-    transition: background-color 0.5s ease;
+    border: 1px solid rgb(245, 129, 141);
+    border-radius: 3px;
+    padding: 0.25rem 0.5rem;
+    /* transition: background-color 0.5s ease; */
 }
 
 .MiniCardBtn:hover{
-    /* background-color: #ED8971; */
+    background-color: rgb(245, 129, 141);
+    color: rgb(246, 246, 250);
     cursor: pointer;
 }
