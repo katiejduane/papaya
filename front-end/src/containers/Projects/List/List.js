@@ -35,7 +35,7 @@ class List extends Component {
       if(this.state.miniCards.length > 0){
         miniCardList = this.state.miniCards.map((card, i) => {
           return(
-            <MiniCard key={i} title={card.name} type={card.tid} status={card.status} />
+            <MiniCard key={i} title={card.name} type={card.tid} status={card.status} view={card.name}/>
           );
         });
       } 

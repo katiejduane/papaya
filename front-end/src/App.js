@@ -4,9 +4,9 @@ import { Route, Switch } from 'react-router-dom';
 
 import Layout from './hoc/Layout/Layout';
 import List from './containers/Projects/List/List';
-import DetailCard from './components/Cards/DetailCard/DetailCard';
+import Details from './containers/Projects/Details/Details';
 import NewProject from './containers/Projects/AddNew/NewProject';
-import EditProject from './containers/Projects/Edit/EditProject';
+import UpdateProject from './containers/Projects/Update/UpdateProject';
 import Account from './containers/Auth/Account/Account';
 
 class App extends Component {
@@ -16,9 +16,9 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route exact path="/" component={List} />
-            <Route exact path="/view/:" component={DetailCard} />
+            <Route exact path="/view/:" component={Details} />
             <Route exact path="/addNew" component={NewProject} />
-            <Route exact path="/edit/:" component={EditProject} />
+            <Route exact path="/update/:" component={UpdateProject} />
             <Route exact path="/account/:" component={Account} />
           </Switch>
         </Layout>
