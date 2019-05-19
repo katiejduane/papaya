@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-
 const sequelize = require('../util/database');
 
 const Project = sequelize.define('project', {
@@ -26,16 +25,7 @@ const Project = sequelize.define('project', {
     submitted: {
         type: Sequelize.BOOLEAN(),
         allowNull: true,
-    },
-    uid: {
-        type: Sequelize.INTEGER(),
-        allowNull: false,
-    },
-    type: {
-        type: Sequelize.STRING(55),
-        allowNull: false,
     }
-
 });
 
 module.exports = Project;

@@ -4,10 +4,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
-const sequelize = require('./util/database');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+const sequelize = require('./util/database');
+
+const User = require('./models/user');
+const Project = require('./models/project');
+const Type = require('./models/type');
 
 var app = express();
 
@@ -27,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+//check DB connection
 sequelize
     .authenticate()
     .then(() => {
@@ -36,16 +41,31 @@ sequelize
         console.log('unable to connect to DB', err)
     })
 
-// should i use 'hasMany' between users and types and keep the tables separate? i just need
-// to know how to insert to both and retrive from both (tables)
 
-// sequelize
-//     .sync()
-//     .then(result => {
-//         // console.log(result);
-//     })
-//     .catch(err => {
-//         // console.log(err);
-//     })
+// create tables and relations
+Project.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+User.hasMany(Project);
+Type.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+Type.hasMany(Project);
+
+
+// special method in sequelize that is aware of all models/tables and only
+// creates new tables if needed (unless 'force' is on)
+sequelize
+    .sync()
+    // .sync({force: true})
+    .then(result => {
+        return User.findByPk(1)
+        // console.log(result);
+    })
+    .then(user => {
+        if(!user){
+            User.create({firstname: 'Katie', lastname: 'Duane', email: 'katiejduane@gmail.com'})
+        }
+        return user;
+    })
+    .catch(err => {
+        // console.log(err);
+    })
 
 module.exports = app;

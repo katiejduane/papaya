@@ -3,7 +3,7 @@ const Project = require('../models/project');
 exports.getIndex = (req, res, next) => {
     Project.findAll({
         where: {
-            uid: 1
+            userId: 1
         }
     })
     .then(projects => {
