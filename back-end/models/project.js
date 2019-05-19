@@ -19,10 +19,6 @@ const Project = sequelize.define('project', {
     status: {
         type: Sequelize.STRING(55),
         allowNull: false
-    },
-    submitted: {
-        type: Sequelize.BOOLEAN(),
-        allowNull: true,
     }
 });
 
