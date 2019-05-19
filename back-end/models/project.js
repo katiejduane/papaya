@@ -15,12 +15,10 @@ const Project = sequelize.define('project', {
     notes: {
         type: Sequelize.TEXT(),
         allowNull: true
-
     },
     status: {
         type: Sequelize.STRING(55),
         allowNull: false
-
     },
     submitted: {
         type: Sequelize.BOOLEAN(),
