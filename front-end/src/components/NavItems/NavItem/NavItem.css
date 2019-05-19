@@ -50,6 +50,7 @@
     .NavItem:active,
     .NavItem a.active {
         background-color: rgba(245, 129, 137, 0.872);
+        border-radius: 0;
         cursor: pointer;
     }
 }

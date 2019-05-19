@@ -18,14 +18,14 @@ class Details extends Component {
         const projId = this.props.match.params.id
         axios.get(`${window.apiHost}/view/${projId}`)
             .then((response) => {
-                const projectDetails = response.data
-                console.log(response)
+                const projectDetails = response.data[0]
+                console.log(projectDetails)
                 this.setState({
                     title: projectDetails.name,
                     status: projectDetails.status,
-                    notes: projectDetails.notes
-                    // type: response.data.name, // how to handle this separate request to another table!?
-                    // color: response.data.color, // this is also from 'types'
+                    notes: projectDetails.notes,
+                    type: projectDetails.type.typename, // how to handle this separate request to another table!?
+                    color: projectDetails.type.color, // this is also from 'types'
                 })
             })
             .catch((error => {
@@ -42,7 +42,10 @@ class Details extends Component {
                 <DetailCard 
                     title={this.state.title}
                     status={this.state.status}
-                    notes={this.state.notes}/>
+                    notes={this.state.notes}
+                    type={this.state.type}
+                    color={this.state.color}
+                    />
             </div>
         )
     }

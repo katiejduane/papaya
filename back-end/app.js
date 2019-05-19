@@ -46,6 +46,7 @@ sequelize
 Project.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
 User.hasMany(Project);
 Type.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+Project.belongsTo(Type);
 Type.hasMany(Project);
 
 

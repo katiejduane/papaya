@@ -1,8 +1,13 @@
 const Project = require('../models/project');
+const Type = require('../models/type');
 
 // loads home page (if logged in, eventually) with all projects, no filter!
 exports.getIndex = (req, res, next) => {
+    // const userId = req.body.id;
     Project.findAll({
+        include:[{
+            model: Type
+        }],
         where: {
             userId: 1
         }
@@ -17,9 +22,15 @@ exports.getIndex = (req, res, next) => {
 // gets a single project to see details
 exports.getProject = (req, res, next) => {
     const projId = req.params.projId;
-    Project.findByPk(projId)
+    Project.findAll({
+        include:[{
+            model: Type}],
+        where: {
+            id: projId}
+        })
         .then(project => {
-            console.log(project)
+            // return project;
+            // console.log(project)
             res.json(project)
         })
         .catch(err => console.log(err))

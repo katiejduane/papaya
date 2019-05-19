@@ -19,6 +19,7 @@ class List extends Component {
         console.log(response) 
         this.setState({
           miniCards: response.data
+          // types: response.data.type.type
         })
       })
       .catch((error => {
@@ -35,7 +36,7 @@ class List extends Component {
       if(this.state.miniCards.length > 0){
         miniCardList = this.state.miniCards.map((card, i) => {
           return(
-            <MiniCard key={i} title={card.name} type={card.tid} status={card.status} view={card.id}/>
+            <MiniCard key={i} title={card.name} type={card.type.typename} color={card.type.color} status={card.status} view={card.id}/>
           );
         });
       } 

@@ -25,6 +25,7 @@
 
 .MiniCard-Type{
     margin: 1rem 0;
+    display: inline;
 }
 
 .MiniCard-Status{

@@ -26,6 +26,7 @@
     color: rgb(107, 213, 179);
     font-size: 12pt;
     border: 1px solid rgb(107, 213, 179);
+    margin: 1rem;
 }
 
 .UpdateBtn:hover{
@@ -38,6 +39,7 @@
     color: rgb(250, 81, 81);
     font-size: 12pt;
     border: 1px solid rgb(250, 81, 81);
+    margin: 1rem;
 }
 
 .DeleteBtn:hover{
