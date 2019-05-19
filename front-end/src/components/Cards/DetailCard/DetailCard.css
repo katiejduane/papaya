@@ -1,0 +1,34 @@
+.DetailCard{
+    width: 80%;
+    height: 80%;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #f3f3f5;
+    border: 1px solid #e3e3e3;
+    box-sizing: border-box;
+    font-family: 'Work Sans', sans-serif;
+    border-radius: 0 10px 10px 10px;
+    color:rgb(82, 73, 80);
+}
+
+
+.DetailCard-Title{
+    margin: 1rem;
+}
+
+.DetailCard-Type{
+    margin: 1rem;
+}
+
+.DetailCard-Status{
+    margin: 1rem;
+}
+
+.DetailCard-Notes{
+    margin: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

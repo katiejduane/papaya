@@ -13,6 +13,6 @@ router.get('/addNew', projectController.getTypes);
 router.post('/addNew', projectController.postNewProject);
 
 // GET the details of a project
-router.get('/view/:', projectController.getProject);
+router.get('/view/:projId', projectController.getProject);
 
 module.exports = router;

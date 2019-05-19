@@ -16,6 +16,13 @@ exports.getIndex = (req, res, next) => {
 
 // gets a single project to see details
 exports.getProject = (req, res, next) => {
+    const projId = req.params.projId;
+    Project.findByPk(projId)
+        .then(project => {
+            console.log(project)
+            res.json(project)
+        })
+        .catch(err => console.log(err))
 
 }
 

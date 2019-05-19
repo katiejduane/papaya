@@ -1,6 +1,12 @@
 *{
     font-family: 'Work Sans', sans-serif;
     outline:none;
+    border-radius: 3px;
+    padding: 0.25rem 0.5rem;
+}
+
+*:hover{
+    cursor: pointer;
 }
 
 .MiniCardBtn{
@@ -8,13 +14,33 @@
     color: rgb(245, 129, 141);
     font-size: 12pt;
     border: 1px solid rgb(245, 129, 141);
-    border-radius: 3px;
-    padding: 0.25rem 0.5rem;
-    /* transition: background-color 0.5s ease; */
 }
 
 .MiniCardBtn:hover{
     background-color: rgb(245, 129, 141);
     color: rgb(246, 246, 250);
-    cursor: pointer;
+}
+
+.UpdateBtn{
+    background-color: rgb(246, 246, 250);
+    color: rgb(107, 213, 179);
+    font-size: 12pt;
+    border: 1px solid rgb(107, 213, 179);
+}
+
+.UpdateBtn:hover{
+    background-color: rgb(107, 213, 179);
+    color: rgb(246, 246, 250);
+}
+
+.DeleteBtn{
+    background-color: rgb(246, 246, 250);
+    color: rgb(250, 81, 81);
+    font-size: 12pt;
+    border: 1px solid rgb(250, 81, 81);
+}
+
+.DeleteBtn:hover{
+    background-color: rgb(250, 81, 81);
+    color: rgb(246, 246, 250);
 }

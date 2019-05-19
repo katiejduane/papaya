@@ -16,7 +16,7 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route exact path="/" component={List} />
-            <Route exact path="/view/:" component={Details} />
+            <Route exact path="/view/:id" component={Details} />
             <Route exact path="/addNew" component={NewProject} />
             <Route exact path="/update/:" component={UpdateProject} />
             <Route exact path="/account/:" component={Account} />
