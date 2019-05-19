@@ -39,7 +39,11 @@ class List extends Component {
             <MiniCard key={i} title={card.name} type={card.type.typename} color={card.type.color} status={card.status} view={card.id}/>
           );
         });
-      } 
+      } else {
+        return(
+          <h2>You don't have any projects yet!</h2>
+        )
+      }
 
         return (
           <div className="MiniCardContainer">
