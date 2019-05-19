@@ -3,7 +3,7 @@ import React from 'react';
 import './NavItem.css';
 
 const navItem = (props) => (
-    <li className="NavItem">
+    <li className="NavItem" id={props.id}>
         {props.children}
     </li>
 )

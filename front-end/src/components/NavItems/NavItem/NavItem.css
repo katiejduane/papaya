@@ -3,10 +3,22 @@
     box-sizing: border-box;
     display: block;
     width: 100%;
-    transition: background-color 1s ease;
+    /* transition: background-color 1s ease; */
     color: rgb(84, 72, 69);
     font-family: 'Work Sans', sans-serif;
     font-size: 13pt;
+}
+
+#AddNew{
+    margin-bottom: 2rem;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #ed8a71;
+    /* transition: color 1s ease; */
+}
+
+#AddNew:hover{
+    color: #FAFBF9;
 }
 
 /* .NavItem a {

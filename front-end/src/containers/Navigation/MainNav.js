@@ -1,6 +1,6 @@
 import React from 'react';
 import './MainNav.css';
-import NavItems from '../../../components/NavItems/NavItems';
+import NavItems from '../../components/NavItems/NavItems';
 
 
 const MainNav = (props) => (

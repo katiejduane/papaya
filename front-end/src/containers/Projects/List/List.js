@@ -2,19 +2,21 @@ import React, { Component } from  'react';
 import axios from 'axios';
 
 import './List.css';
-import MiniCard from '../../components/Cards/MiniCard/MiniCard';
+import MiniCard from '../../../components/Cards/MiniCard/MiniCard';
 
 class List extends Component {
     state = {
         miniCards: [],
         status: ['Idea', 'In-Progress', 'Revision', 'Finished', 'Accepted'],
+        types: [],
+        colors: [],
         error: false
     }
 
     componentDidMount(){
       axios.get(`${window.apiHost}`)
       .then((response) => {
-        console.log(response)
+        console.log(response) 
         this.setState({
           miniCards: response.data
         })
@@ -33,7 +35,7 @@ class List extends Component {
       if(this.state.miniCards.length > 0){
         miniCardList = this.state.miniCards.map((card, i) => {
           return(
-            <MiniCard key={i} title={card.name} type={card.type} status={card.status} />
+            <MiniCard key={i} title={card.name} type={card.tid} status={card.status} />
           );
         });
       } 
