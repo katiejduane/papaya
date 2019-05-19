@@ -7,7 +7,7 @@ import List from './containers/Projects/List/List';
 import DetailCard from './components/Cards/DetailCard/DetailCard';
 import NewProject from './containers/Projects/AddNew/NewProject';
 import EditProject from './containers/Projects/Edit/EditProject';
-import Account from './containers/AccountInfo/Account';
+import Account from './containers/Auth/Account/Account';
 
 class App extends Component {
   render() {
