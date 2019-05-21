@@ -24,8 +24,8 @@ class Details extends Component {
                     title: projectDetails.name,
                     status: projectDetails.status,
                     notes: projectDetails.notes,
-                    type: projectDetails.type.typename, // how to handle this separate request to another table!?
-                    color: projectDetails.type.color, // this is also from 'types'
+                    type: projectDetails.type.typename, 
+                    color: projectDetails.type.color
                 })
             })
             .catch((error => {

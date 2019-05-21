@@ -22,6 +22,7 @@ class App extends Component {
             <Route exact path="/addNew" component={NewProject} />
             <Route exact path="/update/:" component={UpdateProject} />
             <Route exact path="/account/:" component={Account} />
+            {/* // filtered results route // */}
           </Switch>
         </Layout>
       </div>

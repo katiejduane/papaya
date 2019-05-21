@@ -1,4 +1,8 @@
 .Content{
     margin: 0;
-    width: calc(100% - 250px)
+    width: calc(100% - 250px);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 250px;
 }

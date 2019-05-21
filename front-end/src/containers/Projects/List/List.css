@@ -1,7 +1,7 @@
 .MiniCardContainer{
-    position: absolute;
+    /* position: absolute;
     top: 0;
-    left: 250px;
+    left: 250px; */
     width: calc(100% - 250px);
     height: 100%;
     padding: 2rem;

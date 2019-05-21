@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './NavItems.css';
 import NavItem from './NavItem/NavItem';
 
 const navItems = () => (
   <ul className="NavItems">
-    <NavItem id="AddNew" link="/addNew" >Add New</NavItem>
+    <NavItem id="AddNew"><Link to='/addNew'>Add New</Link></NavItem>
     <NavItem>All</NavItem>
     <NavItem>By Type</NavItem>
     <NavItem>By Status</NavItem>
@@ -14,3 +15,4 @@ const navItems = () => (
 );
 
 export default navItems;
+

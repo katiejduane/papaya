@@ -49,8 +49,9 @@ exports.filterByStatus = (req, res, next) => {
 
 // gets types to load in 'select' drop down menu in add new project form
 exports.getTypes = (req, res, next) => {
-    req.user
-    .getTypes()
+    // req.user
+    Type.findAll({ where: 
+        {userId: 1 }})
     .then(types => {
         res.json(types)
         console.log(types)

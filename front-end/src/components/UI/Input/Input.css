@@ -1,0 +1,28 @@
+* {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12pt;
+}
+
+input{
+    border: 1px solid lightgray;
+    outline: none;
+    height: 2rem;
+    width: 20rem;
+    border-radius: 20px;
+}
+
+textarea{
+    border: 1px solid lightgray;
+    outline: none;
+    width: 20rem;
+    height: 10rem;
+    border-radius: 5px;
+}
+
+select{
+    border: 1px solid lightgray;
+    outline: none;
+    width: 10rem;
+    height: 2rem;
+    padding: 2rem;
+}
