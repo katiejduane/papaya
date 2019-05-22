@@ -61,6 +61,7 @@ class NewProject extends Component {
             }
         }).then((response) => {
             console.log(response)
+            this.props.history.push('/')
         }).catch((err) => {
             console.log(err)
         })

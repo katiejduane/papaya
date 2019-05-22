@@ -75,30 +75,28 @@ exports.postNewProject = (req, res, next) => {
     //why doesn't req.user work for me like it did for max? and it's not in the docs anywhere..?
     //will have to figure out the RIGHT way to pass and get the user id from the req (after i implement auth)
     const name = req.body.name;
-    const type = req.body.type || req.body.newType;
-    const status = req.body.status
+    const type = req.body.type;
+    const status = req.body.status;
     const notes = req.body.notes;
 
-    if(typeof type === "string"){
-        Type.create({
-            typename: type,
-            userId: uid
+    Type.findOrCreate({where: {userId : uid, typename: type}})
+    .then(type => {
+        Project.create({
+            userId: uid,
+            name: name,
+            notes: notes,
+            statusId: status,
+            typeId: type.id
         })
-        return type
-    }
-    //also, i'm not sure this is the best way... could i do User.createProject() or something like that???
-    //i need to handle the condition for when  a user sends back a NEW TYPE (string, not an int!)
-    Project.create({
-        userId: uid,
-        name: name,
-        notes: notes,
-        statusId: status,
-        typeId: type
-    })
-    .then(response => {
-        res.json(response)
+        .then(response => {
+            res.json(response)
+        })
+        .catch(err2 => console.log(err2))
     })
     .catch(err => console.log(err))
+    //also, i'm not sure this is the best way... could i do User.createProject() or something like that???
+    //i need to handle the condition for when  a user sends back a NEW TYPE (string, not an int!)
+    
 }
 
 // update project
