@@ -6,15 +6,15 @@ import Button from '../../UI/Button/Button'
 
 const miniCard = (props) => {
 
-    const miniTypeColor = {
+    const miniStatusColor = {
         backgroundColor: props.color
     }
 
     return(
         <div className="MiniCard">
             <h3 className="MiniCard-Title">{props.title}</h3>
-            <div className="MiniCard-Type" style={miniTypeColor}>{props.type}</div>
-            <div className="MiniCard-Status">{props.status}</div>
+            <div className="MiniCard-Type">{props.type}</div>
+            <div className="MiniCard-Status" style={miniStatusColor}>{props.status}</div>
             <Button btnClass="MiniCardBtn"><Link to={`/view/${props.view}`}>View</Link></Button>
         </div>
     )

@@ -10,10 +10,6 @@ const Type = sequelize.define('type', {
     },
     typename: {
         type: Sequelize.STRING,
-        allowNull: false
-    },
-    color: {
-        type: Sequelize.STRING,
         allowNull: true
     }
 });

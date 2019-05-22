@@ -5,15 +5,15 @@ import Button from '../../UI/Button/Button'
 
 const DetailCard = (props) => {
 
-    const typeColor = {
+    const statusColor = {
         backgroundColor: props.color
     }
 
     return(
         <div className="DetailCard">
             <h2 className="DetailCard-Title">{props.title}</h2>
-            <div className="DetailCard-Type" style={typeColor}><strong>Type: </strong>{props.type}</div>
-            <div className="DetailCard-Status"><strong>Status: </strong>{props.status}</div>
+            <div className="DetailCard-Type"><strong>Type: </strong>{props.type}</div>
+            <div className="DetailCard-Status" style={statusColor}><strong>Status: </strong>{props.status}</div>
             <p className="DetailCard-Notes"><strong>Notes: </strong>{props.notes}</p>
             <div className="CardBtnContainer">
                 <Button btnClass="UpdateBtn">Update</Button>

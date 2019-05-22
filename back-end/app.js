@@ -12,6 +12,7 @@ const sequelize = require('./util/database');
 const User = require('./models/user');
 const Project = require('./models/project');
 const Type = require('./models/type');
+const Status = require('./models/status');
 
 var app = express();
 
@@ -48,6 +49,8 @@ User.hasMany(Project);
 Type.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
 Project.belongsTo(Type);
 Type.hasMany(Project);
+Status.hasMany(Project);
+Project.belongsTo(Status);
 
 
 // special method in sequelize that is aware of all models/tables and only
@@ -63,7 +66,31 @@ sequelize
         if(!user){
             User.create({firstname: 'Katie', lastname: 'Duane', email: 'katiejduane@gmail.com'})
         }
-        return user;
+        return Status.findByPk(1);
+    })
+    .then(status => {
+        if(!status){
+            Status.bulkCreate([
+                { statusname: 'Idea', color: 'papayawhip' },
+                { statusname: 'Research', color: 'lavender' },
+                { statusname: 'In-Progress', color: 'palevioletred' },
+                { statusname: 'Revision', color: 'lightsalmon' },
+                { statusname: 'Finished', color: 'lightblue' }, 
+                { statusname: 'Submitted', color: 'mintcream' },
+                { statusname: 'Accepted', color: 'palegoldenrod' }])
+        }
+        return Type.findByPk(1)
+    })
+    .then(type => {
+        if(!type){
+            Type.create({typename: 'Misc', userId: 1})
+        }
+        return Project.findByPk(1)
+    })
+    .then(project => {
+        if(!project){
+            Project.create({name: 'First project!', notes: 'Add details here', userId: 1, typeId: 1, statusId: 1})
+        }
     })
     .catch(err => {
         // console.log(err);

@@ -22,10 +22,10 @@ class Details extends Component {
                 console.log(projectDetails)
                 this.setState({
                     title: projectDetails.name,
-                    status: projectDetails.status,
+                    status: projectDetails.status.statusname,
                     notes: projectDetails.notes,
                     type: projectDetails.type.typename, 
-                    color: projectDetails.type.color
+                    color: projectDetails.status.color
                 })
             })
             .catch((error => {
