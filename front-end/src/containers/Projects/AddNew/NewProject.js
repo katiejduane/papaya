@@ -5,6 +5,8 @@ import './NewProject.css'
 import Input from '../../../components/UI/Input/Input';
 import Loader from '../../../components/UI/Loader/Loader';
 import Button from '../../../components/UI/Button/Button';
+import { type } from 'os';
+import { Z_BLOCK } from 'zlib';
 
 class NewProject extends Component {
     state = {
@@ -12,7 +14,7 @@ class NewProject extends Component {
             title: {
                 elemLabel: 'Title',
                 elemType: 'input',
-                elemClass: 'input-title',
+                elemClass: 'Input-Title',
                 elemConf: {
                     type: 'text',
                     placeholder: 'Idea or project title'
@@ -22,43 +24,42 @@ class NewProject extends Component {
                     required: true
                 },
                 valid: false,
-                touched: false
+                touched: false,
+                style: {display: 'block'}
             }, 
             type: {
                 elemLabel: 'Choose type',
                 elemType: 'select',
-                elemClass: 'select-prev-type',
+                elemClass: 'Select-Prev-Type',
                 elemConf: {
                     options: []
                 },
-                value: 'select',
-                validation: {
-                    required: true
-                },
-                valid: false,
+                value: '',
+                validation: {},
+                valid: true,
                 touched: false
             }, 
             newType: {
-                elemLabel: 'Or, add a new type',
+                elemLabel: '',
                 elemType: 'input',
-                elemClass: 'select-old-type',
+                elemClass: 'Select-New-Type',
                 elemConf: {
                     type: 'text',
                     placeholder: 'Add new project type'
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
+                validation: {},
+                valid: true,
+                touched: false,
+                style: { display: 'none' }
             },
             color: {
-                elemLabel: 'Choose a color for a new type',
+                elemLabel: '',
                 elemType: 'select',
-                elemClass:'select-color',
+                elemClass: 'Select-Color',
                 elemConf: {
                     options: [
+                        { value: '', displayValue: 'Select one' },
                         { value: 'papayawhip', displayValue: 'Papaya Whip' },
                         { value: 'palegoldenrod', displayValue: 'Goldenrod' },
                         { value: 'lightsalmon', displayValue: 'Coral' },
@@ -71,17 +72,16 @@ class NewProject extends Component {
                         { value: 'mintcream', displayValue: 'Mint Cream' },
                     ]
                 },
-                value: 'papayawhip',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
+                value: '',
+                validation: {},
+                valid: true,
+                touched: false,
+                style: { display: 'none' }
             },
             status: {
                 elemLabel: 'Set status',
                 elemType: 'select',
-                elemClass: 'select-status',
+                elemClass: 'Select-Status',
                 elemConf: {
                     options: [
                         { value: 'idea', displayValue: 'Idea' },
@@ -94,41 +94,42 @@ class NewProject extends Component {
                     ]
                 },
                 value: 'idea',
-                validation: {
-                    require: true
-                },
-                valid: false,
-                touched: false
+                validation: {},
+                valid: true,
+                touched: false,
+                style: {display: 'block'}
             },
             notes: {
                 elemLabel: 'Add notes',
                 elemType: 'textarea',
-                elemClass: 'text-notes',
+                elemClass: 'Text-Notes',
                 elemConf: {
                     placeholder: 'Add notes about your idea/project here. Materials, research, etc...'
                 },
                 value: '',
-                validation: {},
+                validation: {
+                    required: false
+                },
                 valid: true,
-                touched: false
+                touched: false,
+                style: { display: 'block' }
             }
         },
         formIsValid: false,
-        loading: false,
-        types: [],
+        loading: true
     };
 
-    
+    // I WANT TO COME BACK AND DO PROPER VALIDATION FOR THIS FORM AT SOME POINT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     componentDidMount(){
         axios.get(`${window.apiHost}/addNew`)
             .then((response) => {
-                console.log(response.data)
+                this.setState({loading: false})
                 let typeArray = response.data.map(type => {
-                    return {value : type.typename, displayValue : type.typename}
+                    return {value : type.id, displayValue : type.typename}
                 }) 
-                // console.log(typeArray)
-                // console.log(this.state.addProjectForm.status.elemConf.options)
+                typeArray.push({ value: 'new', displayValue: 'Add new type' })
+                // how will i conditionally render the 'add new type' input elements if the above is selected??
                 this.setState({
                     addProjectForm: {
                         ...this.state.addProjectForm,
@@ -140,9 +141,17 @@ class NewProject extends Component {
                                     }
                                 }
                             }
-                                
+                    })
+                this.setState({
+                    addProjectForm: {
+                        ...this.state.addProjectForm,
+                        type: {
+                            ...this.state.addProjectForm.type,
+                            value: typeArray[0].value
+                        }
+                    }
                 })
-                // console.log(this.state.addProjectForm.type.elemConf.options)
+                // console.log(this.state)
             })
             .catch((error => {
                 this.setState({
@@ -152,9 +161,54 @@ class NewProject extends Component {
             }))
     }
 
-    addNewHandler(){
+    addNewHandler = event => {
+        event.preventDefault();
+        const addFormData = {};
+        for(let formElement in this.state.addProjectForm){
+            addFormData[formElement] = this.state.addProjectForm[formElement].value
+        }
+        axios
+            .post(`${window.apiHost}/addNew`, addFormData)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
         //then to redirect this.props.history.push...
+    }
+
+    checkNewType(event, value){
+        event.preventDefault();
+        console.log(event, value)
+        //  I can't figure out how to conditionally render this part of the form...
+        //  it enters some kind of an infinite loop type situation...
+        let conditionalDisplay = {
+            display: 'block'
+        }
+
+        if (value === 'new') {
+            console.log('new')
+            this.setState({
+                addProjectForm: {
+                    ...this.state.addProjectForm,
+                    newType: {
+                        ...this.state.addProjectForm.newType,
+                        style: conditionalDisplay
+                    }
+                }
+            })
+            this.setState({
+                addProjectForm: {
+                    ...this.state.addProjectForm,
+                    color: {
+                        ...this.state.addProjectForm.color,
+                        style: conditionalDisplay
+                    }
+                }
+            })
+        }
     }
 
     checkValidity(value, rules){
@@ -165,8 +219,12 @@ class NewProject extends Component {
         return isValid;
     }
 
-    inputChangedHandler(event, inputIdentifier){
-        // console.log(inputIdentifier);
+    inputChangedHandler(event, inputIdentifier, value){
+        console.log(inputIdentifier, value)
+        let conditionalDisplay = {
+            display: 'block'
+        }
+
         const updatedAddProjectForm = {
             ...this.state.addProjectForm
         };
@@ -185,9 +243,33 @@ class NewProject extends Component {
         for (let inputIdentifier in updatedAddProjectForm) {
             formIsValid = updatedAddProjectForm[inputIdentifier].valid && formIsValid;
         }
-        
-        this.setState({ addProjectForm: updatedAddProjectForm, formIsValid: formIsValid });
-    
+
+        this.setState({ addProjectForm : updatedAddProjectForm, formIsValid: formIsValid });
+
+        // this doesn't work... for some reason the value isn't being read as new until after you
+        // you click on it, and then it cannot be changed again back to anything else (ie poetry)
+        // even when it does register as new, it doesn't change the display of the elements below...
+        // if (value === 'new') {
+        //     console.log('new')
+        //     this.setState({
+        //         addProjectForm: {
+        //             ...this.state.addProjectForm,
+        //             newType: {
+        //                 ...this.state.addProjectForm.newType,
+        //                 style: conditionalDisplay
+        //             }
+        //         }
+        //     })
+        //     this.setState({
+        //         addProjectForm: {
+        //             ...this.state.addProjectForm,
+        //             color: {
+        //                 ...this.state.addProjectForm.color,
+        //                 style: conditionalDisplay
+        //             }
+        //         }
+        //     })
+        // }
     }
 
     render(){
@@ -205,6 +287,7 @@ class NewProject extends Component {
                 {addFormElements.map(formElem => (
                     <Input
                         key={formElem.id}
+                        style={formElem.style}
                         label={formElem.config.elemLabel}
                         className={formElem.config.elemClass}
                         elemType={formElem.config.elemType}
@@ -213,20 +296,15 @@ class NewProject extends Component {
                         invalid={!formElem.config.valid}
                         shouldValidate={formElem.config.validation}
                         touched={formElem.config.touched}
-                        changed={event => this.inputChangedHandler(event, formElem.id)}
+                        // onChange={event => this.checkNewType(event, formElem.value)}
+                        changed={event => this.inputChangedHandler(event, formElem.id, formElem.config.value)}
                     />
                 ))}
-                <Button btnType="Submit" disabled={!this.state.formIsValid}>Add</Button>
+                <Button btnType="Submit" btnClass="Submit" disabled={!this.state.formIsValid}>Add</Button>
 
             </form>
         );
-
-        if(this.state.addProjectForm.type.elemConf.options === 0){
-            this.state.loading = true;
-        } else {
-            this.state.loading = false;
-        }
-
+      
         if(this.state.loading){
             addForm = <Loader />
         }

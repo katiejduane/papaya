@@ -46,3 +46,23 @@
     background-color: rgb(250, 81, 81);
     color: rgb(246, 246, 250);
 }
+
+.Submit{
+    background-color: rgb(246, 246, 250);
+    color: rgb(90, 128, 210);
+    font-size: 12pt;
+    border: 1px solid rgb(90, 128, 210);
+    margin: 1rem;
+}
+
+.Submit:hover{
+    background-color: rgb(90, 128, 210);
+    color: rgb(246, 246, 250);
+}
+
+*:disabled{
+    background-color: rgb(247,245,250);
+    border: 1px solid lightgray;
+    color: lightgray;
+    cursor: not-allowed;
+}

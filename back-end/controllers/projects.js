@@ -54,14 +54,39 @@ exports.getTypes = (req, res, next) => {
         {userId: 1 }})
     .then(types => {
         res.json(types)
-        console.log(types)
+        // console.log(types)
     })
     .catch(err => console.log(err))
 }
 
 // posts new project
 exports.postNewProject = (req, res, next) => {
-
+    console.log(req)
+    uid = 1
+    //why doesn't req.user work for me like it did for max? and it's not in the docs anywhere..?
+    //will have to figure out the RIGHT way to pass and get the user id from the req (after i implement auth)
+    const title = req.body.title;
+    const type = req.body.type || req.body.newType;
+    const status = req.body.status;
+    const notes = req.body.notes;
+    //also, i'm not sure this is the best way... could i do User.createProject() or something like that???
+    Project.create({
+        userId : uid,
+        name: title,
+        status: status,
+        notes: notes,
+        typeId: type
+    })
+    // .then(project => {
+    //     project.setType({
+    //         type
+    //     })
+    //     return project
+    // })
+    .then(response => {
+        res.json(response)
+    })
+    .catch(err => console.log(err))
 }
 
 // update project

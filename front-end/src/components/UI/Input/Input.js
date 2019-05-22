@@ -3,28 +3,27 @@ import './Input.css';
 
 const input = (props) => {
     let inputElement = null;
-    const inputClasses = ['InputElement'];
+    // const inputClasses = ['InputElement'];
 
     let selectColor = {
         backgroundColor: props.value
     }
 
-
-    if (props.invalid && props.shouldValidate && props.touched) {
-        inputClasses.push('Invalid')
-    }
+    // if (props.invalid && props.shouldValidate && props.touched) {
+    //     inputClasses.push('Invalid')
+    // }
 
     switch (props.elemType) {
         case ('input'):
             inputElement = <input
-                className={inputClasses.join(' ')}
+                className={props.className}
                 {...props.elemConf}
                 value={props.value}
                 onChange={props.changed} />
             break;
         case ('textarea'):
             inputElement = <textarea
-                className={inputClasses.join(' ')}
+                className={props.className}
                 {...props.elemConf}
                 value={props.value}
                 onChange={props.changed} />;
@@ -32,7 +31,7 @@ const input = (props) => {
         case ('select'):
             inputElement = (
                 <select
-                    className={inputClasses.join(' ')}
+                    className={props.className}
                     {...props.elemConf}
                     value={props.value}
                     style={selectColor}
@@ -48,12 +47,12 @@ const input = (props) => {
             break;
         default:
             inputElement = <input
-                className={inputClasses.join(' ')}
+                className={props.className}
                 value={props.value} />;
     }
 
     return (
-        <div className="Input">
+        <div className={props.className}>
             <div className="Label">{props.label}</div>
             {inputElement}
         </div>

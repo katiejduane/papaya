@@ -6,7 +6,7 @@
 input{
     border: 1px solid lightgray;
     outline: none;
-    height: 2rem;
+    height: 1.5rem;
     width: 20rem;
     border-radius: 20px;
 }
@@ -26,3 +26,11 @@ select{
     height: 2rem;
     padding: 2rem;
 }
+
+/* .Select-New-Type{
+    display: none;
+}
+
+.Select-Color{
+    display:none;
+} */
