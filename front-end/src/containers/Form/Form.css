@@ -1,0 +1,36 @@
+
+
+input{
+    border: 1px solid lightgray;
+    outline: none;
+    border-radius: 15px;
+    font-size: 12pt;
+    width: 13rem;
+}
+
+select{
+    border: 1px solid lightgray;
+    outline: none;
+    border-radius: 15px;
+    font-size: 12pt;
+    width: 10rem;
+}
+
+textarea{
+    border: 1px solid lightgray;
+    outline: none;
+    border-radius: 5px;
+    font-size: 12pt;
+    width: 20rem;
+    height: 15rem;
+}
+
+.FormLabel{
+    font-size: 13pt;
+    color: rgb(84, 72, 69);
+    margin-top: 1rem;
+}
+
+.NewType{
+    margin: 0 1rem;
+}
