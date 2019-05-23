@@ -36,6 +36,7 @@ class NewProject extends Component {
                     return {value : type.id, displayValue : type.typename}
                 }) 
                 typeArray.push({ value: 'new', displayValue: 'Add new type' })
+                console.log(typeArray)
                 // how will i conditionally render the 'add new type' input elements if the above is selected??
                 this.setState({
                     types: typeArray
@@ -49,7 +50,7 @@ class NewProject extends Component {
             }))
     }
 
-    addNewProject = (title, type, status, note) => {
+    addNewProject = (title, type, status, notes) => {
         axios({
             method: 'POST',
             url: `${window.apiHost}/addNew`,
@@ -57,7 +58,7 @@ class NewProject extends Component {
                 name: title,
                 type: type,
                 status: status,
-                note: note
+                notes: notes
             }
         }).then((response) => {
             console.log(response)

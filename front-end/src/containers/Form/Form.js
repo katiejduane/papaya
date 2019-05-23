@@ -31,18 +31,21 @@ class Form extends Component {
         this.setState({
             type: event.target.value
         })
+        console.log(this.state.type)
     }
 
     changeStatusHandler = (event) => {
         this.setState({
             status: event.target.value
         })
+        console.log(this.state.status)
     }
 
     changeNotesHandler = (event) => {
         this.setState({
             note: event.target.value
         })
+        console.log(this.state)
     }
 
 
@@ -54,21 +57,21 @@ class Form extends Component {
                     <div className="FormLabel">Title</div>
                     <section>
                         <input type="text" onChange={this.changeTitleHandler} className="TitleInput" 
-                            placeholder={this.props.titleholder} value={this.state.title} required />
+                            placeholder={this.props.titleholder}  required />
                     </section>
                     <div className="FormLabel">Type</div>
                     <section>
                         <select onChange={this.changeTypeHandler} className="SelectType">
-                            <option value="">{this.props.defaultType}</option>
+                            <option value=''>{this.props.defaultType}</option>
                             {this.props.typeList}
                         </select>
                         <input type="text" onChange={this.changeTypeHandler} className="NewType"
-                            placeholder={this.props.typeholder} value={this.state.type} />
+                            placeholder={this.props.typeholder}  />
                     </section>
                     <div className="FormLabel">Status</div>
                     <section>
                         <select onChange={this.changeStatusHandler} className="SelectStatus" required>
-                            <option value="">{this.props.defaultStatus}</option>
+                            <option value=''>{this.props.defaultStatus}</option>
                             {this.props.statusList}
                         </select>
                     </section>

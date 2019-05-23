@@ -3,10 +3,13 @@ const Type = require('../models/type');
 const Status = require('../models/status');
 
 // loads home page (if logged in, eventually) with all projects, no filter!
-exports.getIndex = (req, res, next) => {
+module.exports.getIndex = (req, res, next) => {
     // const userId = req.body.id;
     Project.findAll({
-        include:[ Type, Status ],
+        include: [
+            { model: Type },
+            { model: Status } 
+        ],
         where: {
             userId: 1
         }
@@ -19,7 +22,7 @@ exports.getIndex = (req, res, next) => {
 };
 
 // gets a single project to see details
-exports.getProject = (req, res, next) => {
+module.exports.getProject = (req, res, next) => {
     const projId = req.params.projId;
     Project.findAll({
         include:[
@@ -39,17 +42,17 @@ exports.getProject = (req, res, next) => {
 }
 
 // allows the user to filter the projects by type
-exports.filterByType = (req, res , next) => {
+module.exports.filterByType = (req, res , next) => {
 
 }
 
 // allows the user to filter the projects by status
-exports.filterByStatus = (req, res, next) => {
+module.exports.filterByStatus = (req, res, next) => {
 
 }
 
 // gets types to load in 'select' drop down menu in add new project form
-exports.getTypes = (req, res, next) => {
+module.exports.getTypes = (req, res, next) => {
     Type.findAll({
         where: {userId:1}
     })
@@ -69,42 +72,56 @@ exports.getTypes = (req, res, next) => {
 
 
 // posts new project
-exports.postNewProject = (req, res, next) => {
+module.exports.postNewProject = (req, res, next) => {
     // console.log(req)
     uid = 1
     //why doesn't req.user work for me like it did for max? and it's not in the docs anywhere..?
     //will have to figure out the RIGHT way to pass and get the user id from the req (after i implement auth)
     const name = req.body.name;
-    const type = req.body.type;
+    let type = req.body.type;
     const status = req.body.status;
     const notes = req.body.notes;
-
-    Type.findOrCreate({where: {userId : uid, typename: type}})
-    .then(type => {
+    console.log('NAME',name, 'TYPE',type, 'STATUS',status, 'NOTES',notes)
+    if (isNaN(parseInt(type))) {
+        Type.create({ typename: type, userId: uid  })
+            .then(type => {
+            Project.create({
+                userId: uid,
+                name: name,
+                notes: notes,
+                statusId: status,
+                typeId: type.id
+            })
+            .then(response => {
+                res.json(response)
+            })
+            .catch(err2 => console.log(err2))
+            })
+            .catch(err => console.log(err))
+    } else {
         Project.create({
             userId: uid,
             name: name,
             notes: notes,
             statusId: status,
-            typeId: type.id
+            typeId: type
         })
         .then(response => {
             res.json(response)
         })
         .catch(err2 => console.log(err2))
-    })
-    .catch(err => console.log(err))
+
     //also, i'm not sure this is the best way... could i do User.createProject() or something like that???
     //i need to handle the condition for when  a user sends back a NEW TYPE (string, not an int!)
     
-}
+}}
 
 // update project
-exports.updateProject = (req, res, next) => {
+module.exports.updateProject = (req, res, next) => {
 
 }
 
 // delete project
-exports.deleteProject = (req, res, next) => {
+module.exports.deleteProject = (req, res, next) => {
 
 }
