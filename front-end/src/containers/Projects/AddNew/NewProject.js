@@ -61,12 +61,11 @@ class NewProject extends Component {
                 notes: notes
             }
         }).then((response) => {
-            console.log(response)
+            // console.log(response)
             this.props.history.push('/')
         }).catch((err) => {
             console.log(err)
         })
-        //then to redirect this.props.history.push...
     }
 
     render(){ 

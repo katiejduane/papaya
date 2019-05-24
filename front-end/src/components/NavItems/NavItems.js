@@ -7,7 +7,7 @@ import NavItem from './NavItem/NavItem';
 const navItems = () => (
   <ul className="NavItems">
     <NavItem id="AddNew"><Link to='/addNew'>Add New</Link></NavItem>
-    <NavItem>All</NavItem>
+    <NavItem id="ViewAll"><Link to='/'>All</Link></NavItem>
     <NavItem>By Type</NavItem>
     <NavItem>By Status</NavItem>
     <NavItem>Me</NavItem>

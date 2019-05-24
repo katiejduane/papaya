@@ -31,21 +31,18 @@ class Form extends Component {
         this.setState({
             type: event.target.value
         })
-        console.log(this.state.type)
     }
 
     changeStatusHandler = (event) => {
         this.setState({
             status: event.target.value
         })
-        console.log(this.state.status)
     }
 
     changeNotesHandler = (event) => {
         this.setState({
             note: event.target.value
         })
-        console.log(this.state)
     }
 
 

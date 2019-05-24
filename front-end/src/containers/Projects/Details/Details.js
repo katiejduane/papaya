@@ -10,6 +10,7 @@ class Details extends Component {
         status: '',
         notes: '',
         type: '',
+        dateCreated: '',
         color: '',
         error: false
     }
@@ -25,6 +26,8 @@ class Details extends Component {
                     status: projectDetails.status.statusname,
                     notes: projectDetails.notes,
                     type: projectDetails.type.typename, 
+                    dateCreated: projectDetails.createdAt,
+                    dateUpdated: projectDetails.updatedAt,
                     color: projectDetails.status.color
                 })
             })
@@ -37,6 +40,10 @@ class Details extends Component {
     }
 
     render(){
+
+        const humanizedDateCreated = new Date(this.state.dateCreated).toLocaleDateString();
+        const humanizedDateUpdated = new Date(this.state.dateUpdated).toLocaleDateString();
+        
         return(
             <div className="DetailCardContainer">
                 <DetailCard 
@@ -45,6 +52,8 @@ class Details extends Component {
                     notes={this.state.notes}
                     type={this.state.type}
                     color={this.state.color}
+                    dateCreated={humanizedDateCreated}
+                    dateUpdated={humanizedDateUpdated}
                     />
             </div>
         )
