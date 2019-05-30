@@ -28,6 +28,7 @@ class List extends Component {
       }))
     }
 
+
     render(){
 
       let miniCardList;

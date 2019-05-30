@@ -39,6 +39,10 @@ class Details extends Component {
             }))
     }
 
+    deleteProject(){
+        
+    }
+
     render(){
 
         const humanizedDateCreated = new Date(this.state.dateCreated).toLocaleDateString();
