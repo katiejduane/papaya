@@ -116,12 +116,32 @@ module.exports.postNewProject = (req, res, next) => {
     
 }}
 
-// update project
-module.exports.updateProject = (req, res, next) => {
+// get project to update
+module.exports.getUpdateProject = (req, res, next) => {
+
+}
+
+// post updated project
+module.exports.postUpdateProject = (req, res, next) => {
 
 }
 
 // delete project
 module.exports.deleteProject = (req, res, next) => {
 
+}
+
+// view projects by status
+module.exports.filterByStatus = (req, res, next) => {
+
+}
+
+//view projects by type
+module.exports.filterByType = (req, res, next) => {
+
+}
+
+//view archived projects
+module.exports.getArchive = (req, res, next) => {
+    
 }

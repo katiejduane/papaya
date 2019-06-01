@@ -4,6 +4,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
+const helmet = require('helmet');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -15,6 +17,8 @@ const Type = require('./models/type');
 const Status = require('./models/status');
 
 var app = express();
+
+app.use(helmet());
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -30,7 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/account', usersRouter);
 
 //check DB connection
 sequelize
@@ -52,9 +56,7 @@ Type.hasMany(Project);
 Status.hasMany(Project);
 Project.belongsTo(Status);
 
-
-// special method in sequelize that is aware of all models/tables and only
-// creates new tables if needed (unless 'force' is on)
+// sequelize sync
 sequelize
     .sync()
     // .sync({force: true})
