@@ -4,15 +4,20 @@ const Status = require('../models/status');
 
 // loads home page (if logged in, eventually) with all projects, no filter!
 module.exports.getIndex = (req, res, next) => {
-    // const userId = req.body.id;
+    const userId = 1;
     Project.findAll({
         include: [
             { model: Type },
             { model: Status } 
+            // for the above, use 'attributes' to get only what you need from these models
         ],
         where: {
-            userId: 1
-        }
+            userId: userId,
+            statusId: [1,2,3,4]
+        },
+        order: [
+            ['updatedAt', 'DESC']
+        ]
     })
     .then(projects => {
         res.json(projects)
@@ -23,6 +28,7 @@ module.exports.getIndex = (req, res, next) => {
 
 // gets a single project to see details
 module.exports.getProject = (req, res, next) => {
+    const userId = 1;
     const projId = req.params.projId;
     Project.findAll({
         include:[
@@ -53,8 +59,9 @@ module.exports.filterByStatus = (req, res, next) => {
 
 // gets types to load in 'select' drop down menu in add new project form
 module.exports.getTypes = (req, res, next) => {
+    userId = 1
     Type.findAll({
-        where: {userId:1}
+        where: {userId:userId}
     })
     .then(types => {
         res.json(types)
@@ -74,7 +81,7 @@ module.exports.getTypes = (req, res, next) => {
 // posts new project
 module.exports.postNewProject = (req, res, next) => {
     // console.log(req)
-    uid = 1
+    userId = 1
     //why doesn't req.user work for me like it did for max? and it's not in the docs anywhere..?
     //will have to figure out the RIGHT way to pass and get the user id from the req (after i implement auth)
     const name = req.body.name;
@@ -83,10 +90,10 @@ module.exports.postNewProject = (req, res, next) => {
     const notes = req.body.notes;
     console.log('NAME',name, 'TYPE',type, 'STATUS',status, 'NOTES',notes)
     if (isNaN(parseInt(type))) {
-        Type.create({ typename: type, userId: uid  })
+        Type.create({ typename: type, userId: userId  })
             .then(type => {
             Project.create({
-                userId: uid,
+                userId: userId,
                 name: name,
                 notes: notes,
                 statusId: status,
@@ -100,7 +107,7 @@ module.exports.postNewProject = (req, res, next) => {
             .catch(err => console.log(err))
     } else {
         Project.create({
-            userId: uid,
+            userId: userId,
             name: name,
             notes: notes,
             statusId: status,
@@ -128,20 +135,74 @@ module.exports.postUpdateProject = (req, res, next) => {
 
 // delete project
 module.exports.deleteProject = (req, res, next) => {
-
+    const projId = req.body.projectId;
+    // above i might use req.params instead, idk yet
+    Project.findByPk(projId)
+        .then(project => {
+            return project.destroy();
+        })
+        .then(result => {
+            console.log('destroyed project');
+            res.json(result);
+            // this will likely have to change...will need to redirect back to list component
+            // so do i even need to res these results?
+        })
+        .catch(err => console.log(err));
 }
 
 // view projects by status
 module.exports.filterByStatus = (req, res, next) => {
-
+    const userId = 1
+    const statusId = ''
+    Project.findAll({
+        include: [
+            { model: Type },
+            { model: Status }
+        ],
+        where: {
+            userId: userId,
+            statusId: statusId
+        }
+    })
 }
 
 //view projects by type
 module.exports.filterByType = (req, res, next) => {
-
+    const userId = 1
+    const typeId = ''
+    Project.findAll({
+        include: [
+            { model: Type },
+            { model: Status }
+        ],
+        where: {
+            userId: userId,
+            typeId: typeId
+        }
+    })
 }
 
 //view archived projects
 module.exports.getArchive = (req, res, next) => {
-    
-}
+    const userId = 1
+    Project.findAll({
+        include: [
+            { model: Type },
+            { model: Status }
+        ],
+        where: {
+            userId: userId,
+            statusId: [5,6,7]
+        },
+        order: [
+            ['updatedAt', 'DESC']
+        ]
+    })
+        .then(projects => {
+            res.json(projects)
+            // console.log(projects)
+        })
+        .catch(err => console.log(err))
+};
+
+

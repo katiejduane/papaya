@@ -25,13 +25,13 @@ router.get('/view/:projId', projectController.getProject);
 // router.post('/update:projId', projectController.postUpdateProject);
 
 // // GET projects in list by STATUS
-// router.get('/filter/:statusId', projectController.getByStatus);
+// router.get('/view/:statusId', projectController.getByStatus);
 
 // // GET projects in list by TYPE
-// router.get('/filter/:typeId', projectController.getByType);
+// router.get('/view/:typeId', projectController.getByType);
 
-// // GET archived projects
-// router.get('/archive', projectController.getArchive);
+// GET archived projects
+router.get('/archive', projectController.getArchive);
 
 
 

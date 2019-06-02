@@ -5,13 +5,16 @@ const userController = require('../controllers/user');
 
 router.get('/', userController.getAccount);
 
-router.get('/signIn', userController.getSignIn);
+// not sure if i will use two separate routes for signup/sign in or just one for auth and
+// conditionally render
 
-router.post('/signIn', userController.postSignIn);
+// router.get('/signIn', userController.getSignIn);
 
-router.get('/signUp', userController.getSignUp);
+// router.post('/signIn', userController.postSignIn);
 
-router.post('/signUp', userController.postSignUp);
+// router.get('/signUp', userController.getSignUp);
+
+// router.post('/signUp', userController.postSignUp);
 
 router.post('/account', userController.postAccount);
 
