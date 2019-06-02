@@ -6,6 +6,7 @@ import MiniCard from '../../../components/Cards/MiniCard/MiniCard';
 
 class List extends Component {
     state = {
+        loading: true,
         miniCards: [],
         status: ['Idea', 'Research', 'In-Progress', 'Revision', 'Finished', 'Accepted'],
         types: [],
@@ -17,6 +18,7 @@ class List extends Component {
       .then((response) => {
         console.log(response) 
         this.setState({
+          loading: false,
           miniCards: response.data
         })
       })
@@ -25,7 +27,7 @@ class List extends Component {
           error: true
         })
         console.log(error)
-      }))
+      }));
     }
 
 

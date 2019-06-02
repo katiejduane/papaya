@@ -7,8 +7,7 @@ import List from './containers/Projects/List/List';
 import Details from './containers/Projects/Details/Details';
 import NewProject from './containers/Projects/AddNew/NewProject';
 import UpdateProject from './containers/Projects/Update/UpdateProject';
-import SignIn from './containers/Auth/SignIn/SignIn';
-import SignUp from './containers/Auth/SignUp/SignUp';
+import Auth from './containers/Auth/Auth';
 import Account from './containers/Auth/Account/Account';
 import Splash from './components/Splash/Splash';
 
@@ -26,8 +25,7 @@ class App extends Component {
             <Route exact path="/view/:id" component={Details} />
             <Route exact path="/addNew" component={NewProject} />
             <Route exact path="/update/:" component={UpdateProject} />
-            <Route exact path="/signIn" component={SignIn} />
-            <Route exact path="/signUp" component={SignUp} />
+            {/* route(s) for auth (maybe one, maybe two... idk) */}
             <Route exact path="/account/:" component={Account} />
             <Route exact path="/splash" component={Splash} />
           </Switch>

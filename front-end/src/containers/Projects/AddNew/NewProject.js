@@ -14,8 +14,6 @@ class NewProject extends Component {
         error: false,
         types: [],
         stats: [
-            // not sure this will work as the DB already has these, wish i could pull the list from
-            // db but i can't seem to do it while ALSO loading the types list from db...
             { value: '1', displayValue: 'Idea' },
             { value: '2', displayValue: 'Research' },
             { value: '3', displayValue: 'In-Progress' },
@@ -26,8 +24,6 @@ class NewProject extends Component {
         ]
     };
 
-    // I WANT TO COME BACK AND DO PROPER VALIDATION FOR THIS FORM AT SOME POINT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     componentDidMount(){
         axios.get(`${window.apiHost}/addNew`)
             .then((response) => {
@@ -36,8 +32,7 @@ class NewProject extends Component {
                     return {value : type.id, displayValue : type.typename}
                 }) 
                 typeArray.push({ value: 'new', displayValue: 'Add new type' })
-                console.log(typeArray)
-                // how will i conditionally render the 'add new type' input elements if the above is selected??
+                // console.log(typeArray)
                 this.setState({
                     types: typeArray
                 })

@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './MainNav.css';
 import NavItems from '../../components/NavItems/NavItems';
 
 
-
-class MainNav extends Compondent {
-    // state = {
-    //     username: '',
-    //     types: [],
-    //     statuses:
-    // }
+class MainNav extends Component {
+    state = {
+        username: '',
+        types: [],
+        // stats: [
+        //     { value: '1', displayValue: 'Idea' },
+        //     { value: '2', displayValue: 'Research' },
+        //     { value: '3', displayValue: 'In-Progress' },
+        //     { value: '4', displayValue: 'Revision' },
+        //     { value: '5', displayValue: 'Finished' },
+        //     { value: '6', displayValue: 'Submitted' },
+        //     { value: '7', displayValue: 'Accepted' }
+        // ]
+    }
 
     componentDidMount(){
-
+       // get types
     }
 
 
