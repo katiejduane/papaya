@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import './Details.css';
 import DetailCard from '../../../components/Cards/DetailCard/DetailCard';
+import Button from '../../../components/UI/Button/Button'
 
 class Details extends Component {
     state = {
@@ -59,6 +61,7 @@ class Details extends Component {
                     dateCreated={humanizedDateCreated}
                     dateUpdated={humanizedDateUpdated}
                     />
+                <Link to='/'><Button btnClass='GeneralButton'>Back</Button></Link>
             </div>
         )
     }

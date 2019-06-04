@@ -73,6 +73,32 @@
     color: rgb(246, 246, 250);
 }
 
+.SwitchAuth{
+    background-color: rgb(246, 246, 250);
+    color: rgb(242, 150, 111);
+    font-size: 12pt;
+    border: 1px solid rgb(242, 150, 111);
+    margin-bottom: 1rem;
+}
+
+.SwitchAuth:hover{
+    background-color: rgb(242, 150, 111);
+    color: rgb(246, 246, 250);
+}
+
+.GeneralButton{
+    background-color: rgb(246, 246, 250);
+    color: rgb(111, 203, 242);
+    font-size: 12pt;
+    border: 1px solid rgb(111, 203, 242);
+    margin-bottom: 1rem;
+}
+
+.GeneralButton:hover{
+    background-color: rgb(111, 203, 242);
+    color: rgb(246, 246, 250);
+}
+
 *:disabled{
     background-color: rgb(247,245,250);
     border: 1px solid lightgray;

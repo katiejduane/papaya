@@ -17,8 +17,8 @@ module.exports.getSignUp = (req, res, next) => {
 }
 
 module.exports.postSignUp = (req, res, next) => {
-    // const firstname = req.body.firstname;
-    // const lastname = req.body.lastname;
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
     const email = req.body.email;
     const password = req.body.password;
     User.create({

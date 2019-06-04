@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -7,9 +8,35 @@ import './Auth.css';
 import * as actions from '../../store/actions/index';
 
 
-class Auth extends Component {
+class SignUp extends Component {
     state = {
         controls: {
+            firstname: {
+                elementType: "input",
+                elementConfig: {
+                    type: "text",
+                    placeholder: "First name"
+                },
+                value: "",
+                validation: {
+                    required: true,
+                },
+                valid: false,
+                touched: false
+            },
+            lastname: {
+                elementType: "input",
+                elementConfig: {
+                    type: "text",
+                    placeholder: "Last name"
+                },
+                value: "",
+                validation: {
+                    required: true,
+                },
+                valid: false,
+                touched: false
+            },
             email: {
                 elementType: "input",
                 elementConfig: {
@@ -38,7 +65,7 @@ class Auth extends Component {
                 valid: false,
                 touched: false
             },
-        }
+        },
     }
 
     checkValidity(value, rules) {
@@ -84,6 +111,12 @@ class Auth extends Component {
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value)
     }
 
+    switchAuthModeHandler = () => {
+        this.setState(prevState => {
+            return {isSignUp: !prevState.isSignUp}
+        })
+    }
+
     render(){
         let formElementsArray = [];
         for (let key in this.state.controls) {
@@ -110,11 +143,12 @@ class Auth extends Component {
         return(
             <div className="AuthFormContainer">
                 <h1 className="AuthWelcome">Welcome to Papaya</h1>
-                <p className="AuthPlease">Please sign up or sign in</p>
+                <p className="AuthPlease">Please sign up</p>
                 <form className="AuthForm" onSubmit={this.submitHandler}>
                     {form}
-                    <Button btnClass="AuthButton" btnType="submit">Sign In</Button>
+                    <Button btnClass="AuthButton" btnType="submit">Submit</Button>
                 </form>
+                <Button btnClass="SwitchAuth"><Link to='/signin'>Or Sign In</Link></Button>
             </div>
         )
     }
@@ -126,4 +160,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(null, mapDispatchToProps)(SignUp);
