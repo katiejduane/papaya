@@ -109,7 +109,7 @@ class SignUp extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         const firstname = this.state.controls.firstname.value;
-        const lastname = this.state.controls.firstname.value;
+        const lastname = this.state.controls.lastname.value;
         const email = this.state.controls.email.value;
         const pass = this.state.controls.password.value;
         this.props.onSignUp(firstname,lastname,email,pass)
@@ -154,7 +154,7 @@ class SignUp extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSignUp: (email, password) => dispatch(actions.signUp(email, password))
+        onSignUp: (firstname, lastname, email, password) => dispatch(actions.signUp(firstname, lastname, email, password))
     }
 }
 

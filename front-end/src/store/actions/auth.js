@@ -26,7 +26,7 @@ export const signUpFail = (error) => {
 };
 
 //you might end up splitting this into two files (login/reg) with their own methods!
-export const signUp = (firstname, lastname, email, password, method) => {
+export const signUp = (firstname, lastname, email, password) => {
     return dispatch => {
         // authenticate user
         dispatch(signUpStart())
@@ -38,10 +38,10 @@ export const signUp = (firstname, lastname, email, password, method) => {
             // returnToken: true
             //the above line might be a sham i've made up
         }
-        // axios.post(`${window.apiHost}users/signup`, authData)
+        console.log(authData)
         axios({
             method: 'POST',
-            url: `${window.apiHost}users/signup`,
+            url: `${window.apiHost}/users/signup`,
             data: authData
         })
         .then(response => {
@@ -57,7 +57,52 @@ export const signUp = (firstname, lastname, email, password, method) => {
 
 
 // ======================================== SIGNIN ======================================== //
+export const signInStart = () => {
+    return {
+        type: actionTypes.SIGNIN_START
+    };
+};
 
+export const signInSuccess = (authData) => {
+    return {
+        type: actionTypes.SIGNIN_SUCCESS,
+        authData: authData
+    }
+};
+
+export const signInFail = (error) => {
+    return {
+        type: actionTypes.SIGNIN_FAIL,
+        error: error
+    }
+};
+
+export const signIn = (email, password) => {
+    return dispatch => {
+        // authenticate user
+        dispatch(signInStart())
+        const authData = {
+            email: email,
+            password: password,
+            // returnToken: true
+            //the above line might be a sham i've made up
+        }
+        console.log(authData)
+        axios({
+            method: 'POST',
+            url: `${window.apiHost}/users/signin`,
+            data: authData
+        })
+            .then(response => {
+                console.log(response)
+                dispatch(signInSuccess(response.data))
+            })
+            .catch(err => {
+                console.log(err);
+                dispatch(signInFail(err))
+            })
+    }
+}
 
 
 // ======================================== SIGNOUT ======================================== //
