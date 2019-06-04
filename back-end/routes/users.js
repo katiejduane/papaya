@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const bcrypt = require('bcrypt');
+
 const userController = require('../controllers/user');
 
 router.get('/', userController.getAccount);
