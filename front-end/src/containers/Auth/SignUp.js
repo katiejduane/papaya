@@ -108,13 +108,11 @@ class SignUp extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value)
-    }
-
-    switchAuthModeHandler = () => {
-        this.setState(prevState => {
-            return {isSignUp: !prevState.isSignUp}
-        })
+        const firstname = this.state.controls.firstname.value;
+        const lastname = this.state.controls.firstname.value;
+        const email = this.state.controls.email.value;
+        const pass = this.state.controls.password.value;
+        this.props.onSignUp(firstname,lastname,email,pass)
     }
 
     render(){
@@ -156,7 +154,7 @@ class SignUp extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(actions.auth(email, password))
+        onSignUp: (email, password) => dispatch(actions.signUp(email, password))
     }
 }
 

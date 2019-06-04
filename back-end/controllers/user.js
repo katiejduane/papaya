@@ -1,19 +1,8 @@
 const User = require('../models/user');
 
-module.exports.getAccount = (req, res, next) => {
-
-}
-
-// module.exports.getSignIn = (req, res, next) => {
-
-// }
 
 module.exports.postSignIn = (req, res, next) => {
     
-}
-
-module.exports.getSignUp = (req, res, next) => {
-
 }
 
 module.exports.postSignUp = (req, res, next) => {
@@ -22,6 +11,8 @@ module.exports.postSignUp = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     User.create({
+        firstname: firstname,
+        lastname: lastname,
         email: email,
         hash: password
     })
@@ -29,6 +20,10 @@ module.exports.postSignUp = (req, res, next) => {
         res.json(response)
     })
     .catch(err => console.log(err))
+}
+
+module.exports.getAccount = (req, res, next) => {
+
 }
 
 module.exports.postAccount = (req, res, next) => {

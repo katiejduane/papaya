@@ -13,11 +13,11 @@ const User = sequelize.define('user', {
     },
     firstname:{
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     },
     lastname: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     },
     email: {
         type: Sequelize.STRING,
@@ -29,35 +29,6 @@ const User = sequelize.define('user', {
     }
 })
 
-User.beforeCreate((user, options) => {
-    return cryptPassword(user.hash)
-    .then(success => {
-        user.hash = success
-    })
-    .catch(err => console.log(err));
-});
-
-// i'm not sure the code below will work... or what about error handling?
-User.prototype.comparePasswords = async (password) => {
-    return await bcrypt.compare(password, this.password)
-}
-
-function cryptPassword(password){
-    console.log('crypt: ', password)
-    return new Promise((resolve, reject) => {
-        bcrypt.genSalt(10, (err, salt) => {
-            if(err) return reject(err);
-            bcrypt.hash(password, salt, null, (err, hash) => {
-                if(err) return reject(err);
-                return resolve(hash)
-            })
-        })
-    })
-}
-
-
-
-// this might be a simpler option than the above code for crypting... play around with both...
 // User.beforeCreate((user, options) => {
 //     return bcrypt.hash(user.hash, saltRounds)
 //         .then(hash => {
@@ -67,5 +38,15 @@ function cryptPassword(password){
 //             throw new Error();
 //         });
 // });
+
+// // i'm not sure the code below will work the way i want it to... or what about error handling,
+// // i'll need to respond with a message that the password doesn't match, no?
+// User.prototype.comparePasswords = async (password) => {
+//     return await bcrypt.compare(password, this.password)
+// }
+
+
+
+
 
 module.exports = User;

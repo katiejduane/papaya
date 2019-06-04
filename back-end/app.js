@@ -53,9 +53,9 @@ sequelize
 
 
 // create tables and relations
-Project.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+Project.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Project);
-Type.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+Type.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 Project.belongsTo(Type);
 Type.hasMany(Project);
 Status.hasMany(Project);
@@ -70,37 +70,37 @@ sequelize
         // console.log(result);
     })
     .then(user => {
-        if(!user){
-            User.create({firstname: 'Katie', lastname: 'Duane', email: 'katiejduane@gmail.com'})
+        if (!user) {
+            User.create({ firstname: 'Katie', lastname: 'Duane', email: 'katiejduane@gmail.com', hash:'xxxxxx' })
         }
         return Status.findByPk(1);
     })
     .then(status => {
-        if(!status){
+        if (!status) {
             Status.bulkCreate([
                 { statusname: 'Idea', color: 'papayawhip' },
                 { statusname: 'Research', color: 'lavender' },
                 { statusname: 'In-Progress', color: 'palevioletred' },
                 { statusname: 'Revision', color: 'lightsalmon' },
-                { statusname: 'Finished', color: 'lightblue' }, 
+                { statusname: 'Finished', color: 'lightblue' },
                 { statusname: 'Submitted', color: 'mintcream' },
                 { statusname: 'Accepted', color: 'palegoldenrod' }])
         }
         return Type.findByPk(1)
     })
     .then(type => {
-        if(!type){
-            Type.create({typename: 'Misc', userId: 1})
+        if (!type) {
+            Type.create({ typename: 'Misc', userId: 1 })
         }
         return Project.findByPk(1)
     })
     .then(project => {
-        if(!project){
-            Project.create({name: 'First project!', notes: 'Add details here', userId: 1, typeId: 1, statusId: 1})
+        if (!project) {
+            Project.create({ name: 'First project!', notes: 'Add details here', userId: 1, typeId: 1, statusId: 1 })
         }
     })
     .catch(err => {
-        // console.log(err);
+        console.log(err);
     })
 
 module.exports = app;
