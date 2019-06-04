@@ -2,29 +2,30 @@ import React from 'react';
 import './Input.css';
 
 const input = (props) => {
+
     let inputElement = null;
+    
     // const inputClasses = ['InputElement'];
+    // if (props.invalid && props.shouldValidate && props.touched) {
+    //     inputClasses.push('Invalid')
+    // }
 
     let selectColor = {
         backgroundColor: props.value
     }
 
-    // if (props.invalid && props.shouldValidate && props.touched) {
-    //     inputClasses.push('Invalid')
-    // }
-
-    switch (props.elemType) {
+    switch (props.elementType) {
         case ('input'):
             inputElement = <input
                 className={props.className}
-                {...props.elemConf}
+                {...props.elementConfig}
                 value={props.value}
                 onChange={props.changed} />
             break;
         case ('textarea'):
             inputElement = <textarea
                 className={props.className}
-                {...props.elemConf}
+                {...props.elementConfig}
                 value={props.value}
                 onChange={props.changed} />;
             break;
@@ -32,11 +33,11 @@ const input = (props) => {
             inputElement = (
                 <select
                     className={props.className}
-                    {...props.elemConf}
+                    {...props.elementConfig}
                     value={props.value}
                     style={selectColor}
                     onChange={props.changed}>
-                    {props.elemConf.options.map(option => (
+                    {props.elementConfig.options.map(option => (
                         <option key={option.value} value={option.value}
                             onChange={props.changed}>
                             {option.displayValue}

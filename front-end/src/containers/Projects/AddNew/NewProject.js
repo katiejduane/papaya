@@ -65,7 +65,7 @@ class NewProject extends Component {
 
     render(){ 
         // do i need an if statement here checking the length of the types state?
-        // create option dropdowns for add form (type and status)
+        
         const typeList = this.state.types.map((type, i)=>{
             return (<option key={i} value={type.value}>{type.displayValue}</option>)
         })

@@ -17,17 +17,17 @@ class App extends Component {
       <div className="App">
         <Layout>
           <Switch>
-            <Route exact path="/" component={List} />
-            {/* but what about if they're not logged in!? must redirect '/' to splash */}
             <Route exact path="/status/:status" component={List} />
             <Route exact path="/type/:typeid" component={List} />
             <Route exact path="/archive" component={List} />
             <Route exact path="/view/:id" component={Details} />
             <Route exact path="/addNew" component={NewProject} />
             <Route exact path="/update/:" component={UpdateProject} />
-            {/* route(s) for auth (maybe one, maybe two... idk) */}
+            <Route exact path="/auth" component={Auth} />
             <Route exact path="/account/:" component={Account} />
             <Route exact path="/splash" component={Splash} />
+            <Route exact path="/" component={List} />
+            {/* but what about if they're not logged in!? must redirect '/' to splash */}
           </Switch>
         </Layout>
       </div>

@@ -4,8 +4,6 @@ import './Form.css';
 
 class Form extends Component {
     state = {
-        // types: [],
-        // stats: [],
         error: false,
         loading: false,
         title: '',
@@ -54,7 +52,7 @@ class Form extends Component {
                     <div className="FormLabel">Title</div>
                     <section>
                         <input type="text" onChange={this.changeTitleHandler} className="TitleInput" 
-                            placeholder={this.props.titleholder}  required />
+                            placeholder={this.props.titleholder} maxlength="25" required />
                     </section>
                     <div className="FormLabel">Type</div>
                     <section>

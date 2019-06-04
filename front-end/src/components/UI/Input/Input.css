@@ -34,3 +34,7 @@ select{
 .Select-Color{
     display:none;
 } */
+
+.Invalid {
+    border: 1px solid red;
+}
