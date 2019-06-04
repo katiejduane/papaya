@@ -10,13 +10,13 @@ router.get('/', userController.getAccount);
 // not sure if i will use two separate routes for signup/sign in or just one for auth and
 // conditionally render
 
-// router.get('/signIn', userController.getSignIn);
+// router.get('/auth', userController.getSignIn);
 
-// router.post('/signIn', userController.postSignIn);
+// router.post('/auth', userController.postSignIn);
 
 // router.get('/signUp', userController.getSignUp);
 
-// router.post('/signUp', userController.postSignUp);
+router.post('/auth', userController.postSignUp);
 
 router.post('/account', userController.postAccount);
 

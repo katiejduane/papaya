@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
 
 const bcrypt = require('bcrypt');
-// const saltRounds = 10;
+const saltRounds = 10;
 
 const User = sequelize.define('user', {
     id: {
@@ -37,6 +37,11 @@ User.beforeCreate((user, options) => {
     .catch(err => console.log(err));
 });
 
+// i'm not sure the code below will work... or what about error handling?
+User.prototype.comparePasswords = async (password) => {
+    return await bcrypt.compare(password, this.password)
+}
+
 function cryptPassword(password){
     console.log('crypt: ', password)
     return new Promise((resolve, reject) => {
@@ -49,5 +54,18 @@ function cryptPassword(password){
         })
     })
 }
+
+
+
+// this might be a simpler option than the above code for crypting... play around with both...
+// User.beforeCreate((user, options) => {
+//     return bcrypt.hash(user.hash, saltRounds)
+//         .then(hash => {
+//             user.hash = hash;
+//         })
+//         .catch(err => {
+//             throw new Error();
+//         });
+// });
 
 module.exports = User;
