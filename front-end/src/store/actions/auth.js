@@ -38,14 +38,13 @@ export const signUp = (firstname, lastname, email, password) => {
             // returnToken: true
             //the above line might be a sham i've made up
         }
-        console.log(authData)
         axios({
             method: 'POST',
             url: `${window.apiHost}/users/signup`,
             data: authData
         })
         .then(response => {
-            console.log(response)
+            // console.log(response)
             dispatch(signUpSuccess(response.data))
         })
         .catch(err => {

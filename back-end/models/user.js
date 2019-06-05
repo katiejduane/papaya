@@ -27,17 +27,7 @@ const User = sequelize.define('user', {
         type: Sequelize.STRING,
         allowNull: false
     }
-}, {
-        instanceMethods: {
-            authenticate: function (value) {
-                if (bcrypt.compareSync(value, this.password))
-                    return this;
-                else
-                    return new Error('Your password does not match!');
-                    //or return false? idk, will need to mess with this...
-            }
-        }
-    });
+});
 
 // hash password with bcrypt
 User.beforeCreate((user, options) => {
@@ -46,16 +36,23 @@ User.beforeCreate((user, options) => {
             user.hash = hash;
         })
         .catch(err => {
+            console.log(err)
             throw new Error();
         });
 });
 
-// code for handling when instance method 'authenticate' fails (returns false)
-// function passFail(?){
-//     if(User.authenticate === false){
-    // do something
-//  }
-// }
+User.prototype.authenticate = async function (value, callback) {
+    // console.log('data:', value, this.hash)
+    await bcrypt.compare(value, this.hash, function(err, same){
+        if (err){
+            // console.log('auth', err)
+            callback(err)
+        }else{
+            // console.log('auth2', err, same)
+            callback(err, same)
+        }
+    })
+}
 
 
 module.exports = User;
