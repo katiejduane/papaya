@@ -41,14 +41,14 @@ User.beforeCreate((user, options) => {
         });
 });
 
+// prototype method for all users to check whether password entered === hash in db
 User.prototype.authenticate = async function (value, callback) {
-    // console.log('data:', value, this.hash)
     await bcrypt.compare(value, this.hash, function(err, same){
         if (err){
-            // console.log('auth', err)
+            console.log(err)
             callback(err)
         }else{
-            // console.log('auth2', err, same)
+            console.log(err, same)
             callback(err, same)
         }
     })

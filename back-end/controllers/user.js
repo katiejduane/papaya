@@ -3,7 +3,25 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const config = require('../config');
 
+// sign up
+module.exports.postSignUp = (req, res, next) => {
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const email = req.body.email;
+    const password = req.body.password;
+    User.create({
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        hash: password
+    })
+        .then(response => {
+            res.json(response)
+        })
+        .catch(err => console.log(err))
+}
 
+// sign in
 module.exports.postSignIn = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -30,10 +48,9 @@ module.exports.postSignIn = (req, res, next) => {
                 });
             } else if(!same) {
                 res.status(401).json({
-                    msg: 'Bad password'
+                    msg: 'That password is incorrect'
                 });
             } else {
-                console.log("hi", user)
                 const token = jwt.sign(
                     {id: user.id},
                     config.secret,
@@ -50,31 +67,12 @@ module.exports.postSignIn = (req, res, next) => {
     .catch(err => console.log(err))
 };
 
-// const token = jwt.sign(payload, secret, {
-//     expiresIn: '1h'
-// });
-
-module.exports.postSignUp = (req, res, next) => {
-    const firstname = req.body.firstname;
-    const lastname = req.body.lastname;
-    const email = req.body.email;
-    const password = req.body.password;
-    User.create({
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        hash: password
-    })
-    .then(response => {
-        res.json(response)
-    })
-    .catch(err => console.log(err))
-}
-
+//get account info
 module.exports.getAccount = (req, res, next) => {
 
 }
 
+//update account info
 module.exports.postAccount = (req, res, next) => {
 
 }

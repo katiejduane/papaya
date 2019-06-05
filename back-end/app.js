@@ -6,8 +6,6 @@ var logger = require('morgan');
 
 const helmet = require('helmet');
 
-const bcrypt = require('bcrypt');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
