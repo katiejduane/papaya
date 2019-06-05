@@ -18,9 +18,6 @@ const Project = require('./models/project');
 const Type = require('./models/type');
 const Status = require('./models/status');
 
-//a VERY TEMPORARY secret for testing issuing tokens, will be moved to config or .ENV later
-const secret = 'shhhh'
-
 var app = express();
 
 app.use(helmet());

@@ -1,4 +1,7 @@
+const jwt = require('jsonwebtoken');
+
 const User = require('../models/user');
+const config = require('../config');
 
 
 module.exports.postSignIn = (req, res, next) => {
@@ -12,35 +15,44 @@ module.exports.postSignIn = (req, res, next) => {
     .then(function(user, err){
         if(err){
             console.log(err);
-            res.status(500)
-                .json({
+            res.status(500).json({
                     error: 'Internal error please try again'  
             })
         } else if(!user){
-            res.json({
+            res.status(401).json({
                 msg: 'User email does not exist'
             })
         } else {
             user.authenticate(password,function(err, same){
             if (err) {
-                res.status(500)
-                .json({
+                res.status(500).json({
                     error: 'Internal error please try again'
                 });
             } else if(!same) {
-                res.status(401)
-                .json({
+                res.status(401).json({
                     msg: 'Bad password'
                 });
             } else {
                 console.log("hi", user)
-                res.json(user)
-            }
-        });
-    }
+                const token = jwt.sign(
+                    {id: user.id},
+                    config.secret,
+                    {expiresIn: 3600}
+                )
+                res.json({
+                    token,
+                    user: user,
+                    loggedIn: true})
+                }
+            });
+        }
     })
     .catch(err => console.log(err))
-}
+};
+
+// const token = jwt.sign(payload, secret, {
+//     expiresIn: '1h'
+// });
 
 module.exports.postSignUp = (req, res, next) => {
     const firstname = req.body.firstname;
