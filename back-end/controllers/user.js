@@ -34,7 +34,7 @@ module.exports.postSignIn = (req, res, next) => {
         if(err){
             console.log(err);
             res.status(500).json({
-                    error: 'Internal error please try again'  
+                error: 'Internal error please try again'  
             })
         } else if(!user){
             res.status(401).json({
