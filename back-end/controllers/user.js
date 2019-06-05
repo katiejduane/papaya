@@ -34,21 +34,25 @@ module.exports.postSignIn = (req, res, next) => {
         if(err){
             console.log(err);
             res.status(500).json({
-                error: 'Internal error please try again'  
+                error: 'Internal error please try again'  ,
+                auth: false
             })
         } else if(!user){
             res.status(401).json({
-                msg: 'User email does not exist'
+                msg: 'User email does not exist',
+                auth: false
             })
         } else {
             user.authenticate(password,function(err, same){
             if (err) {
                 res.status(500).json({
-                    error: 'Internal error please try again'
+                    error: 'Internal error please try again',
+                    auth: false
                 });
             } else if(!same) {
                 res.status(401).json({
-                    msg: 'That password is incorrect'
+                    msg: 'That password is incorrect',
+                    auth: false
                 });
             } else {
                 const token = jwt.sign(
@@ -59,7 +63,7 @@ module.exports.postSignIn = (req, res, next) => {
                 res.json({
                     token,
                     user: user,
-                    loggedIn: true})
+                    auth: true})
                 }
             });
         }
