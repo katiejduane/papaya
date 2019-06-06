@@ -44,12 +44,14 @@ export const signUp = (firstname, lastname, email, password) => {
             data: authData
         })
         .then(response => {
-            // console.log(response)
+            console.log(response)
             dispatch(signUpSuccess(response.data))
         })
         .catch(err => {
-            console.log(err);
-            dispatch(signUpFail(err))
+            console.log('error', err);
+            dispatch(signUpFail("That email appears to already be in our database!"))
+            // the default error message is useless for users, so pass a string for now, but will need to
+            // figure out how to render the actual error message i'm trying to send from the backend
         })
     }   
 }
@@ -62,10 +64,11 @@ export const signInStart = () => {
     };
 };
 
-export const signInSuccess = (authData) => {
+export const signInSuccess = (token, userId) => {
     return {
         type: actionTypes.SIGNIN_SUCCESS,
-        authData: authData
+        token: token,
+        userId: userId
     }
 };
 
@@ -75,6 +78,22 @@ export const signInFail = (error) => {
         error: error
     }
 };
+
+
+export const signOut = () => {
+    return {
+        type: actionTypes.SIGNOUT
+    }
+}
+
+export const checkAuthTimeOut = (expirationTime) => {
+    console.log(expirationTime)
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(signOut())
+        }, expirationTime);
+    }
+}
 
 export const signIn = (email, password) => {
     return dispatch => {
@@ -94,14 +113,18 @@ export const signIn = (email, password) => {
         })
             .then(response => {
                 console.log(response)
-                dispatch(signInSuccess(response.data))
+                dispatch(signInSuccess(response.data.token, response.data.userId))
+                dispatch(checkAuthTimeOut(response.data.expiresIn))
             })
             .catch(err => {
                 console.log(err);
-                dispatch(signInFail(err))
+                dispatch(signInFail('Email or password is invalid'))
+                // the default error message is useless for users, so pass a string for now, but will need to
+                // figure out how to render the actual error message i'm trying to send from the backend
             })
     }
 }
 
 
 // ======================================== SIGNOUT ======================================== //
+

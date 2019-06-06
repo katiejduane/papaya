@@ -53,8 +53,8 @@ module.exports.postSignIn = (req, res, next) => {
                 auth: false
             })
         } else if(!user){
-            res.json({
-                msg: 'User email does not exist',
+            res.status(401).json({
+                error: 'User email does not exist',
                 auth: false
             })
         } else {
@@ -65,8 +65,8 @@ module.exports.postSignIn = (req, res, next) => {
                     auth: false
                 });
             } else if(!same) {
-                res.json({
-                    msg: 'That password is incorrect',
+                res.status(401).json({
+                    error: 'That password is incorrect',
                     auth: false
                 });
             } else {
@@ -74,10 +74,15 @@ module.exports.postSignIn = (req, res, next) => {
                     {id: user.id},
                     config.secret,
                     {expiresIn: 3600}
+                    //how can i access the above chunk of time?
                 )
                 res.json({
                     token,
+                    expiresIn: 3600,
+                    // above is just a temporary solution
+                    userId: user.id,
                     user: user,
+                    error: false,
                     auth: true})
                 }
             });

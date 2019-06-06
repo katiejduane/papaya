@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import Loader from '../../components/UI/Loader/Loader';
 import './Auth.css';
 import * as actions from '../../store/actions/index';
+
 
 class SignIn extends Component{
     state = {
@@ -95,7 +97,7 @@ class SignIn extends Component{
             });
         }
 
-        const form = formElementsArray.map(formElem => (
+        let form = formElementsArray.map(formElem => (
             <Input
                 key={formElem.id}
                 elementType={formElem.config.elementType}
@@ -109,8 +111,21 @@ class SignIn extends Component{
 
         ))
 
+        if(this.props.loading){
+            form = <Loader />
+        }
+
+        let errorMsg = null;
+        // need to figure out how to get the actual error here
+        if (this.props.error){
+            errorMsg = (
+                <p>{this.props.error}</p>
+            )
+        }
+
         return (
             <div className="AuthFormContainer">
+                {errorMsg}
                 <h1 className="AuthWelcome">Welcome to Papaya</h1>
                 <p className="AuthPlease">Please sign in</p>
                 <form className="AuthForm" onSubmit={this.submitHandler}>
@@ -123,10 +138,17 @@ class SignIn extends Component{
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         onSignIn: (email, password) => dispatch(actions.signIn(email, password))
     }
 }
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
