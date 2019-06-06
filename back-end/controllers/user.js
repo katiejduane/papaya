@@ -7,23 +7,38 @@ const config = require('../config');
 module.exports.postSignUp = (req, res, next) => {
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
-    const email = req.body.email;
+    const email = req.body.email.toLowerCase();
     const password = req.body.password;
-    User.create({
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        hash: password
+    User.findOne({
+        where: {
+            email : email
+        }
     })
-        .then(response => {
-            res.json(response)
-        })
-        .catch(err => console.log(err))
+    .then(user => {
+        if(!user){
+            User.create({
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                hash: password
+            })
+            .then(response => {
+                res.json(response)
+            })
+            .catch(err => console.log(err))
+        } else {
+            res.json({
+                msg: 'User already exists!'
+            })
+        }
+    })
+    .catch(err => console.log(err))
+    
 }
 
 // sign in
 module.exports.postSignIn = (req, res, next) => {
-    const email = req.body.email;
+    const email = req.body.email.toLowerCase();
     const password = req.body.password;
     User.findOne({
         where: {
@@ -38,7 +53,7 @@ module.exports.postSignIn = (req, res, next) => {
                 auth: false
             })
         } else if(!user){
-            res.status(401).json({
+            res.json({
                 msg: 'User email does not exist',
                 auth: false
             })
@@ -50,7 +65,7 @@ module.exports.postSignIn = (req, res, next) => {
                     auth: false
                 });
             } else if(!same) {
-                res.status(401).json({
+                res.json({
                     msg: 'That password is incorrect',
                     auth: false
                 });

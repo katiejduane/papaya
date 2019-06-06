@@ -60,16 +60,16 @@ Project.belongsTo(Status);
 sequelize
     .sync()
     // .sync({force: true})
-    .then(result => {
-        return User.findByPk(1)
-        // console.log(result);
-    })
-    .then(user => {
-        if (!user) {
-            User.create({ firstname: 'Katie', lastname: 'Duane', email: 'katiejduane@gmail.com', hash:'xxxxxx' })
-        }
-        return Status.findByPk(1);
-    })
+    // .then(result => {
+    //     return User.findByPk(1)
+    //     // console.log(result);
+    // })
+    // .then(user => {
+    //     if (!user) {
+    //         User.create({ firstname: 'Katie', lastname: 'Duane', email: 'katiejduane@gmail.com', hash:'xxxxxx' })
+    //     }
+    //     return Status.findByPk(1);
+    // })
     .then(status => {
         if (!status) {
             Status.bulkCreate([
@@ -83,17 +83,17 @@ sequelize
         }
         return Type.findByPk(1)
     })
-    .then(type => {
-        if (!type) {
-            Type.create({ typename: 'Misc', userId: 1 })
-        }
-        return Project.findByPk(1)
-    })
-    .then(project => {
-        if (!project) {
-            Project.create({ name: 'First project!', notes: 'Add details here', userId: 1, typeId: 1, statusId: 1 })
-        }
-    })
+    // .then(type => {
+    //     if (!type) {
+    //         Type.create({ typename: 'Misc', userId: 1 })
+    //     }
+    //     return Project.findByPk(1)
+    // })
+    // .then(project => {
+    //     if (!project) {
+    //         Project.create({ name: 'First project!', notes: 'Add details here', userId: 1, typeId: 1, statusId: 1 })
+    //     }
+    // })
     .catch(err => {
         console.log(err);
     })
