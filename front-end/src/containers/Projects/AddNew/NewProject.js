@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import './NewProject.css'
+import styles from './NewProject.module.css'
 // import Input from '../../../components/UI/Input/Input';
 import Loader from '../../../components/UI/Loader/Loader';
 import Form from '../../Form/Form';
@@ -93,7 +93,7 @@ class NewProject extends Component {
 
         return(
             <Aux>
-                <h1 className="AddTitle">Enter your new idea or project details</h1>
+                <h1 className={styles.AddTitle}>Enter your new idea or project details</h1>
                 {addForm}
             </Aux>
         );

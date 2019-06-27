@@ -12,20 +12,20 @@
 }
 
 
-.DetailCard-Title{
+.DetailCardTitle{
     margin: 1rem;
 }
 
-.DetailCard-Type{
+.DetailCardType{
     margin: 1rem;
     display: inline;
 }
 
-.DetailCard-Status{
+.DetailCardStatus{
     margin: 1rem;
 }
 
-.DetailCard-Notes{
+.DetailCardNotes{
     margin: 1rem;
 }
 

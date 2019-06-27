@@ -1,7 +1,7 @@
 import React, { Component } from  'react';
 import axios from 'axios';
 
-import './List.css';
+import styles from './List.module.css';
 import MiniCard from '../../../components/Cards/MiniCard/MiniCard';
 
 class List extends Component {
@@ -47,7 +47,7 @@ class List extends Component {
       }
 
         return (
-          <div className="MiniCardContainer">
+          <div className={styles.MiniCardContainer}>
             {miniCardList}
           </div>
         );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import './Details.css';
+import styles from './Details.module.css';
 import DetailCard from '../../../components/Cards/DetailCard/DetailCard';
 import Button from '../../../components/UI/Button/Button'
 
@@ -51,7 +51,7 @@ class Details extends Component {
         const humanizedDateUpdated = new Date(this.state.dateUpdated).toLocaleDateString();
         
         return(
-            <div className="DetailCardContainer">
+            <div className={styles.DetailCardContainer}>
                 <DetailCard 
                     title={this.state.title}
                     status={this.state.status}

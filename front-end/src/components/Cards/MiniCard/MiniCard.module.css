@@ -21,16 +21,16 @@
     box-shadow: 5px 5px 8px -5px rgba(201, 190, 190, 0.817);
 }
 
-.MiniCard-Title{
+.MiniCardTitle{
     margin: 1rem 0;
 }
 
-.MiniCard-Type{
+.MiniCardType{
     margin: 1rem 0;
     display: inline;
 }
 
-.MiniCard-Status{
+.MiniCardStatus{
     margin: 1rem 0;
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 
-import './UpdateProject.css'
+import './UpdateProject.module.css'
 
 class EditProject extends Component {
     render(){

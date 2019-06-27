@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../../components/UI/Button/Button';
-import './Form.css';
+import styles from './Form.module.css';
 
 class Form extends Component {
     state = {
@@ -47,32 +47,32 @@ class Form extends Component {
     render(){
 
         return (
-            <div className='FormContainer'>
-                <form onSubmit={this.postNew} className="Form">
-                    <div className="FormLabel">Title</div>
+            <div className={styles.FormContainer}>
+                <form onSubmit={this.postNew} className={styles.Form}>
+                    <div className={styles.FormLabel}>Title</div>
                     <section>
-                        <input type="text" onChange={this.changeTitleHandler} className="TitleInput" 
+                        <input type="text" onChange={this.changeTitleHandler} className={styles.TitleInput} 
                             placeholder={this.props.titleholder} maxlength="25" required />
                     </section>
-                    <div className="FormLabel">Type</div>
+                    <div className={styles.FormLabel}>Type</div>
                     <section>
-                        <select onChange={this.changeTypeHandler} className="SelectType">
+                        <select onChange={this.changeTypeHandler} className={styles.SelectType}>
                             <option value=''>{this.props.defaultType}</option>
                             {this.props.typeList}
                         </select>
-                        <input type="text" onChange={this.changeTypeHandler} className="NewType"
+                        <input type="text" onChange={this.changeTypeHandler} className={styles.NewType}
                             placeholder={this.props.typeholder}  />
                     </section>
-                    <div className="FormLabel">Status</div>
+                    <div className={styles.FormLabel}>Status</div>
                     <section>
-                        <select onChange={this.changeStatusHandler} className="SelectStatus" required>
+                        <select onChange={this.changeStatusHandler} className={styles.SelectStatus} required>
                             <option value=''>{this.props.defaultStatus}</option>
                             {this.props.statusList}
                         </select>
                     </section>
-                    <div className="FormLabel">Notes</div>
+                    <div className={styles.FormLabel}>Notes</div>
                     <section>
-                        <textarea onChange={this.changeNotesHandler} className="NewNote" 
+                        <textarea onChange={this.changeNotesHandler} className={styles.NewNote} 
                             placeholder={this.props.noteholder} value={this.state.note}></textarea>
                     </section>
                     <Button type="submit" btnClass="Submit">Add</Button>

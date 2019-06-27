@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './MainNav.css';
+import styles from './MainNav.module.css';
 import NavItems from '../../components/NavItems/NavItems';
 
 
@@ -33,15 +33,15 @@ class MainNav extends Component {
 
     render(){
         return (
-            <header className="MainNav">
-                <section className="NavTop">
-                    <div className="Welcome">Hi, Katie</div>
-                    <nav className="deskTopOnly">
+            <header className={styles.MainNav}>
+                <section className={styles.NavTop}>
+                    <div className={styles.Welcome}>Hi, Katie</div>
+                    <nav className={styles.deskTopOnly}>
                         <NavItems />
                     </nav>
                 </section>
-                <section className="NavBottom">
-                    <div className="MainNavLogo"></div>
+                <section className={styles.NavBottom}>
+                    <div className={styles.MainNavLogo}></div>
                 </section>
 
             </header>

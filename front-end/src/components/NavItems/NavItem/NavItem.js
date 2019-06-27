@@ -1,9 +1,9 @@
 import React from 'react';
 // import { NavLink } from 'react-router-dom';
-import './NavItem.css';
+import styles from './NavItem.module.css';
 
 const navItem = (props) => (
-    <li className="NavItem" id={props.id}>
+    <li className={styles.NavItem} id={props.id}>
         {props.children}
     </li>
 )

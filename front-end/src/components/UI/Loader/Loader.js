@@ -1,9 +1,9 @@
 import React from 'react';
-import './Loader.css';
+import styles from './Loader.module.css';
 
 const loader = () => (
-    <div className="LoaderContainer">
-        <div className="Loader">Loading...</div>
+    <div className={styles.LoaderContainer}>
+        <div className={styles.Loader}>Loading...</div>
     </div>
 );
 

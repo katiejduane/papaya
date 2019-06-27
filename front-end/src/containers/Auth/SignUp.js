@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
-import './Auth.css';
+import styles from './Auth.module.css';
 import * as actions from '../../store/actions/index';
 
 
@@ -139,10 +139,10 @@ class SignUp extends Component {
         ))
 
         return(
-            <div className="AuthFormContainer">
-                <h1 className="AuthWelcome">Welcome to Papaya</h1>
-                <p className="AuthPlease">Please sign up</p>
-                <form className="AuthForm" onSubmit={this.submitHandler}>
+            <div className={styles.AuthFormContainer}>
+                <h1 className={styles.AuthWelcome}>Welcome to Papaya</h1>
+                <p className={styles.AuthPlease}>Please sign up</p>
+                <form className={styles.AuthForm} onSubmit={this.submitHandler}>
                     {form}
                     <Button btnClass="AuthButton" btnType="submit">Submit</Button>
                 </form>
