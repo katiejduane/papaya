@@ -6,6 +6,8 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
+    authorized: false,
+    message: '',
     authRedirectPath: '/'
 };
 
@@ -18,14 +20,15 @@ const signInSuccess = (state, action) => {
         token: action.token,
         userId: action.userId,
         error: null,
-        loading: false
+        loading: false,
+        authorized: true
     });
 };
 
 const signInFail = (state, action) => {
     return updateObject(state, {
         error: action.error,
-        loading: false
+        loading: false,
     });
 };
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -41,6 +41,10 @@ class SignIn extends Component{
                 touched: false
             }
         }
+    }
+
+    componentDidUpdate(){
+        
     }
 
     checkValidity(value, rules) {
@@ -89,58 +93,70 @@ class SignIn extends Component{
     }
 
     render() {
-        let formElementsArray = [];
-        for (let key in this.state.controls) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.controls[key]
-            });
-        }
+        if(this.props.authorized){
+            // this.props.history.push('/')
+            return(
+                <Redirect to='/' />
+            )
+        } else {
+            let formElementsArray = [];
+            for (let key in this.state.controls) {
+                formElementsArray.push({
+                    id: key,
+                    config: this.state.controls[key]
+                });
+            }
 
-        let form = formElementsArray.map(formElem => (
-            <Input
-                key={formElem.id}
-                elementType={formElem.config.elementType}
-                elementConfig={formElem.config.elementConfig}
-                value={formElem.config.value}
-                invalid={!formElem.config.valid}
-                shouldValidate={formElem.config.validation}
-                touched={formElem.config.touched}
-                changed={event => this.inputChangedHandler(event, formElem.id)}
-            />
+            let form = formElementsArray.map(formElem => (
+                <Input
+                    key={formElem.id}
+                    elementType={formElem.config.elementType}
+                    elementConfig={formElem.config.elementConfig}
+                    value={formElem.config.value}
+                    invalid={!formElem.config.valid}
+                    shouldValidate={formElem.config.validation}
+                    touched={formElem.config.touched}
+                    changed={event => this.inputChangedHandler(event, formElem.id)}
+                />
 
-        ))
+            ))
 
-        if(this.props.loading){
-            form = <Loader />
-        }
+            if (this.props.loading) {
+                form = <Loader />
+            }
 
-        let errorMsg = null;
-        // need to figure out how to get the actual error here
-        if (this.props.error){
-            errorMsg = (
-                <p>{this.props.error}</p>
+            let errorMsg = null;
+            // need to figure out how to get the actual error here
+            if (this.props.error) {
+                errorMsg = (
+                    <p>{this.props.error}</p>
+                )
+            }
+
+            return (
+                <div className={styles.AuthFormContainer}>
+                    {errorMsg}
+                    <h1 className={styles.AuthWelcome}>Welcome to Papaya</h1>
+                    <p className={styles.AuthPlease}>Please sign in</p>
+                    <form className={styles.AuthForm} onSubmit={this.submitHandler}>
+                        {form}
+                        <Button btnClass="AuthButton" btnType="submit">Submit</Button>
+                    </form>
+                    <Button btnClass="SwitchAuth"><Link to='/signup'>Or Sign Up</Link></Button>
+                </div>
             )
         }
 
-        return (
-            <div className={styles.AuthFormContainer}>
-                {errorMsg}
-                <h1 className={styles.AuthWelcome}>Welcome to Papaya</h1>
-                <p className={styles.AuthPlease}>Please sign in</p>
-                <form className={styles.AuthForm} onSubmit={this.submitHandler}>
-                    {form}
-                    <Button btnClass="AuthButton" btnType="submit">Submit</Button>
-                </form>
-                <Button btnClass="SwitchAuth"><Link to='/signup'>Or Sign Up</Link></Button>
-            </div>
-        )
-    }
+
+
+        }
+
 }
 
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
+        authorized: state.auth.authorized,
         error: state.auth.error
     }
 }

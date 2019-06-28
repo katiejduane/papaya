@@ -77,8 +77,7 @@ export const signInFail = (error) => {
         type: actionTypes.SIGNIN_FAIL,
         error: error
     }
-};
-
+}
 
 export const signOut = () => {
     return {
@@ -96,20 +95,26 @@ export const checkAuthTimeOut = (expirationTime) => {
 }
 
 export const signIn = (email, password) => {
+    const config = {
+        headers: {
+            "Content-type": "application/json"
+        }
+    };
     return dispatch => {
         // authenticate user
         dispatch(signInStart())
         const authData = {
             email: email,
             password: password,
-            // returnToken: true
+            returnToken: true
             //the above line might be a sham i've made up
         }
         console.log(authData)
         axios({
             method: 'POST',
             url: `${window.apiHost}/users/signin`,
-            data: authData
+            data: authData,
+            config
         })
             .then(response => {
                 console.log(response)
@@ -123,6 +128,24 @@ export const signIn = (email, password) => {
                 // figure out how to render the actual error message i'm trying to send from the backend
             })
     }
+}
+
+// ===================================== CHECK TOKEN ====================================== //
+export const tokenConfig = () => {
+    const token = localStorage.getItem('token');
+    const config = {
+        headers: {
+            'Content-type': 'application/json'
+        }
+    }
+    if (token) {
+        config.headers['x-auth-token'] = token;
+    }
+    return config;
+}
+
+export const checkToken = () => {
+    const token = tokenConfig();
 }
 
 

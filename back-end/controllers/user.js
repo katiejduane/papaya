@@ -77,10 +77,10 @@ module.exports.postSignIn = (req, res, next) => {
                     //how can i access the above chunk of time?
                 )
                 res.json({
-                    token,
+                    token: token,
                     expiresIn: 3600,
                     // above is just a temporary solution
-                    userId: user.id,
+                    msg: 'Welcome!',
                     user: user,
                     error: false,
                     auth: true})
@@ -90,6 +90,30 @@ module.exports.postSignIn = (req, res, next) => {
     })
     .catch(err => console.log(err))
 };
+
+//check token ============================== DON'T KNOW IF I NEED THIS ===============================
+module.exports.checkToken = (req, res, next) => {
+    const userId = req.user.id;
+    User.findOne({
+        where: {
+            id: userId
+        }
+    }).then(user => {
+        const token = jwt.sign(
+            { id: user._id },
+            config.jwtSecret,
+            { expiresIn: 36000000 }
+        );
+        res.json({
+            token: token,
+            expiresIn: 3600,
+            // above is just a temporary solution
+            message: 'valid token',
+            auth: true,
+            user: user,
+        });
+    }).catch(err => console.log(err));
+}
 
 //get account info
 module.exports.getAccount = (req, res, next) => {
