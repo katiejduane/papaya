@@ -2,20 +2,40 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
-    token: null,
+    token: localStorage.getItem('token'),
     userId: null,
     error: null,
     loading: false,
     authorized: false,
-    message: '',
+    msg: '',
     authRedirectPath: '/'
 };
+
+const signUpStart = (state, action) => {
+    return updateObject(state, { error: null, loading: true });
+}
+
+const signUpSuccess = (state, action) => {
+    return updateObject(state, {
+        msg: 'signup success',
+        error: null,
+        loading: false,
+    });
+}
+
+const signUpFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false,
+    });
+}
 
 const signInStart = (state, action) => {
     return updateObject(state, { error: null, loading: true });
 };
 
 const signInSuccess = (state, action) => {
+    localStorage.setItem('token', action.token)
     return updateObject(state, {
         token: action.token,
         userId: action.userId,
@@ -32,6 +52,17 @@ const signInFail = (state, action) => {
     });
 };
 
+const checkToken = (state, action) => {
+    if(action.token){
+        localStorage.setItem('token', action.token);
+    } else{
+        localStorage.removeItem('token');
+    }
+    return updateObject(state, {
+        token: action.token
+    })
+}
+
 const signOut = (state, action) => {
     return updateObject(state, { token: null, userId: null });
 };
@@ -42,9 +73,13 @@ const signOut = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.SIGNUP_START: return signUpStart(state, action);
+        case actionTypes.SIGNUP_SUCCESS: return signUpSuccess(state, action);
+        case actionTypes.SIGNUP_FAIL: return signUpFail(state, action);
         case actionTypes.SIGNIN_START: return signInStart(state, action);
         case actionTypes.SIGNIN_SUCCESS: return signInSuccess(state, action);
         case actionTypes.SIGNIN_FAIL: return signInFail(state, action);
+        case actionTypes.CHECK_TOKEN: return checkToken(state, action)
         case actionTypes.SIGNOUT: return signOut(state, action);
         // case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action);
         default:

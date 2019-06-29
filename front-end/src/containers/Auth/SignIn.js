@@ -146,11 +146,7 @@ class SignIn extends Component{
                 </div>
             )
         }
-
-
-
-        }
-
+    }
 }
 
 const mapStateToProps = state => {

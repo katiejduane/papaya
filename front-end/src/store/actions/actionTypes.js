@@ -11,5 +11,9 @@ export const SIGNIN_FAIL = 'SIGNIN_FAIL';
 //signout
 export const SIGNOUT = 'SIGNOUT';
 
-//check token
+//token
 export const CHECK_TOKEN = 'CHECK_TOKEN';
+export const TOKEN_FAIL = 'TOKEN_FAIL';
+export const TOKEN_SUCCESS = 'TOKEN_SUCCESS';
+
+//redirect path

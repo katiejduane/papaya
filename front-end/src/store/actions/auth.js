@@ -12,6 +12,7 @@ export const signUpStart = () => {
 };
 
 export const signUpSuccess = (authData) => {
+    localStorage.setItem('token', authData.token)
     return {
         type: actionTypes.SIGNUP_SUCCESS,
         authData: authData
@@ -27,6 +28,9 @@ export const signUpFail = (error) => {
 
 //you might end up splitting this into two files (login/reg) with their own methods!
 export const signUp = (firstname, lastname, email, password) => {
+    const headers = {
+        "Content-type": "application/json"
+    };
     return dispatch => {
         // authenticate user
         dispatch(signUpStart())
@@ -41,7 +45,8 @@ export const signUp = (firstname, lastname, email, password) => {
         axios({
             method: 'POST',
             url: `${window.apiHost}/users/signup`,
-            data: authData
+            data: authData,
+            headers
         })
         .then(response => {
             console.log(response)
@@ -65,6 +70,7 @@ export const signInStart = () => {
 };
 
 export const signInSuccess = (token, userId) => {
+    localStorage.setItem('token', token)
     return {
         type: actionTypes.SIGNIN_SUCCESS,
         token: token,
@@ -86,7 +92,7 @@ export const signOut = () => {
 }
 
 export const checkAuthTimeOut = (expirationTime) => {
-    console.log(expirationTime)
+    // console.log(expirationTime)
     return dispatch => {
         setTimeout(() => {
             dispatch(signOut())
@@ -95,10 +101,8 @@ export const checkAuthTimeOut = (expirationTime) => {
 }
 
 export const signIn = (email, password) => {
-    const config = {
-        headers: {
-            "Content-type": "application/json"
-        }
+    const headers = {
+        "Content-type": "application/json"
     };
     return dispatch => {
         // authenticate user
@@ -109,16 +113,16 @@ export const signIn = (email, password) => {
             returnToken: true
             //the above line might be a sham i've made up
         }
-        console.log(authData)
         axios({
             method: 'POST',
             url: `${window.apiHost}/users/signin`,
             data: authData,
-            config
+            headers
         })
             .then(response => {
                 console.log(response)
                 dispatch(signInSuccess(response.data.token, response.data.userId))
+                dispatch(checkToken())
                 dispatch(checkAuthTimeOut(response.data.expiresIn))
             })
             .catch(err => {
@@ -131,22 +135,51 @@ export const signIn = (email, password) => {
 }
 
 // ===================================== CHECK TOKEN ====================================== //
-export const tokenConfig = () => {
-    const token = localStorage.getItem('token');
-    const config = {
-        headers: {
-            'Content-type': 'application/json'
-        }
-    }
-    if (token) {
-        config.headers['x-auth-token'] = token;
-    }
-    return config;
-}
 
 export const checkToken = () => {
-    const token = tokenConfig();
+    const token = localStorage.getItem('token');
+    const headers = {
+        'Content-type': 'application/json'
+    }
+    if (token) {
+        headers['Authorization'] = token;
+    }
+    return dispatch => {
+        axios({
+            method: 'GET',
+            url: `${window.apiHost}/users/checkToken`,
+            token: token,
+            headers
+        })
+            .then(response => {
+                console.log(response)
+                dispatch(tokenSuccess(response.data.token, response.data.userId))
+                dispatch(checkAuthTimeOut(response.data.expiresIn))
+            })
+            .catch(err => {
+                console.log(err);
+                dispatch(tokenFail(err))
+                // the default error message is useless for users, so pass a string for now, but will need to
+                // figure out how to render the actual error message i'm trying to send from the backend
+            })
+    }
 }
+
+export const tokenSuccess = (token, userId) => {
+    return {
+        type: actionTypes.TOKEN_SUCCESS,
+        token: token,
+        userId: userId
+    }
+}
+
+export const tokenFail = (error) => {
+    return {
+        type: actionTypes.TOKEN_FAIL,
+        error: error
+    }
+}
+
 
 
 // ======================================== SIGNOUT ======================================== //
