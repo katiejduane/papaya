@@ -73,12 +73,11 @@ module.exports.postSignIn = (req, res, next) => {
                 const token = jwt.sign(
                     {id: user.id},
                     config.secret,
-                    {expiresIn: 3600}
-                    //how can i access the above chunk of time?
+                    {expiresIn: 36000}
                 )
                 res.json({
                     token: token,
-                    expiresIn: 3600,
+                    expiresIn: 36000,
                     // above is just a temporary solution
                     msg: 'Welcome!',
                     user: user,
@@ -93,26 +92,24 @@ module.exports.postSignIn = (req, res, next) => {
 
 //check token ============================== DON'T KNOW IF I NEED THIS ===============================
 module.exports.checkToken = (req, res, next) => {
-    const userId = req.user.id;
-    User.findOne({
-        where: {
-            id: userId
-        }
-    }).then(user => {
-        const token = jwt.sign(
-            { id: user._id },
-            config.jwtSecret,
-            { expiresIn: 36000000 }
-        );
-        res.json({
-            token: token,
-            expiresIn: 3600,
-            // above is just a temporary solution
-            message: 'valid token',
-            auth: true,
-            user: user,
-        });
-    }).catch(err => console.log(err));
+    let token = req.body.token || req.query.token || req.headers['authorization'];;
+    if (!token) {
+        console.log('controller: no token')
+        return res.status(401).json({ msg: 'Must pass token' });
+    }
+    // Check token that was passed by decoding token using secret
+    jwt.verify(token, config.secret, function (err, user) {
+        if (err) throw err;
+        //return user using the id from w/in JWTToken
+        User.findByPk(user.id)
+            .then(user => {
+                res.json({
+                    user: user, 
+                    token: token
+                })
+            })
+            .catch(err => console.log(err))
+    });   
 }
 
 //get account info
@@ -124,3 +121,28 @@ module.exports.getAccount = (req, res, next) => {
 module.exports.postAccount = (req, res, next) => {
 
 }
+
+
+
+// a possible alternative for checkToken
+// const userId = req.user.id;
+    // User.findOne({
+    //     where: {
+    //         id: userId
+    //     }
+    // }).then(user => {
+    //     const token = jwt.sign(
+    //         { id: user._id },
+    //         config.jwtSecret,
+    //         { expiresIn: 60 * 60 * 24}
+    //     );
+    //     res.json({
+    //         token: token,
+    //         expiresIn: 60 * 60 * 24,
+    //         // above is just a temporary solution
+    //         msg: 'Welcome!',
+    //         user: user,
+    //         error: false,
+    //         auth: true
+    //     });
+    // }).catch(err => console.log(err));
