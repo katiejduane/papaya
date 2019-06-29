@@ -92,7 +92,7 @@ export const signOut = () => {
 }
 
 export const checkAuthTimeOut = (expirationTime) => {
-    // console.log(expirationTime)
+    console.log(expirationTime)
     return dispatch => {
         setTimeout(() => {
             dispatch(signOut())
@@ -121,9 +121,9 @@ export const signIn = (email, password) => {
         })
             .then(response => {
                 console.log(response)
-                dispatch(signInSuccess(response.data.token, response.data.userId))
+                dispatch(signInSuccess(response.data.token, response.data.user.id))
                 dispatch(checkToken())
-                dispatch(checkAuthTimeOut(response.data.expiresIn))
+                // dispatch(checkAuthTimeOut(response.data.expiresIn))
             })
             .catch(err => {
                 console.log(err);
@@ -153,8 +153,8 @@ export const checkToken = () => {
         })
             .then(response => {
                 console.log(response)
-                dispatch(tokenSuccess(response.data.token, response.data.userId))
-                dispatch(checkAuthTimeOut(response.data.expiresIn))
+                dispatch(tokenSuccess(response.data.token, response.data.user.id))
+                // dispatch(checkAuthTimeOut(response.data.expiresIn))
             })
             .catch(err => {
                 console.log(err);
@@ -166,6 +166,7 @@ export const checkToken = () => {
 }
 
 export const tokenSuccess = (token, userId) => {
+    console.log(token, userId)
     return {
         type: actionTypes.TOKEN_SUCCESS,
         token: token,

@@ -94,7 +94,6 @@ class SignIn extends Component{
 
     render() {
         if(this.props.authorized){
-            // this.props.history.push('/')
             return(
                 <Redirect to='/' />
             )

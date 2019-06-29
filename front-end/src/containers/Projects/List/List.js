@@ -1,8 +1,11 @@
 import React, { Component } from  'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import styles from './List.module.css';
 import MiniCard from '../../../components/Cards/MiniCard/MiniCard';
+import * as actions from '../../../store/actions/index';
 
 class List extends Component {
     state = {
@@ -14,7 +17,17 @@ class List extends Component {
     }
 
     componentDidMount(){
-      axios.get(`${window.apiHost}`)
+      console.log(this.props)
+      // const token = localStorage.getItem('token');
+      const headers = {
+        'Content-type': 'application/json'
+      }
+      const token = this.props.token
+      if (token) {
+        headers['Authorization'] = token;
+      }
+      // console.log(headers)
+      axios.get(`${window.apiHost}`, headers)
       .then((response) => {
         console.log(response) 
         this.setState({
@@ -54,4 +67,17 @@ class List extends Component {
     }
 }
 
-export default List;
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+    authorized: state.auth.authorized,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    checkToken: () => dispatch(actions.checkToken())
+  }
+}
+
+export default connect(mapStateToProps, null)(List);

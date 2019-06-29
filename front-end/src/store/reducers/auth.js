@@ -20,6 +20,7 @@ const signUpSuccess = (state, action) => {
         msg: 'signup success',
         error: null,
         loading: false,
+        token: action.token
     });
 }
 
@@ -36,6 +37,7 @@ const signInStart = (state, action) => {
 
 const signInSuccess = (state, action) => {
     localStorage.setItem('token', action.token)
+    // console.log(action)
     return updateObject(state, {
         token: action.token,
         userId: action.userId,
@@ -59,9 +61,19 @@ const checkToken = (state, action) => {
         localStorage.removeItem('token');
     }
     return updateObject(state, {
-        token: action.token
+        token: action.token,
+        userId: action.user.id,
+        authorized: true
     })
 }
+
+// const tokenSuccess = (state, action) => {
+//     return updateObject(state, {
+//         token: action.token,
+//         userId: action.user.id,
+//         authorized: true
+//     })
+// }
 
 const signOut = (state, action) => {
     return updateObject(state, { token: null, userId: null });
@@ -79,7 +91,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SIGNIN_START: return signInStart(state, action);
         case actionTypes.SIGNIN_SUCCESS: return signInSuccess(state, action);
         case actionTypes.SIGNIN_FAIL: return signInFail(state, action);
-        case actionTypes.CHECK_TOKEN: return checkToken(state, action)
+        case actionTypes.CHECK_TOKEN: return checkToken(state, action);
+        // case actionTypes.TOKEN_SUCCESS: return tokenSuccess(state, action);
         case actionTypes.SIGNOUT: return signOut(state, action);
         // case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action);
         default:
