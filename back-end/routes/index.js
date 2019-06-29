@@ -33,7 +33,7 @@ router.get('/view/:projId', withAuth, projectController.getProject);
 // router.get('/view/:typeId', withAuth, projectController.getByType);
 
 // GET archived projects
-router.get('/archive', projectController.getArchive);
+router.get('/archive', withAuth, projectController.getArchive);
 
 
 

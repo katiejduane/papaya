@@ -94,7 +94,7 @@ module.exports.postSignIn = (req, res, next) => {
 module.exports.checkToken = (req, res, next) => {
     let token = req.body.token || req.query.token || req.headers['authorization'];;
     if (!token) {
-        console.log('controller: no token')
+        // console.log('controller: no token')
         return res.status(401).json({ msg: 'Must pass token' });
     }
     // Check token that was passed by decoding token using secret
@@ -103,6 +103,7 @@ module.exports.checkToken = (req, res, next) => {
         //return user using the id from w/in JWTToken
         User.findByPk(user.id)
             .then(user => {
+                // console.log('controller checkToken user', user, token)
                 res.json({
                     user: user, 
                     token: token

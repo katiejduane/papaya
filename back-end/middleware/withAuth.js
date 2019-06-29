@@ -9,16 +9,18 @@ const withAuth = function (req, res, next) {
         req.headers['authorization'];
         req.cookies.token;
     if (!token) {
-        console.log('middleware: no token')
-        res.status(401).send('Unauthorized: No token provided');
+        console.log('middleware: no token', req.url)
+        res.status(401).json({Unauthorized: 'No token provided'});
     } else {
-        console.log('middleware: ', token)
+        console.log('middleware: ', req.url, token)
         // console.log('headers in middleware', req.headers)
-        jwt.verify(token, config.secret, function (err, decoded) {
+        jwt.verify(token, config.secret, function (err, user) {
             if (err) {
-                res.status(401).send('Unauthorized: Invalid token');
+                console.log('err', err)
+                res.status(401).json({Unauthorized: 'Invalid token'});
             } else {
-                req.email = decoded.email;
+                console.log('verify', user)
+                req.user = user;
                 next();
             }
         });

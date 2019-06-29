@@ -48,7 +48,7 @@ User.prototype.authenticate = async function (value, callback) {
             console.log(err)
             callback(err)
         }else{
-            console.log(err, same)
+            console.log('authenticate', err, same)
             callback(err, same)
         }
     })
