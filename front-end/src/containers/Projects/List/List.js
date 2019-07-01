@@ -1,76 +1,79 @@
-import React, { Component } from  'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+// import { Redirect } from "react-router-dom";
 
-import styles from './List.module.css';
-import MiniCard from '../../../components/Cards/MiniCard/MiniCard';
-import * as actions from '../../../store/actions/index';
+import styles from "./List.module.css";
+import MiniCard from "../../../components/Cards/MiniCard/MiniCard";
+import * as actions from "../../../store/actions/index";
 
 class List extends Component {
-    state = {
-        loading: true,
-        miniCards: [],
-        status: ['Idea', 'Research', 'In-Progress', 'Revision', 'Finished', 'Accepted'],
-        types: [],
-        error: false
-    }
+  state = {
+    loading: true,
+    miniCards: [],
+    status: [
+      "Idea",
+      "Research",
+      "In-Progress",
+      "Revision",
+      "Finished",
+      "Accepted"
+    ],
+    types: [],
+    error: false
+  };
 
-    componentDidMount(){
-      // console.log(this.props)
-      // console.log(this.state)
-      const headers = {
-        'Content-type': 'application/json',
-      }
-      const token = localStorage.getItem('token');
-      // const token = this.props.token
-      if (token) {
-        headers['Authorization'] = token;
-      }
-      console.log(headers)
-      axios({
-        method: 'GET',
-        url: `${window.apiHost}`,
-        token: token,
-        headers
-      })
-      .then((response) => {
-        console.log(response) 
+  componentDidMount() {
+    const headers = {
+      "Content-type": "application/json"
+    };
+    const token = localStorage.getItem("token");
+    if (token) {
+      headers["Authorization"] = token;
+    }
+    console.log(headers);
+    axios({
+      method: "GET",
+      url: `${window.apiHost}`,
+      token: token,
+      headers
+    })
+      .then(response => {
+        console.log(response);
         this.setState({
           loading: false,
           miniCards: response.data
-        })
+        });
       })
-      .catch((error => {
+      .catch(error => {
         this.setState({
           error: true
-        })
-        console.log(error)
-      }));
-    }
-
-
-    render(){
-
-      let miniCardList;
-      if(this.state.miniCards.length > 0){
-        miniCardList = this.state.miniCards.map((card, i) => {
-          return(
-            <MiniCard key={i} title={card.name} type={card.type.typename} color={card.status.color} status={card.status.statusname} view={card.id}/>
-          );
         });
-      } else {
-        return(
-          <h2>You don't have any projects yet!</h2>
-        )
-      }
+        console.log(error);
+      });
+  }
 
+  render() {
+    let miniCardList;
+    if (this.state.miniCards.length > 0) {
+      miniCardList = this.state.miniCards.map((card, i) => {
         return (
-          <div className={styles.MiniCardContainer}>
-            {miniCardList}
-          </div>
+          <MiniCard
+            key={i}
+            title={card.name}
+            type={card.type.typename}
+            color={card.status.color}
+            status={card.status.statusname}
+            view={card.id}
+          />
         );
+      });
+    } else {
+      return <h2>You don't have any projects yet!</h2>;
     }
+
+    return <div className={styles.MiniCardContainer}>{miniCardList}</div>;
+  }
 }
 
 const mapStateToProps = state => {
@@ -78,13 +81,16 @@ const mapStateToProps = state => {
     token: state.auth.token,
     authorized: state.auth.authorized,
     loading: state.auth.loading
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     checkToken: () => dispatch(actions.checkToken())
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(List);
