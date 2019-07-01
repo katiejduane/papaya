@@ -2,17 +2,18 @@ const config = require('../config');
 const jwt = require('jsonwebtoken');
 
 const withAuth = function (req, res, next) {
-    // console.log(req.headers)
     const token =
         req.body.token ||
         req.query.token ||
-        req.headers['authorization'];
+        req.headers['authorization'] ||
         req.cookies.token;
     if (!token) {
+        console.log('no token headers', req.headers)
         console.log('middleware: no token', req.url)
         res.status(401).json({Unauthorized: 'No token provided'});
     } else {
-        console.log('middleware: ', req.url, token)
+        console.log('middleware, token: ', req.url, token)
+        console.log('token headers', req.headers)
         // console.log('headers in middleware', req.headers)
         jwt.verify(token, config.secret, function (err, user) {
             if (err) {
@@ -26,6 +27,7 @@ const withAuth = function (req, res, next) {
         });
     }
 }
+
 module.exports = withAuth;
 
 
