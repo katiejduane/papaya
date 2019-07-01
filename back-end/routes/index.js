@@ -1,21 +1,21 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const withAuth = require('../middleware/withAuth');
-const projectController = require('../controllers/projects');
+const withAuth = require("../middleware/withAuth");
+const projectController = require("../controllers/projects");
 
 // GET home page
 
-router.get('/', withAuth, projectController.getIndex);
+router.get("/", withAuth, projectController.getIndex);
 
 // GET types to load in dropdown menu
-router.get('/addNew', withAuth, projectController.getTypes);
+router.get("/addNew", withAuth, projectController.getTypes);
 
 // POST a new project
-router.post('/addNew', withAuth, projectController.postNewProject);
+router.post("/addNew", withAuth, projectController.postNewProject);
 
 // GET the details of a project
-router.get('/view/:projId', withAuth, projectController.getProject);
+router.get("/view/:projId", withAuth, projectController.getProject);
 
 // // POST deleted project
 // router.post('/delete/:projId', withAuth, projectController.deleteProject);
@@ -23,7 +23,7 @@ router.get('/view/:projId', withAuth, projectController.getProject);
 // // GET project to edit
 // router.get('/update/:projId', withAuth, projectController.getUpdateProject);
 
-// // POST project to edit 
+// // POST project to edit
 // router.post('/update:projId', withAuth, projectController.postUpdateProject);
 
 // // GET projects in list by STATUS // i may not need if i can conditionally render with react router
@@ -33,8 +33,6 @@ router.get('/view/:projId', withAuth, projectController.getProject);
 // router.get('/view/:typeId', withAuth, projectController.getByType);
 
 // GET archived projects
-router.get('/archive', withAuth, projectController.getArchive);
-
-
+router.get("/archive", withAuth, projectController.getArchive);
 
 module.exports = router;
