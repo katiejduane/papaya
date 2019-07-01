@@ -17,17 +17,23 @@ class List extends Component {
     }
 
     componentDidMount(){
-      console.log(this.props)
-      // const token = localStorage.getItem('token');
+      // console.log(this.props)
+      // console.log(this.state)
       const headers = {
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
       }
-      const token = this.props.token
+      const token = localStorage.getItem('token');
+      // const token = this.props.token
       if (token) {
         headers['Authorization'] = token;
       }
-      // console.log(headers)
-      axios.get(`${window.apiHost}`, headers)
+      console.log(headers)
+      axios({
+        method: 'GET',
+        url: `${window.apiHost}`,
+        token: token,
+        headers
+      })
       .then((response) => {
         console.log(response) 
         this.setState({
@@ -71,6 +77,7 @@ const mapStateToProps = state => {
   return {
     token: state.auth.token,
     authorized: state.auth.authorized,
+    loading: state.auth.loading
   }
 }
 
@@ -80,4 +87,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, null)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(List);

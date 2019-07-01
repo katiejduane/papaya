@@ -122,7 +122,7 @@ export const signIn = (email, password) => {
             .then(response => {
                 console.log(response)
                 dispatch(signInSuccess(response.data.token, response.data.user.id))
-                dispatch(checkToken())
+                // dispatch(checkToken())
                 // dispatch(checkAuthTimeOut(response.data.expiresIn))
             })
             .catch(err => {
