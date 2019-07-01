@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import React, { Component } from "react";
+import "./App.css";
+import { Route, Switch } from "react-router-dom";
 
-import Layout from './hoc/Layout/Layout';
-import List from './containers/Projects/List/List';
-import Details from './containers/Projects/Details/Details';
-import NewProject from './containers/Projects/AddNew/NewProject';
-import UpdateProject from './containers/Projects/Update/UpdateProject';
-import Account from './containers/Auth/Account/Account';
-import Splash from './components/Splash/Splash';
-import SignUp from './containers/Auth/SignUp';
-import SignIn from './containers/Auth/SignIn';
+import Layout from "./hoc/Layout/Layout";
+import List from "./containers/Projects/List/List";
+import Details from "./containers/Projects/Details/Details";
+import NewProject from "./containers/Projects/AddNew/NewProject";
+import UpdateProject from "./containers/Projects/Update/UpdateProject";
+import Account from "./containers/Auth/Account/Account";
+import Splash from "./components/Splash/Splash";
+import SignUp from "./containers/Auth/SignUp";
+import SignIn from "./containers/Auth/SignIn";
 
 class App extends Component {
   render() {
