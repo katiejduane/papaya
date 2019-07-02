@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../../axiosInstance";
 // import { Redirect } from "react-router-dom";
 
 import styles from "./List.module.css";
@@ -24,19 +25,19 @@ class List extends Component {
   };
 
   componentDidMount() {
-    const headers = {
-      "Content-type": "application/json"
-    };
-    const token = localStorage.getItem("token");
-    if (token) {
-      headers["Authorization"] = token;
-    }
-    console.log(headers);
+    // const headers = {
+    //   "Content-type": "application/json"
+    // };
+    // const token = localStorage.getItem("token");
+    // if (token) {
+    //   headers["Authorization"] = token;
+    // }
+
     axios({
       method: "GET",
-      url: `${window.apiHost}`,
-      token: token,
-      headers
+      url: `/`
+      // token: token,
+      // headers
     })
       .then(response => {
         console.log(response);

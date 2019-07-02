@@ -25,7 +25,6 @@ export const signUpFail = error => {
   };
 };
 
-//you might end up splitting this into two files (login/reg) with their own methods!
 export const signUp = (firstname, lastname, email, password) => {
   const headers = {
     "Content-type": "application/json"
@@ -38,8 +37,6 @@ export const signUp = (firstname, lastname, email, password) => {
       lastname: lastname,
       email: email,
       password: password
-      // returnToken: true
-      //the above line might be a sham i've made up
     };
     axios({
       method: "POST",
@@ -70,7 +67,6 @@ export const signInStart = () => {
 };
 
 export const signInSuccess = (token, userId) => {
-  localStorage.setItem("token", token);
   return {
     type: actionTypes.SIGNIN_SUCCESS,
     token: token,
@@ -85,14 +81,7 @@ export const signInFail = error => {
   };
 };
 
-export const signOut = () => {
-  return {
-    type: actionTypes.SIGNOUT
-  };
-};
-
 export const checkAuthTimeOut = expirationTime => {
-  console.log(expirationTime);
   return dispatch => {
     setTimeout(() => {
       dispatch(signOut());
@@ -105,13 +94,10 @@ export const signIn = (email, password) => {
     "Content-type": "application/json"
   };
   return dispatch => {
-    // authenticate user
     dispatch(signInStart());
     const authData = {
       email: email,
-      password: password,
-      returnToken: true
-      //the above line might be a sham i've made up
+      password: password
     };
     axios({
       method: "POST",
@@ -121,9 +107,11 @@ export const signIn = (email, password) => {
     })
       .then(response => {
         console.log(response);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("expirationTime", response.data.expiresIn);
+        localStorage.setItem("userId", response.data.user.id);
         dispatch(signInSuccess(response.data.token, response.data.user.id));
-        // dispatch(checkToken())
-        // dispatch(checkAuthTimeOut(response.data.expiresIn))
+        dispatch(checkAuthTimeOut(response.data.expiresIn));
       })
       .catch(err => {
         console.log(err);
@@ -154,7 +142,7 @@ export const checkToken = () => {
       .then(response => {
         console.log(response);
         dispatch(tokenSuccess(response.data.token, response.data.user.id));
-        // dispatch(checkAuthTimeOut(response.data.expiresIn))
+        dispatch(checkAuthTimeOut(response.data.expiresIn));
       })
       .catch(err => {
         console.log(err);
@@ -181,4 +169,39 @@ export const tokenFail = error => {
   };
 };
 
+// ================================ Checking Various Auth States ===============================
+
+export const setAuthRedirectPath = path => {
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT_PATH,
+    path: path
+  };
+};
+
+export const authCheckState = () => {
+  return dispatch => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      dispatch(signOut());
+    } else {
+      const expireTime = localStorage.getItem("expirationTime");
+      if (expireTime <= 0) {
+        dispatch(signOut());
+      } else {
+        const userId = localStorage.getItem("userId");
+        dispatch(signInSuccess(token, userId));
+        dispatch(checkAuthTimeOut(expireTime));
+      }
+    }
+  };
+};
 // ======================================== SIGNOUT ======================================== //
+
+export const signOut = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("expirationDate");
+  localStorage.removeItem("userId");
+  return {
+    type: actionTypes.SIGNOUT
+  };
+};

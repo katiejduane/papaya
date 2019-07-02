@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import axios from "../../../axiosInstance";
 
 import styles from "./NewProject.module.css";
 // import Input from '../../../components/UI/Input/Input';
@@ -24,18 +24,9 @@ class NewProject extends Component {
   };
 
   componentDidMount() {
-    const headers = {
-      "Content-type": "application/json"
-    };
-    const token = localStorage.getItem("token");
-    if (token) {
-      headers["Authorization"] = token;
-    }
     axios({
       method: "GET",
-      url: `${window.apiHost}/addNew`,
-      token: token,
-      headers
+      url: `/addNew`
     })
       .then(response => {
         this.setState({ loading: false });
@@ -57,18 +48,9 @@ class NewProject extends Component {
   }
 
   addNewProject = (title, type, status, notes) => {
-    const headers = {
-      "Content-type": "application/json"
-    };
-    const token = localStorage.getItem("token");
-    if (token) {
-      headers["Authorization"] = token;
-    }
     axios({
       method: "POST",
-      url: `${window.apiHost}/addNew`,
-      headers: headers,
-      token,
+      url: `/addNew`,
       data: {
         name: title,
         type: type,

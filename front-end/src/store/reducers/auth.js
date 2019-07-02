@@ -8,7 +8,7 @@ const initialState = {
   loading: false,
   authorized: false,
   msg: "",
-  authRedirectPath: "/"
+  authRedirectPath: "/splash"
 };
 
 const signUpStart = (state, action) => {
@@ -36,8 +36,6 @@ const signInStart = (state, action) => {
 };
 
 const signInSuccess = (state, action) => {
-  localStorage.setItem("token", action.token);
-  // console.log(action)
   return updateObject(state, {
     token: action.token,
     userId: action.userId,
@@ -67,14 +65,6 @@ const checkToken = (state, action) => {
   });
 };
 
-// const tokenSuccess = (state, action) => {
-//     return updateObject(state, {
-//         token: action.token,
-//         userId: action.user.id,
-//         authorized: true
-//     })
-// }
-
 const signOut = (state, action) => {
   return updateObject(state, { token: null, userId: null });
 };
@@ -99,7 +89,6 @@ const reducer = (state = initialState, action) => {
       return signInFail(state, action);
     case actionTypes.CHECK_TOKEN:
       return checkToken(state, action);
-    // case actionTypes.TOKEN_SUCCESS: return tokenSuccess(state, action);
     case actionTypes.SIGNOUT:
       return signOut(state, action);
     // case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action);
