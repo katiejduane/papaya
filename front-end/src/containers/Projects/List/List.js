@@ -32,7 +32,6 @@ class List extends Component {
     // if (token) {
     //   headers["Authorization"] = token;
     // }
-
     axios({
       method: "GET",
       url: `/`
@@ -58,9 +57,10 @@ class List extends Component {
     let miniCardList;
     if (this.state.miniCards.length > 0) {
       miniCardList = this.state.miniCards.map((card, i) => {
+        // change using key{i} this is bad
         return (
           <MiniCard
-            key={i}
+            key={card.id}
             title={card.name}
             type={card.type.typename}
             color={card.status.color}
