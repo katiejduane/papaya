@@ -69,16 +69,16 @@ class NewProject extends Component {
 
   render() {
     // do i need an if statement here checking the length of the types state?
-    const typeList = this.state.types.map((type, i) => {
+    const typeList = this.state.types.map(type => {
       return (
-        <option key={i} value={type.value}>
+        <option key={type.id} value={type.value}>
           {type.displayValue}
         </option>
       );
     });
-    const statusList = this.state.stats.map((status, i) => {
+    const statusList = this.state.stats.map(status => {
       return (
-        <option key={i} value={status.value}>
+        <option key={status.value} value={status.value}>
           {status.displayValue}
         </option>
       );

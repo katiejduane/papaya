@@ -22,25 +22,15 @@ class MainNav extends Component {
 
   componentDidMount() {
     // get types
-    const headers = {
-      "Content-type": "application/json"
-    };
-    const token = localStorage.getItem("token");
-    if (token) {
-      headers["Authorization"] = token;
-    }
-    console.log(headers);
     axios({
       method: "GET",
-      url: `${window.apiHost}/users/getNav`,
-      token: token,
-      headers
+      url: `/users/getNav`
     })
       .then(response => {
         console.log(response);
         this.setState({
-          loading: false
-          //   username: response.data.user.firstname
+          loading: false,
+          username: response.data.user.firstname
         });
       })
       .catch(error => {
