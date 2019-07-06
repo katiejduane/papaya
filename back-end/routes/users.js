@@ -10,8 +10,6 @@ router.post("/signup", userController.postSignUp);
 
 router.post("/signin", userController.postSignIn);
 
-router.get("/getNav", withAuth, userController.getNav);
-
 router.get("/account", withAuth, userController.postAccount);
 
 router.post("/account", withAuth, userController.postAccount);

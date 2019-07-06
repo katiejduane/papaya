@@ -53,6 +53,7 @@ module.exports.filterByStatus = (req, res, next) => {};
 module.exports.getTypes = (req, res, next) => {
   userId = req.user.id;
   Type.findAll({
+    include: [{ model: user }],
     where: { userId: userId }
   })
     .then(types => {
@@ -60,14 +61,6 @@ module.exports.getTypes = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
-
-// exports.getStats = (req, res, next) => {
-//     Status.findAll()
-//         .then(stats => {
-//             res.json(stats)
-//         })
-//         .catch(err => console.log(err))
-// }
 
 // posts new project
 module.exports.postNewProject = (req, res, next) => {
