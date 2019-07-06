@@ -18,3 +18,8 @@ export const TOKEN_SUCCESS = "TOKEN_SUCCESS";
 
 //redirect path
 export const SET_AUTH_REDIRECT_PATH = "SET_AUTH_REDIRECT_PATH";
+
+// get project types
+export const TYPE_START = "TYPE_START";
+export const TYPE_SUCCESS = "TYPE_SUCCESS";
+export const TYPE_FAIL = "TYPE_FAIL";

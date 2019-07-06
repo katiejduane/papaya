@@ -8,16 +8,16 @@ import NavItems from "../../components/NavItems/NavItems";
 class MainNav extends Component {
   state = {
     username: "",
-    types: []
-    // stats: [
-    //     { value: '1', displayValue: 'Idea' },
-    //     { value: '2', displayValue: 'Research' },
-    //     { value: '3', displayValue: 'In-Progress' },
-    //     { value: '4', displayValue: 'Revision' },
-    //     { value: '5', displayValue: 'Finished' },
-    //     { value: '6', displayValue: 'Submitted' },
-    //     { value: '7', displayValue: 'Accepted' }
-    // ]
+    types: [],
+    stats: [
+      { value: "1", displayValue: "Idea" },
+      { value: "2", displayValue: "Research" },
+      { value: "3", displayValue: "In-Progress" },
+      { value: "4", displayValue: "Revision" },
+      { value: "5", displayValue: "Finished" },
+      { value: "6", displayValue: "Submitted" },
+      { value: "7", displayValue: "Accepted" }
+    ]
   };
 
   componentDidMount() {
@@ -66,7 +66,8 @@ const mapStateToProps = state => {
   return {
     token: state.auth.token,
     authorized: state.auth.authorized,
-    loading: state.auth.loading
+    loading: state.auth.loading,
+    types: state.types
   };
 };
 

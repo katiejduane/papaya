@@ -199,7 +199,7 @@ export const authCheckState = () => {
 
 export const signOut = () => {
   localStorage.removeItem("token");
-  localStorage.removeItem("expirationDate");
+  localStorage.removeItem("expirationTime");
   localStorage.removeItem("userId");
   return {
     type: actionTypes.SIGNOUT
