@@ -78,7 +78,7 @@ class NewProject extends Component {
     });
     const statusList = this.state.stats.map(status => {
       return (
-        <option key={status.value} value={status.value}>
+        <option key={status.id} value={status.value}>
           {status.displayValue}
         </option>
       );

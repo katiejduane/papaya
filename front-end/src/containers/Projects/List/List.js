@@ -56,7 +56,7 @@ class List extends Component {
   render() {
     let miniCardList;
     if (this.state.miniCards.length > 0) {
-      miniCardList = this.state.miniCards.map((card, i) => {
+      miniCardList = this.state.miniCards.map(card => {
         // change using key{i} this is bad
         return (
           <MiniCard
