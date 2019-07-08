@@ -11,6 +11,9 @@ router.get("/", withAuth, projectController.getIndex);
 // GET types to load in dropdown menu
 router.get("/addNew", withAuth, projectController.getTypes);
 
+// GET types to load in Nav
+router.get("/getTypes", withAuth, projectController.getTypes);
+
 // POST a new project
 router.post("/addNew", withAuth, projectController.postNewProject);
 

@@ -1,6 +1,7 @@
 const Project = require("../models/project");
 const Type = require("../models/type");
 const Status = require("../models/status");
+const User = require("../models/user");
 
 // loads home page (if logged in, eventually) with all projects, no filter!
 module.exports.getIndex = (req, res, next) => {
@@ -53,7 +54,7 @@ module.exports.filterByStatus = (req, res, next) => {};
 module.exports.getTypes = (req, res, next) => {
   userId = req.user.id;
   Type.findAll({
-    include: [{ model: user }],
+    // include: [{ model: User }],
     where: { userId: userId }
   })
     .then(types => {
