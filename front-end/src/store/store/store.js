@@ -42,4 +42,8 @@ export const saveToLocalStorage = state => {
 const persistedState = loadFromLocalStorage();
 console.log(persistedState);
 
-export const store = theStore(rootReducer, persistedState);
+export const store = theStore(
+  rootReducer,
+  persistedState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);

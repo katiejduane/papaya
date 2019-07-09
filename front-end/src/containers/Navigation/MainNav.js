@@ -22,7 +22,7 @@ class MainNav extends Component {
   };
 
   componentDidMount() {
-    this.props.getProjectTypes();
+    // this.props.getProjectTypes();
     console.log(this.props);
     // get types
     // axios({
@@ -49,13 +49,13 @@ class MainNav extends Component {
   clearFilter() {}
 
   render() {
-    // let typesArray = this.props.types.map(type => {
-    //   return (
-    //     <option key={type.id} value={type.id}>
-    //       {type.typename}
-    //     </option>
-    //   );
-    // });
+    let typesArray = this.props.types.map(type => {
+      return (
+        <option key={type.id} value={type.id}>
+          {type.typename}
+        </option>
+      );
+    });
 
     let statsArray = this.state.stats.map(status => {
       return (
@@ -71,7 +71,7 @@ class MainNav extends Component {
           <div className={styles.Welcome}>Hi, Katie</div>
           <nav className={styles.deskTopOnly}>
             <select className={"byStatus"}>{statsArray}</select>
-            {/* <select className={"byType"}>{typesArray}</select> */}
+            <select className={"byType"}>{typesArray}</select>
             <NavItems />
           </nav>
         </section>
@@ -88,7 +88,7 @@ const mapStateToProps = state => {
     token: state.auth.token,
     authorized: state.auth.authorized,
     loading: state.auth.loading,
-    types: state.types
+    types: state.type.types
   };
 };
 
