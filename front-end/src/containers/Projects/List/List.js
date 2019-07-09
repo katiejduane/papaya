@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 // import axios from "axios";
 import axios from "../../../axiosInstance";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import styles from "./List.module.css";
 import MiniCard from "../../../components/Cards/MiniCard/MiniCard";
@@ -25,6 +25,7 @@ class List extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     // const headers = {
     //   "Content-type": "application/json"
     // };
@@ -54,26 +55,28 @@ class List extends Component {
   }
 
   render() {
-    let miniCardList;
-    if (this.state.miniCards.length > 0) {
-      miniCardList = this.state.miniCards.map(card => {
-        // change using key{i} this is bad
-        return (
-          <MiniCard
-            key={card.id}
-            title={card.name}
-            type={card.type.typename}
-            color={card.status.color}
-            status={card.status.statusname}
-            view={card.id}
-          />
-        );
-      });
+    if (this.props.authorized) {
+      let miniCardList;
+      if (this.state.miniCards.length > 0) {
+        miniCardList = this.state.miniCards.map(card => {
+          return (
+            <MiniCard
+              key={card.id}
+              title={card.name}
+              type={card.type.typename}
+              color={card.status.color}
+              status={card.status.statusname}
+              view={card.id}
+            />
+          );
+        });
+      } else {
+        return <h2>You don't have any projects yet!</h2>;
+      }
+      return <div className={styles.MiniCardContainer}>{miniCardList}</div>;
     } else {
-      return <h2>You don't have any projects yet!</h2>;
+      return <Redirect to="/signin" />;
     }
-
-    return <div className={styles.MiniCardContainer}>{miniCardList}</div>;
   }
 }
 

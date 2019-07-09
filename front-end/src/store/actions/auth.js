@@ -26,9 +26,9 @@ export const signUpFail = error => {
 };
 
 export const signUp = (firstname, lastname, email, password) => {
-  const headers = {
-    "Content-type": "application/json"
-  };
+  // const headers = {
+  //   "Content-type": "application/json"
+  // };
   return dispatch => {
     // authenticate user
     dispatch(signUpStart());
@@ -41,8 +41,8 @@ export const signUp = (firstname, lastname, email, password) => {
     axios({
       method: "POST",
       url: `${window.apiHost}/users/signup`,
-      data: authData,
-      headers
+      data: authData
+      // headers
     })
       .then(response => {
         console.log(response);
@@ -90,9 +90,9 @@ export const checkAuthTimeOut = expirationTime => {
 };
 
 export const signIn = (email, password) => {
-  const headers = {
-    "Content-type": "application/json"
-  };
+  // const headers = {
+  //   "Content-type": "application/json"
+  // };
   return dispatch => {
     dispatch(signInStart());
     const authData = {
@@ -102,14 +102,15 @@ export const signIn = (email, password) => {
     axios({
       method: "POST",
       url: `${window.apiHost}/users/signin`,
-      data: authData,
-      headers
+      data: authData
+      // headers
     })
       .then(response => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("expirationTime", response.data.expiresIn);
         localStorage.setItem("userId", response.data.user.id);
+        localStorage.setItem("firstName", response.data.user.firstname);
         dispatch(signInSuccess(response.data.token, response.data.user.id));
         dispatch(checkAuthTimeOut(response.data.expiresIn));
       })
@@ -201,6 +202,7 @@ export const signOut = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationTime");
   localStorage.removeItem("userId");
+  localStorage.removeItem("firstName");
   return {
     type: actionTypes.SIGNOUT
   };

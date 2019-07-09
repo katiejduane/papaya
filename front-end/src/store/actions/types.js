@@ -33,7 +33,7 @@ export const getProjectTypes = () => {
     })
       .then(response => {
         console.log(response);
-        dispatch(typeSuccess(response.data, response.data[0].id));
+        dispatch(typeSuccess(response.data, response.data[0].userId));
       })
       .catch(err => {
         console.log(err);
