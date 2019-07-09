@@ -11,6 +11,7 @@ class MainNav extends Component {
     username: "",
     types: [],
     stats: [
+      { value: "0", displayValue: "Filter by Status" },
       { value: "1", displayValue: "Idea" },
       { value: "2", displayValue: "Research" },
       { value: "3", displayValue: "In-Progress" },
@@ -22,26 +23,8 @@ class MainNav extends Component {
   };
 
   componentDidMount() {
-    // this.props.getProjectTypes();
-    console.log(this.props);
-    // get types
-    // axios({
-    //   method: "GET",
-    //   url: `/users/getNav`
-    // })
-    //   .then(response => {
-    //     console.log(response);
-    //     this.setState({
-    //       loading: false,
-    //       username: response.data.user.firstname
-    //     });
-    //   })
-    //   .catch(error => {
-    //     this.setState({
-    //       error: true
-    //     });
-    //     console.log(error);
-    //   });
+    this.props.getProjectTypes();
+    //this is a shitty temp solution
   }
 
   filterList() {}
@@ -49,6 +32,7 @@ class MainNav extends Component {
   clearFilter() {}
 
   render() {
+    // need to push on a starter value; probably create a reusable component for this elswhere? (to also use in add/edit)
     let typesArray = this.props.types.map(type => {
       return (
         <option key={type.id} value={type.id}>
@@ -88,6 +72,7 @@ const mapStateToProps = state => {
     token: state.auth.token,
     authorized: state.auth.authorized,
     loading: state.auth.loading,
+    name: state.auth.firstname,
     types: state.type.types
   };
 };

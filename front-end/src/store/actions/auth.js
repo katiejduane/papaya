@@ -66,11 +66,12 @@ export const signInStart = () => {
   };
 };
 
-export const signInSuccess = (token, userId) => {
+export const signInSuccess = (token, userId, firstname) => {
   return {
     type: actionTypes.SIGNIN_SUCCESS,
     token: token,
-    userId: userId
+    userId: userId,
+    firstname: firstname
   };
 };
 
@@ -111,7 +112,13 @@ export const signIn = (email, password) => {
         localStorage.setItem("expirationTime", response.data.expiresIn);
         localStorage.setItem("userId", response.data.user.id);
         localStorage.setItem("firstName", response.data.user.firstname);
-        dispatch(signInSuccess(response.data.token, response.data.user.id));
+        dispatch(
+          signInSuccess(
+            response.data.token,
+            response.data.user.id,
+            response.data.user.firstname
+          )
+        );
         dispatch(checkAuthTimeOut(response.data.expiresIn));
       })
       .catch(err => {

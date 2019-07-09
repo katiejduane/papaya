@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import authReducer from "../reducers/auth";
 import typeReducer from "../reducers/types";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   auth: authReducer,

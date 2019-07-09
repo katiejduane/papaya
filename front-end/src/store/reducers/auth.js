@@ -3,6 +3,7 @@ import { updateObject } from "../utility";
 
 const initialState = {
   token: localStorage.getItem("token"),
+  firstname: localStorage.getItem("firstName"),
   userId: null,
   error: null,
   loading: false,
@@ -39,6 +40,7 @@ const signInSuccess = (state, action) => {
   return updateObject(state, {
     token: action.token,
     userId: action.userId,
+    firstname: action.firstname,
     error: null,
     loading: false,
     authorized: true
