@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import styles from "./MainNav.module.css";
 import NavItems from "../../components/NavItems/NavItems";
+import DropDown from "../../components/UI/Dropdown/DropDown";
 import * as actions from "../../store/actions/index";
 
 class MainNav extends Component {
@@ -26,7 +27,7 @@ class MainNav extends Component {
     this.props.getProjectTypes();
     //this is a shitty temp solution
 
-    // do something liek this?????
+    // do something like this????? OR LOOK AT REDUX SAGA!
 
     //https://stackoverflow.com/questions/46564941/react-redux-how-to-dispatch-an-action-on-componentdidmount-when-using-mapdispa?rq=1
 
@@ -82,8 +83,20 @@ class MainNav extends Component {
         <section className={styles.NavTop}>
           <div className={styles.Welcome}>Hi, Katie</div>
           <nav className={styles.deskTopOnly}>
-            <select className={"byStatus"}>{statsArray}</select>
-            <select className={"byType"}>{typesArray}</select>
+            <DropDown
+              selectClass="byStatus"
+              defaultVal="Idea"
+              defaultDisplayVal="View by Status"
+              vals={statsArray}
+            />
+            {/* <select className={"byStatus"}>{statsArray}</select> */}
+            <DropDown
+              selectClass="byType"
+              defaultVal={typesArray[0]}
+              defaultDisplayVal="View by Type"
+              vals={typesArray}
+            />
+            {/* <select className={"byType"}>{typesArray}</select> */}
             <NavItems />
           </nav>
         </section>
