@@ -25,6 +25,34 @@ class MainNav extends Component {
   componentDidMount() {
     this.props.getProjectTypes();
     //this is a shitty temp solution
+
+    // do something liek this?????
+
+    //https://stackoverflow.com/questions/46564941/react-redux-how-to-dispatch-an-action-on-componentdidmount-when-using-mapdispa?rq=1
+
+    //     componentDidMount() {
+    //         // no need to use dispatch again. Your action creators are already bound by
+    //         // mapDispatchToProps.  Notice also that they come from props
+    //         const { selectedCategory, fetchCategoriesIfNeeded, fetchPostsIfNeeded } = this.props;
+    //         fetchCategoriesIfNeeded(selectedCategory);
+    //         fetchPostsIfNeeded(selectedCategory);
+    //     }
+    //     //... the same
+    // }
+
+    //     function mapStateToProps(state) {
+    //           //... the same
+    //     }
+
+    //     function mapDispatchToProps(dispatch) {
+    //           // when arguments match, you can pass configuration object, which will
+    //           // wrap your actions creators with dispatch automatically.
+    //           return {
+    //               orderPost,
+    //               fetchCategoriesIfNeeded,
+    //               fetchPostsIfNeeded,
+    //           }
+    //       }
   }
 
   filterList() {}
