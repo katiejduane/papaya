@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Layout from "./hoc/Layout/Layout";
@@ -21,6 +21,7 @@ class App extends Component {
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/splash" component={Splash} />
         <Route exact path="/" component={List} />
+        <Redirect to="/splash" />
         {/* // not sure if i need the "/" here or not to allow redirect to 'splash' */}
       </Switch>
     );
@@ -36,6 +37,7 @@ class App extends Component {
           <Route exact path="/update/:" component={UpdateProject} />
           <Route exact path="/" component={List} />
           <Route exact path="/account/:" component={Account} />
+          <Redirect to="/" />
         </Switch>
       );
     }
