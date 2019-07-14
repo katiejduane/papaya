@@ -88,7 +88,7 @@ module.exports.postSignIn = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-//check token ============================== DON'T KNOW IF I NEED THIS ===============================
+// check token
 module.exports.checkToken = (req, res, next) => {
   let token = req.body.token || req.query.token || req.headers["authorization"];
   if (!token) {
@@ -109,8 +109,11 @@ module.exports.checkToken = (req, res, next) => {
   });
 };
 
-//get account info
+// signout
+module.exports.signOut = (req, res, next) => {};
+
+// get account info
 module.exports.getAccount = (req, res, next) => {};
 
-//update account info
+// update account info
 module.exports.postAccount = (req, res, next) => {};
