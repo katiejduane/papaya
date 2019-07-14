@@ -110,7 +110,15 @@ module.exports.checkToken = (req, res, next) => {
 };
 
 // signout
-module.exports.signOut = (req, res, next) => {};
+module.exports.signOut = (req, res, next) => {
+  req.user = null;
+  res.json({
+    token: null,
+    msg: "Logged out!",
+    auth: false,
+    user: null
+  });
+};
 
 // get account info
 module.exports.getAccount = (req, res, next) => {};
