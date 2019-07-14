@@ -21,6 +21,8 @@ class MainNav extends Component {
     ]
   };
 
+  // i need a way to handle the getting of types ONLY if they're authorized, and if not, I need
+  // the component to RE-RENDER once they're authorized!
   componentDidMount() {
     this.props.getProjectTypes();
   }
@@ -51,22 +53,8 @@ class MainNav extends Component {
         <section className={styles.NavTop}>
           <div className={styles.Welcome}>Hi, {this.props.name}</div>
           <nav className={styles.deskTopOnly}>
-            {/* <DropDown
-              selectClass="byStatus"
-              defaultVal="Idea"
-              defaultDisplayVal="View by Status"
-              vals={statsArray}
-            /> */}
-            {/* <select className={"byStatus"}>{statsArray}</select> */}
-            {/* <DropDown
-              selectClass="byType"
-              defaultVal={typesArray[0]}
-              defaultDisplayVal="View by Type"
-              vals={typesArray}
-            /> */}
-            {/* <select className={"byType"}>{typesArray}</select> */}
             <NavItems
-              isAuth={this.props.token}
+              isAuth={this.props.isAuth}
               statuses={statsArray}
               types={typesArray}
             />
