@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../../axiosInstance";
 import { Link } from "react-router-dom";
 
 import styles from "./Details.module.css";
@@ -19,19 +20,19 @@ class Details extends Component {
 
   componentDidMount() {
     const projId = this.props.match.params.id;
-    const headers = {
-      "Content-type": "application/json"
-    };
-    const token = localStorage.getItem("token");
-    if (token) {
-      headers["Authorization"] = token;
-    }
-    console.log(headers);
+    // const headers = {
+    //   "Content-type": "application/json"
+    // };
+    // const token = localStorage.getItem("token");
+    // if (token) {
+    //   headers["Authorization"] = token;
+    // }
+    // console.log(headers);
     axios({
       method: "GET",
-      url: `${window.apiHost}/view/${projId}`,
-      token: token,
-      headers
+      url: `${window.apiHost}/view/${projId}`
+      // token: token,
+      // headers
     })
       .then(response => {
         const projectDetails = response.data[0];

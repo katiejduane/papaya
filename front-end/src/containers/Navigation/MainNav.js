@@ -4,13 +4,11 @@ import { connect } from "react-redux";
 
 import styles from "./MainNav.module.css";
 import NavItems from "../../components/NavItems/NavItems";
-import DropDown from "../../components/UI/Dropdown/DropDown";
+// import DropDown from "../../components/UI/Dropdown/DropDown";
 import * as actions from "../../store/actions/index";
 
 class MainNav extends Component {
   state = {
-    username: "",
-    types: [],
     stats: [
       { value: "0", displayValue: "Filter by Status" },
       { value: "1", displayValue: "Idea" },
@@ -25,43 +23,13 @@ class MainNav extends Component {
 
   componentDidMount() {
     this.props.getProjectTypes();
-    //this is a shitty temp solution
-
-    // do something like this????? OR LOOK AT REDUX SAGA!
-
-    //https://stackoverflow.com/questions/46564941/react-redux-how-to-dispatch-an-action-on-componentdidmount-when-using-mapdispa?rq=1
-
-    //     componentDidMount() {
-    //         // no need to use dispatch again. Your action creators are already bound by
-    //         // mapDispatchToProps.  Notice also that they come from props
-    //         const { selectedCategory, fetchCategoriesIfNeeded, fetchPostsIfNeeded } = this.props;
-    //         fetchCategoriesIfNeeded(selectedCategory);
-    //         fetchPostsIfNeeded(selectedCategory);
-    //     }
-    //     //... the same
-    // }
-
-    //     function mapStateToProps(state) {
-    //           //... the same
-    //     }
-
-    //     function mapDispatchToProps(dispatch) {
-    //           // when arguments match, you can pass configuration object, which will
-    //           // wrap your actions creators with dispatch automatically.
-    //           return {
-    //               orderPost,
-    //               fetchCategoriesIfNeeded,
-    //               fetchPostsIfNeeded,
-    //           }
-    //       }
   }
 
-  filterList() {}
+  typeChangeHandler() {}
 
-  clearFilter() {}
+  statusChangeHandler() {}
 
   render() {
-    // need to push on a starter value; probably create a reusable component for this elswhere? (to also use in add/edit)
     let typesArray = this.props.types.map(type => {
       return (
         <option key={type.id} value={type.id}>
@@ -81,23 +49,27 @@ class MainNav extends Component {
     return (
       <header className={styles.MainNav}>
         <section className={styles.NavTop}>
-          <div className={styles.Welcome}>Hi, Katie</div>
+          <div className={styles.Welcome}>Hi, {this.props.name}</div>
           <nav className={styles.deskTopOnly}>
-            <DropDown
+            {/* <DropDown
               selectClass="byStatus"
               defaultVal="Idea"
               defaultDisplayVal="View by Status"
               vals={statsArray}
-            />
+            /> */}
             {/* <select className={"byStatus"}>{statsArray}</select> */}
-            <DropDown
+            {/* <DropDown
               selectClass="byType"
               defaultVal={typesArray[0]}
               defaultDisplayVal="View by Type"
               vals={typesArray}
-            />
+            /> */}
             {/* <select className={"byType"}>{typesArray}</select> */}
-            <NavItems />
+            <NavItems
+              isAuth={this.props.token}
+              statuses={statsArray}
+              types={typesArray}
+            />
           </nav>
         </section>
         <section className={styles.NavBottom}>
@@ -114,7 +86,8 @@ const mapStateToProps = state => {
     authorized: state.auth.authorized,
     loading: state.auth.loading,
     name: state.auth.firstname,
-    types: state.type.types
+    types: state.type.types,
+    isAuth: state.auth.token !== null
   };
 };
 
@@ -128,3 +101,30 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(MainNav);
+
+// possible alternative for getting redux props!? idk...
+//https://stackoverflow.com/questions/46564941/react-redux-how-to-dispatch-an-action-on-componentdidmount-when-using-mapdispa?rq=1
+
+//     componentDidMount() {
+//         // no need to use dispatch again. Your action creators are already bound by
+//         // mapDispatchToProps.  Notice also that they come from props
+//         const { selectedCategory, fetchCategoriesIfNeeded, fetchPostsIfNeeded } = this.props;
+//         fetchCategoriesIfNeeded(selectedCategory);
+//         fetchPostsIfNeeded(selectedCategory);
+//     }
+//     //... the same
+// }
+
+//     function mapStateToProps(state) {
+//           //... the same
+//     }
+
+//     function mapDispatchToProps(dispatch) {
+//           // when arguments match, you can pass configuration object, which will
+//           // wrap your actions creators with dispatch automatically.
+//           return {
+//               orderPost,
+//               fetchCategoriesIfNeeded,
+//               fetchPostsIfNeeded,
+//           }
+//       }

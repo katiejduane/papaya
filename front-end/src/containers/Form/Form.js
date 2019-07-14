@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "../../components/UI/Button/Button";
 import styles from "./Form.module.css";
+import DropDown from "../../components/UI/Dropdown/DropDown";
 
 class Form extends Component {
   state = {
@@ -28,7 +29,6 @@ class Form extends Component {
     });
   };
 
-  //this one could prove tricky depending on whether or not its new/previous type
   changeTypeHandler = event => {
     this.setState({
       type: event.target.value
@@ -48,6 +48,7 @@ class Form extends Component {
   };
 
   render() {
+    // do i need two way binding here with values set to this.state? it's working as is, without it...
     return (
       <div className={styles.FormContainer}>
         <form onSubmit={this.postNew} className={styles.Form}>

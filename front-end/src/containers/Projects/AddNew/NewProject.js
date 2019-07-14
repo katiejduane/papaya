@@ -24,6 +24,7 @@ class NewProject extends Component {
   };
 
   componentDidMount() {
+    //change this to simply get types from REDUX (they're already in there!)
     axios({
       method: "GET",
       url: `/addNew`
@@ -34,7 +35,6 @@ class NewProject extends Component {
           return { value: type.id, displayValue: type.typename };
         });
         typeArray.push({ value: "new", displayValue: "Add new type" });
-        // console.log(typeArray)
         this.setState({
           types: typeArray
         });
@@ -59,7 +59,7 @@ class NewProject extends Component {
       }
     })
       .then(response => {
-        // console.log(response)
+        //if response.status === 200??
         this.props.history.push("/");
       })
       .catch(err => {

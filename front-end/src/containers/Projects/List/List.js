@@ -35,7 +35,7 @@ class List extends Component {
     // }
     axios({
       method: "GET",
-      url: `/`
+      url: "/"
       // token: token,
       // headers
     })
