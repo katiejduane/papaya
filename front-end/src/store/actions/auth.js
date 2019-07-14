@@ -1,4 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
+// not sure if i want to use axios instance here or not...?
+import axios from "../../axiosInstance";
 
 import * as actionTypes from "./actionTypes";
 
@@ -134,18 +136,18 @@ export const signIn = (email, password) => {
 
 export const checkToken = () => {
   const token = localStorage.getItem("token");
-  const headers = {
-    "Content-type": "application/json"
-  };
-  if (token) {
-    headers["Authorization"] = token;
-  }
+  // const headers = {
+  //   "Content-type": "application/json"
+  // };
+  // if (token) {
+  //   headers["Authorization"] = token;
+  // }
   return dispatch => {
     axios({
       method: "GET",
       url: `${window.apiHost}/users/checkToken`,
-      token: token,
-      headers
+      token: token
+      // headers
     })
       .then(response => {
         console.log(response);
@@ -206,10 +208,19 @@ export const authCheckState = () => {
 // ======================================== SIGNOUT ======================================== //
 
 export const signOut = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("expirationTime");
-  localStorage.removeItem("userId");
-  localStorage.removeItem("firstName");
+  return dispatch => {
+    axios({
+      method: "POST",
+      url: `${window.apiHost}/users/signout`
+      // data: authData
+    })
+      .then(response => {
+        console.log(response);
+        dispatch(signOut);
+      })
+      .catch(err => console.log(err));
+  };
+
   return {
     type: actionTypes.SIGNOUT
   };

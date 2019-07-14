@@ -68,7 +68,16 @@ const checkToken = (state, action) => {
 };
 
 const signOut = (state, action) => {
-  return updateObject(state, { token: null, userId: null });
+  localStorage.removeItem("token");
+  localStorage.removeItem("expirationTime");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("firstName");
+  return updateObject(state, {
+    token: null,
+    userId: null,
+    authorized: false,
+    msg: action.msg
+  });
 };
 
 // const setAuthRedirectPath = (state, action) => {
