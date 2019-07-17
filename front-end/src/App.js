@@ -28,25 +28,23 @@ class App extends Component {
 
     if (this.props.isAuth) {
       routes = (
-        <Switch>
-          <Route exact path="/status/:status" component={List} />
-          <Route exact path="/type/:typeid" component={List} />
-          <Route exact path="/archive" component={List} />
-          <Route exact path="/view/:id" component={Details} />
-          <Route exact path="/addNew" component={NewProject} />
-          <Route exact path="/update/:" component={UpdateProject} />
-          <Route exact path="/" component={List} />
-          <Route exact path="/account/:" component={Account} />
-          <Redirect to="/" />
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route exact path="/status/:status" component={List} />
+            <Route exact path="/type/:typeid" component={List} />
+            <Route exact path="/archive" component={List} />
+            <Route exact path="/view/:id" component={Details} />
+            <Route exact path="/addNew" component={NewProject} />
+            <Route exact path="/update/:" component={UpdateProject} />
+            <Route exact path="/" component={List} />
+            <Route exact path="/account/:" component={Account} />
+            <Redirect to="/" />
+          </Switch>
+        </Layout>
       );
     }
 
-    return (
-      <div className="App">
-        <Layout>{routes}</Layout>
-      </div>
-    );
+    return <div className="App">{routes}</div>;
   }
 }
 
