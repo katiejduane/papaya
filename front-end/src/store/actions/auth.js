@@ -109,7 +109,7 @@ export const signIn = (email, password) => {
       // headers
     })
       .then(response => {
-        console.log(response);
+        // console.log(response);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("expirationTime", response.data.expiresIn);
         localStorage.setItem("userId", response.data.user.id);
@@ -207,6 +207,12 @@ export const authCheckState = () => {
 };
 // ======================================== SIGNOUT ======================================== //
 
+export const signOutStart = () => {
+  return {
+    type: actionTypes.SIGNOUT
+  };
+};
+
 export const signOut = () => {
   return dispatch => {
     axios({
@@ -221,7 +227,7 @@ export const signOut = () => {
       .catch(err => console.log(err));
   };
 
-  return {
-    type: actionTypes.SIGNOUT
-  };
+  // return {
+  //   type: actionTypes.SIGNOUT
+  // };
 };

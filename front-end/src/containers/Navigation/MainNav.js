@@ -9,7 +9,6 @@ import * as actions from "../../store/actions/index";
 
 class MainNav extends Component {
   state = {
-    username: "",
     stats: [
       { value: "0", displayValue: "Filter by Status" },
       { value: "1", displayValue: "Idea" },
@@ -26,17 +25,7 @@ class MainNav extends Component {
   // the component to RE-RENDER once they're authorized!
   componentDidMount() {
     this.props.getProjectTypes();
-    // this.setState({
-    //   username: this.props.name
-    // });
   }
-
-  // componentDidUpdate(prevProps) {
-  //   this.props.getProjectTypes();
-  //   // if(this.props.types !== prevProps.types){
-  //   //   console.log(this.props)
-  //   // }
-  // }
 
   typeChangeHandler() {}
 
@@ -63,7 +52,6 @@ class MainNav extends Component {
       <header className={styles.MainNav}>
         <section className={styles.NavTop}>
           <div className={styles.Welcome}>Hi, {this.props.name}</div>
-          <div className={styles.Welcome}>Welcome</div>
           <nav className={styles.deskTopOnly}>
             <NavItems
               isAuth={this.props.isAuth}
