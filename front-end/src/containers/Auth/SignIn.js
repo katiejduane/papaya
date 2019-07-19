@@ -135,7 +135,7 @@ class SignIn extends Component {
           <form className={styles.AuthForm} onSubmit={this.submitHandler}>
             {form}
             <Button btnClass="AuthButton" btnType="submit">
-              Submit
+              Sign In
             </Button>
           </form>
           <Button btnClass="SwitchAuth">
