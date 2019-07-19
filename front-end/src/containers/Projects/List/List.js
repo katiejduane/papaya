@@ -75,7 +75,7 @@ class List extends Component {
       }
       return <div className={styles.MiniCardContainer}>{miniCardList}</div>;
     } else {
-      return <Redirect to="/signin" />;
+      return <Redirect to="/splash" />;
     }
   }
 }

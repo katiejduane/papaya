@@ -1,39 +1,38 @@
-.AddFormContainer{
-    /* position: absolute;
+.AddFormContainer {
+  /* position: absolute;
     top: 0;
     left: 250px; */
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    padding: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: space-evenly;
-    background-color: rgb(246, 246, 250);
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: space-evenly;
+  background-color: rgb(246, 246, 250);
 }
 
-.AddTitle{
-    font-family: 'Work Sans', sans-serif;
-    color: rgb(84, 72, 69);
+.AddTitle {
+  font-family: "Work Sans", sans-serif;
+  color: rgb(84, 72, 69);
 }
 
-.AddForm{
-    color: rgb(84, 72, 69);
-    font-family: 'Work Sans', sans-serif;
+.AddForm {
+  color: rgb(84, 72, 69);
+  font-family: "Work Sans", sans-serif;
 }
 
 .TypeColors {
-    color: papayawhip;
-    color: palegoldenrod;
-    color: lightsalmon;
-    color: palevioletred;
-    color: mistyrose;
-    color: lavenderblush;
-    color: lavender;
-    color: lightblue;
-    color: paleturquoise;
-    color: mintcream;
-    
+  color: papayawhip;
+  color: palegoldenrod;
+  color: lightsalmon;
+  color: palevioletred;
+  color: mistyrose;
+  color: lavenderblush;
+  color: lavender;
+  color: lightblue;
+  color: paleturquoise;
+  color: mintcream;
 }

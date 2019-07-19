@@ -1,0 +1,25 @@
+.SplashContainer {
+  background-color: rgb(246, 246, 250);
+  margin: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Work Sans", sans-serif;
+  color: rgb(84, 72, 69);
+}
+
+.SplashWelcome {
+  color: rgb(84, 72, 69);
+  font-size: 22pt;
+}
+
+.SplashAbout {
+  text-align: center;
+}
+
+.ButtonContainer {
+  display: flex;
+  width: 15rem;
+  justify-content: space-evenly;
+}

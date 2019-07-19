@@ -26,7 +26,6 @@ const navItems = props => (
           defaultDisplayVal="View by Status"
           vals={props.statuses}
         />
-
         <DropDown
           selectClass="byType"
           defaultVal={props.types[0]}
