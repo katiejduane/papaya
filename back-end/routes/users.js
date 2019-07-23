@@ -19,5 +19,6 @@ router.get("/checkToken", withAuth, userController.checkToken);
 
 router.post("/signout", userController.signOut);
 // do i need to send the above with auth middleware? experiment and find out! :)
+// something with this is not working...
 
 module.exports = router;
