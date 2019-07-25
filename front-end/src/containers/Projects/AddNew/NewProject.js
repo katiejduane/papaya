@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "../../../axiosInstance";
+import { connect } from "react-redux";
 
 import styles from "./NewProject.module.css";
 // import Input from '../../../components/UI/Input/Input';
@@ -25,26 +26,27 @@ class NewProject extends Component {
 
   componentDidMount() {
     //change this to simply get types from REDUX (they're already in there!)
-    axios({
-      method: "GET",
-      url: `/addNew`
-    })
-      .then(response => {
-        this.setState({ loading: false });
-        let typeArray = response.data.map(type => {
-          return { value: type.id, displayValue: type.typename };
-        });
-        typeArray.push({ value: "new", displayValue: "Add new type" });
-        this.setState({
-          types: typeArray
-        });
-      })
-      .catch(error => {
-        this.setState({
-          error: true
-        });
-        console.log(error);
-      });
+    this.props.getProjectTypes();
+    // axios({
+    //   method: "GET",
+    //   url: `/addNew`
+    // })
+    //   .then(response => {
+    //     this.setState({ loading: false });
+    //     let typeArray = response.data.map(type => {
+    //       return { value: type.id, displayValue: type.typename };
+    //     });
+    //     typeArray.push({ value: "new", displayValue: "Add new type" });
+    //     this.setState({
+    //       types: typeArray
+    //     });
+    //   })
+    //   .catch(error => {
+    //     this.setState({
+    //       error: true
+    //     });
+    //     console.log(error);
+    //   });
   }
 
   addNewProject = (title, type, status, notes) => {
@@ -68,14 +70,19 @@ class NewProject extends Component {
   };
 
   render() {
-    // do i need an if statement here checking the length of the types state?
-    const typeList = this.state.types.map(type => {
+    // do i need an if statement here checking the length of the types state/props?
+    // probably, and if it's < 1, make a drop down with the 'create new' option and nada mas
+    const typeList = this.props.types.map(type => {
       return (
-        <option key={type.id} value={type.value}>
-          {type.displayValue}
+        <option key={type.id} value={type.id}>
+          {type.typename}
         </option>
       );
     });
+    // typeList.push(<option key={type.id} value={type.id}>{ type.typename }</option >);
+    // i will need to something like the above line to make sure i can also have this option so they can create a new val
+    // i wonder if i could do the above thing ONCE and then pass it around? i use it here, in main nav, and in editProject
+
     const statusList = this.state.stats.map(status => {
       return (
         <option key={status.id} value={status.value}>
@@ -113,4 +120,22 @@ class NewProject extends Component {
   }
 }
 
-export default NewProject;
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+    types: state.type.types,
+    isAuth: state.auth.token !== null
+    // loading: state.auth.loading //not sure i'll need loading here as i have it in local state? idk look into this!
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getProjectTypes: () => dispatch(actions.getProjectTypes())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewProject);
