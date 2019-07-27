@@ -25,28 +25,7 @@ class NewProject extends Component {
   };
 
   componentDidMount() {
-    //change this to simply get types from REDUX (they're already in there!)
     this.props.getProjectTypes();
-    // axios({
-    //   method: "GET",
-    //   url: `/addNew`
-    // })
-    //   .then(response => {
-    //     this.setState({ loading: false });
-    //     let typeArray = response.data.map(type => {
-    //       return { value: type.id, displayValue: type.typename };
-    //     });
-    //     typeArray.push({ value: "new", displayValue: "Add new type" });
-    //     this.setState({
-    //       types: typeArray
-    //     });
-    //   })
-    //   .catch(error => {
-    //     this.setState({
-    //       error: true
-    //     });
-    //     console.log(error);
-    //   });
   }
 
   addNewProject = (title, type, status, notes) => {
@@ -79,7 +58,7 @@ class NewProject extends Component {
         </option>
       );
     });
-    // typeList.push(<option key={type.id} value={type.id}>{ type.typename }</option >);
+    typeList.push(<option value="new">"Add new project type"</option>);
     // i will need to something like the above line to make sure i can also have this option so they can create a new val
     // i wonder if i could do the above thing ONCE and then pass it around? i use it here, in main nav, and in editProject
 
