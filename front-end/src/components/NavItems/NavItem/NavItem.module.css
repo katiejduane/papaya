@@ -1,56 +1,42 @@
-.NavItem{
-    margin: 10px;
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    /* transition: background-color 1s ease; */
-    color: rgb(82, 73, 80);
-    font-family: 'Work Sans', sans-serif;
-    font-size: 13pt;
+.NavItem {
+  margin: 10px;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  /* transition: background-color 1s ease; */
+  color: rgb(82, 73, 80);
+  font-family: "Work Sans", sans-serif;
+  font-size: 13pt;
 }
 
-#AddNew{
-    margin-bottom: 2rem;
-    font-size: 14pt;
-    font-weight: bold;
-    color: rgb(245, 129, 141);
-    /* transition: color 1s ease; */
+#AddNew {
+  margin-bottom: 2rem;
+  font-size: 14pt;
+  font-weight: bold;
+  color: rgb(245, 129, 141);
+  /* transition: color 1s ease; */
 }
 
-#AddNew:hover{
-    color: #FAFBF9;
+#AddNew:hover {
+  color: #fafbf9;
 }
 
-/* .NavItem a {
+@media (min-width: 500px) {
+  .NavItem {
+    margin: 0px;
+    padding: 5px;
+    display: flex;
+    height: 100%;
+    width: auto;
+    align-items: center;
+  }
 
-} */
-
-/* .NavItem a:hover,
-.NavItem a:active,
-.NavItem a.active{
-
-} */
-
-@media (min-width: 500px){
-    .NavItem {
-        margin: 0px;
-        padding: 10px;
-        display: flex;
-        height: 100%;
-        width: auto;
-        align-items: center;
-    }
-
-    /* NavItem a {
-
-    } */
-
-    /* will probably need to add a to these??? or maybe not since they might open a drop down! */
-    .NavItem:hover,
-    .NavItem:active,
-    .NavItem a.active {
-        background-color: rgba(245, 129, 137, 0.872);
-        border-radius: 0;
-        cursor: pointer;
-    }
+  /* will probably need to add a to these??? or maybe not since they might open a drop down! */
+  .NavItem:hover,
+  .NavItem:active,
+  .NavItem a.active {
+    background-color: rgba(245, 129, 137, 0.872);
+    border-radius: 0;
+    cursor: pointer;
+  }
 }

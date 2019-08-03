@@ -54,7 +54,6 @@ module.exports.filterByStatus = (req, res, next) => {};
 module.exports.getTypes = (req, res, next) => {
   userId = req.user.id;
   Type.findAll({
-    // include: [{ model: User }],
     where: { userId: userId }
   })
     .then(types => {

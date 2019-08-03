@@ -42,8 +42,6 @@ class SignIn extends Component {
     }
   };
 
-  componentDidUpdate() {}
-
   checkValidity(value, rules) {
     let isValid = true;
     if (!rules) {

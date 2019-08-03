@@ -1,60 +1,52 @@
-.MainNav{
-    position: fixed;
-    /* background-color: rgb(249, 211, 197); */
-    background-color: rgb(254, 220, 218);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: border-box;
-    z-index: 90;
-    /* box-shadow: 1px 5px 15px 1px rgba(201, 190, 190, 0.495); */
+.MainNav {
+  position: fixed;
+  /* background-color: rgb(249, 211, 197); */
+  background-color: rgb(254, 220, 218);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  z-index: 90;
+  /* box-shadow: 1px 5px 15px 1px rgba(201, 190, 190, 0.495); */
 }
 
-.NavTop{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.NavTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .Welcome {
-    font-family: 'Work Sans', sans-serif; 
-    font-size: 18pt;
-    color:rgb(84, 72, 69);
-    margin: 2rem;
+  font-family: "Work Sans", sans-serif;
+  font-size: 18pt;
+  color: rgb(84, 72, 69);
+  margin: 2rem;
 }
-
+/* 
 .MainNav nav{
     height: 2rem;
     width: 100%;
     margin: 2rem;
-}
+} */
 
 .MainNavLogo {
-    height: 1.5rem;
-    width: 1.5rem;
-    border-radius: 50%;
-    margin: 2rem;
-    padding: 0rem;
-    background-color:rgb(245, 129, 141);
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  margin: 2rem;
+  padding: 0rem;
+  background-color: rgb(245, 129, 141);
 }
 
-@media (min-width: 600px){
-    .MainNav{
-        width: 250px;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        flex-direction: column;
-    }
+@media (min-width: 600px) {
+  .MainNav {
+    width: 250px;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+  }
 }
-
-
-
-
-
-
-
-

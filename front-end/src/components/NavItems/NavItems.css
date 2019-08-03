@@ -1,0 +1,32 @@
+.NavItems {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.byStatus {
+  background-color: rgba(245, 129, 137, 0.872);
+  margin: 0.25rem;
+  outline: none;
+  border: none;
+  color: rgb(82, 73, 80);
+}
+
+.byType {
+  background-color: rgba(245, 129, 137, 0.872);
+  margin: 0.25rem;
+  outline: none;
+  border: none;
+  color: rgb(82, 73, 80);
+}
+
+@media (min-width: 500px) {
+  /* .NavItems{
+        flex-flow: row;
+    } */
+}

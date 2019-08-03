@@ -22,6 +22,9 @@ module.exports.postSignUp = (req, res, next) => {
           email: email,
           hash: password
         })
+          // .then(user => {
+          //   user.makeAddNewType("Add new type -->");
+          // })
           .then(response => {
             res.json(response);
           })

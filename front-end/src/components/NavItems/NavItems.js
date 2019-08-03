@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import styles from "./NavItems.module.css";
+import "./NavItems.css";
 import NavItem from "./NavItem/NavItem";
 import DropDown from "../../components/UI/Dropdown/DropDown";
 
@@ -10,7 +10,7 @@ const navItems = props => (
   // this will have to change hugely anyway, but also don't forget to WRAP the items in the link to, not vice versa
   <nav>
     {props.isAuth ? (
-      <ul className={styles.NavItems}>
+      <ul className="NavItems">
         <NavItem id="AddNew">
           <Link to="/addNew">Add New</Link>
         </NavItem>
@@ -40,7 +40,7 @@ const navItems = props => (
         </NavItem>
       </ul>
     ) : (
-      <ul className={styles.NavItems}>
+      <ul className="NavItems">
         <NavItem id="AddNew">
           <Link to="/signin">Sign In</Link>
         </NavItem>

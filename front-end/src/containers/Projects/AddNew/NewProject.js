@@ -7,6 +7,7 @@ import styles from "./NewProject.module.css";
 import Loader from "../../../components/UI/Loader/Loader";
 import Form from "../../Form/Form";
 import Aux from "../../../hoc/Aux/Aux";
+import * as actions from "../../../store/actions/index";
 
 class NewProject extends Component {
   state = {
@@ -24,7 +25,7 @@ class NewProject extends Component {
   };
 
   componentDidMount() {
-    this.props.getProjectTypes();
+    // this.props.getProjectTypes();
   }
 
   addNewProject = (title, type, status, notes) => {

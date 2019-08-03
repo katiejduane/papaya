@@ -4,7 +4,7 @@ var router = express.Router();
 const withAuth = require("../middleware/withAuth");
 const userController = require("../controllers/user");
 
-// router.get('/splash', userController.getSplash)
+// router.get("/splash", userController.getSplash);
 
 router.post("/signup", userController.postSignUp);
 

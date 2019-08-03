@@ -52,13 +52,13 @@ class MainNav extends Component {
       <header className={styles.MainNav}>
         <section className={styles.NavTop}>
           <div className={styles.Welcome}>Hi, {this.props.name}</div>
-          <nav className={styles.deskTopOnly}>
+          <div className={styles.deskTopOnly}>
             <NavItems
               isAuth={this.props.isAuth}
               statuses={statsArray}
               types={typesArray}
             />
-          </nav>
+          </div>
         </section>
         <section className={styles.NavBottom}>
           <div className={styles.MainNavLogo} />
