@@ -12,7 +12,6 @@ class NewProject extends Component {
   state = {
     loading: true,
     error: false,
-    types: [],
     stats: [
       { value: "1", displayValue: "Idea" },
       { value: "2", displayValue: "Research" },
