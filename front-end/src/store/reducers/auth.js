@@ -3,24 +3,23 @@ import { updateObject } from "../utility";
 
 const initialState = {
   token: null,
-  firstname: localStorage.getItem("firstName"),
+  firstname: null,
   userId: null,
   error: null,
   loading: false,
   authorized: false,
-  registered: null,
+  registered: false,
   msg: ""
 };
 
 const signUpStart = (state, action) => {
-  return updateObject(state, { error: null, loading: true });
+  return updateObject(state, { loading: true });
 };
 
 const signUpSuccess = (state, action) => {
   console.log("action", action);
   return updateObject(state, {
     msg: "signup success",
-    error: null,
     loading: false,
     registered: true
   });
@@ -28,6 +27,7 @@ const signUpSuccess = (state, action) => {
 
 const signUpFail = (state, action) => {
   return updateObject(state, {
+    msg: "signup error",
     error: action.error,
     loading: false
   });

@@ -181,6 +181,7 @@ export const authCheckState = () => {
     }
   };
 };
+
 // ======================================== SIGNOUT ======================================== //
 
 export const signOutStart = () => {

@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
+import Loader from "../../components/UI/Loader/Loader";
 import styles from "./Auth.module.css";
 import * as actions from "../../store/actions/index";
 
@@ -142,8 +143,19 @@ class SignUp extends Component {
         />
       ));
 
+      if (this.props.loading) {
+        form = <Loader />;
+      }
+
+      let errorMsg = null;
+      // need to figure out how to get the actual error here
+      if (this.props.error) {
+        errorMsg = <p>{this.props.error}</p>;
+      }
+
       return (
         <div className={styles.AuthFormContainer}>
+          {errorMsg}
           <h1 className={styles.AuthWelcome}>Welcome to Papaya</h1>
           <p className={styles.AuthPlease}>Please sign up</p>
           <form className={styles.AuthForm} onSubmit={this.submitHandler}>
