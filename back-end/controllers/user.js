@@ -5,6 +5,7 @@ const config = require("../config");
 
 // sign up
 module.exports.postSignUp = (req, res, next) => {
+  console.log(req.body);
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email.toLowerCase();
@@ -22,11 +23,10 @@ module.exports.postSignUp = (req, res, next) => {
           email: email,
           hash: password
         })
-          // .then(user => {
-          //   user.makeAddNewType("Add new type -->");
-          // })
           .then(response => {
-            res.json(response);
+            res.json({
+              response
+            });
           })
           .catch(err => console.log(err));
       } else {

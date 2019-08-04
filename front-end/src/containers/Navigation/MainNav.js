@@ -4,13 +4,11 @@ import { connect } from "react-redux";
 
 import styles from "./MainNav.module.css";
 import NavItems from "../../components/NavItems/NavItems";
-// import DropDown from "../../components/UI/Dropdown/DropDown";
 import * as actions from "../../store/actions/index";
 
 class MainNav extends Component {
   state = {
     stats: [
-      { value: "0", displayValue: "Filter by Status" },
       { value: "1", displayValue: "Idea" },
       { value: "2", displayValue: "Research" },
       { value: "3", displayValue: "In-Progress" },
@@ -21,10 +19,11 @@ class MainNav extends Component {
     ]
   };
 
-  // i need a way to handle the getting of types ONLY if they're authorized, and if not, I need
-  // the component to RE-RENDER once they're authorized!
   componentDidMount() {
     this.props.getProjectTypes();
+    // i can't tell if this is bad or not; i have seen it done in some tutorials, but
+    // i get weird errors about memory leaks (from this page i think) when i clear local storage
+    // to 'log out'; rendering this function totally null
   }
 
   typeChangeHandler() {}

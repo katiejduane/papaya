@@ -55,8 +55,8 @@ User.prototype.authenticate = async function(value, callback) {
   });
 };
 
-// User.prototype.makeAddNewType = function(typename) {
-//   Type.create({ typename: typename, userId: userId });
-// };
+User.prototype.signOut = async function() {
+  sequelize.models.AuthToken.destroy({ where: { token } });
+};
 
 module.exports = User;

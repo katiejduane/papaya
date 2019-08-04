@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
@@ -118,44 +118,54 @@ class SignUp extends Component {
   };
 
   render() {
-    let formElementsArray = [];
-    for (let key in this.state.controls) {
-      formElementsArray.push({
-        id: key,
-        config: this.state.controls[key]
-      });
-    }
+    if (this.props.registered) {
+      return <Redirect to="/signin" />;
+    } else {
+      let formElementsArray = [];
+      for (let key in this.state.controls) {
+        formElementsArray.push({
+          id: key,
+          config: this.state.controls[key]
+        });
+      }
 
-    const form = formElementsArray.map(formElem => (
-      <Input
-        key={formElem.id}
-        elementType={formElem.config.elementType}
-        elementConfig={formElem.config.elementConfig}
-        value={formElem.config.value}
-        invalid={!formElem.config.valid}
-        shouldValidate={formElem.config.validation}
-        touched={formElem.config.touched}
-        changed={event => this.inputChangedHandler(event, formElem.id)}
-      />
-    ));
+      const form = formElementsArray.map(formElem => (
+        <Input
+          key={formElem.id}
+          elementType={formElem.config.elementType}
+          elementConfig={formElem.config.elementConfig}
+          value={formElem.config.value}
+          invalid={!formElem.config.valid}
+          shouldValidate={formElem.config.validation}
+          touched={formElem.config.touched}
+          changed={event => this.inputChangedHandler(event, formElem.id)}
+        />
+      ));
 
-    return (
-      <div className={styles.AuthFormContainer}>
-        <h1 className={styles.AuthWelcome}>Welcome to Papaya</h1>
-        <p className={styles.AuthPlease}>Please sign up</p>
-        <form className={styles.AuthForm} onSubmit={this.submitHandler}>
-          {form}
-          <Button btnClass="AuthButton" btnType="submit">
-            Sign Up
+      return (
+        <div className={styles.AuthFormContainer}>
+          <h1 className={styles.AuthWelcome}>Welcome to Papaya</h1>
+          <p className={styles.AuthPlease}>Please sign up</p>
+          <form className={styles.AuthForm} onSubmit={this.submitHandler}>
+            {form}
+            <Button btnClass="AuthButton" btnType="submit">
+              Sign Up
+            </Button>
+          </form>
+          <Button btnClass="SwitchAuth">
+            <Link to="/signin">Or Sign In</Link>
           </Button>
-        </form>
-        <Button btnClass="SwitchAuth">
-          <Link to="/signin">Or Sign In</Link>
-        </Button>
-      </div>
-    );
+        </div>
+      );
+    }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    registered: state.auth.registered
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -165,6 +175,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SignUp);

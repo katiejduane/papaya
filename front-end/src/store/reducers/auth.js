@@ -2,14 +2,14 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 
 const initialState = {
-  token: localStorage.getItem("token"),
+  token: null,
   firstname: localStorage.getItem("firstName"),
   userId: null,
   error: null,
   loading: false,
   authorized: false,
-  msg: "",
-  authRedirectPath: "/splash"
+  registered: null,
+  msg: ""
 };
 
 const signUpStart = (state, action) => {
@@ -17,11 +17,12 @@ const signUpStart = (state, action) => {
 };
 
 const signUpSuccess = (state, action) => {
+  console.log("action", action);
   return updateObject(state, {
     msg: "signup success",
     error: null,
     loading: false,
-    token: action.token
+    registered: true
   });
 };
 
@@ -80,10 +81,6 @@ const signOut = (state, action) => {
   });
 };
 
-// const setAuthRedirectPath = (state, action) => {
-//     return updateObject(state, { authRedirectPath: action.path })
-// }
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SIGNUP_START:
@@ -102,7 +99,6 @@ const reducer = (state = initialState, action) => {
       return checkToken(state, action);
     case actionTypes.SIGNOUT:
       return signOut(state, action);
-    // case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action);
     default:
       return state;
   }

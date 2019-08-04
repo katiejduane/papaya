@@ -11,7 +11,6 @@ import * as actions from "../../../store/actions/index";
 
 class NewProject extends Component {
   state = {
-    loading: true,
     error: false,
     stats: [
       { value: "1", displayValue: "Idea" },
@@ -25,7 +24,9 @@ class NewProject extends Component {
   };
 
   componentDidMount() {
-    // this.props.getProjectTypes();
+    if (!this.props.types) {
+      this.props.getProjectTypes();
+    }
   }
 
   addNewProject = (title, type, status, notes) => {
@@ -40,8 +41,9 @@ class NewProject extends Component {
       }
     })
       .then(response => {
-        //if response.status === 200??
-        this.props.history.push("/");
+        if (response.status === 200) {
+          this.props.history.push("/");
+        }
       })
       .catch(err => {
         console.log(err);
@@ -49,22 +51,25 @@ class NewProject extends Component {
   };
 
   render() {
-    // do i need an if statement here checking the length of the types state/props?
-    // probably, and if it's < 1, make a drop down with the 'create new' option and nada mas
-    const typeList = this.props.types.map(type => {
-      return (
-        <option key={type.id} value={type.id}>
-          {type.typename}
-        </option>
-      );
-    });
-    typeList.push(<option value="new">"Add new project type"</option>);
-    // i will need to something like the above line to make sure i can also have this option so they can create a new val
-    // i wonder if i could do the above thing ONCE and then pass it around? i use it here, in main nav, and in editProject
+    const typeList =
+      this.props.types.length > 0
+        ? this.props.types.map((type, index) => {
+            return (
+              <option key={index + type.id} value={type.id}>
+                {type.typename}
+              </option>
+            );
+          })
+        : [];
+    typeList.push(
+      <option key="new" value="new">
+        Add new project type
+      </option>
+    );
 
-    const statusList = this.state.stats.map(status => {
+    const statusList = this.state.stats.map((status, index) => {
       return (
-        <option key={status.id} value={status.value}>
+        <option key={index + status.value} value={status.value}>
           {status.displayValue}
         </option>
       );
@@ -103,8 +108,8 @@ const mapStateToProps = state => {
   return {
     token: state.auth.token,
     types: state.type.types,
-    isAuth: state.auth.token !== null
-    // loading: state.auth.loading //not sure i'll need loading here as i have it in local state? idk look into this!
+    isAuth: state.auth.token !== null,
+    loading: state.auth.loading
   };
 };
 

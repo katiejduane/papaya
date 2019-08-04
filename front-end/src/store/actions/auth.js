@@ -13,7 +13,7 @@ export const signUpStart = () => {
 };
 
 export const signUpSuccess = authData => {
-  localStorage.setItem("token", authData.token);
+  console.log(authData);
   return {
     type: actionTypes.SIGNUP_SUCCESS,
     authData: authData
@@ -28,11 +28,7 @@ export const signUpFail = error => {
 };
 
 export const signUp = (firstname, lastname, email, password) => {
-  // const headers = {
-  //   "Content-type": "application/json"
-  // };
   return dispatch => {
-    // authenticate user
     dispatch(signUpStart());
     const authData = {
       firstname: firstname,
@@ -44,7 +40,6 @@ export const signUp = (firstname, lastname, email, password) => {
       method: "POST",
       url: `${window.apiHost}/users/signup`,
       data: authData
-      // headers
     })
       .then(response => {
         console.log(response);
@@ -93,9 +88,6 @@ export const checkAuthTimeOut = expirationTime => {
 };
 
 export const signIn = (email, password) => {
-  // const headers = {
-  //   "Content-type": "application/json"
-  // };
   return dispatch => {
     dispatch(signInStart());
     const authData = {
@@ -106,12 +98,10 @@ export const signIn = (email, password) => {
       method: "POST",
       url: `${window.apiHost}/users/signin`,
       data: authData
-      // headers
     })
       .then(response => {
-        // console.log(response);
+        console.log(response);
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("expirationTime", response.data.expiresIn);
         localStorage.setItem("userId", response.data.user.id);
         localStorage.setItem("firstName", response.data.user.firstname);
         dispatch(
@@ -136,18 +126,11 @@ export const signIn = (email, password) => {
 
 export const checkToken = () => {
   const token = localStorage.getItem("token");
-  // const headers = {
-  //   "Content-type": "application/json"
-  // };
-  // if (token) {
-  //   headers["Authorization"] = token;
-  // }
   return dispatch => {
     axios({
       method: "GET",
       url: `${window.apiHost}/users/checkToken`,
       token: token
-      // headers
     })
       .then(response => {
         console.log(response);
@@ -181,13 +164,6 @@ export const tokenFail = error => {
 
 // ================================ Checking Various Auth States ===============================
 
-export const setAuthRedirectPath = path => {
-  return {
-    type: actionTypes.SET_AUTH_REDIRECT_PATH,
-    path: path
-  };
-};
-
 export const authCheckState = () => {
   return dispatch => {
     const token = localStorage.getItem("token");
@@ -218,7 +194,6 @@ export const signOut = () => {
     axios({
       method: "POST",
       url: `${window.apiHost}/users/signout`
-      // data: authData
     })
       .then(response => {
         console.log(response);

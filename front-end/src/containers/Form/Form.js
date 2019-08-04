@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "../../components/UI/Button/Button";
 import styles from "./Form.module.css";
-// import DropDown from "../../components/UI/Dropdown/DropDown";
+import DropDown from "../../components/UI/Dropdown/DropDown";
 
 class Form extends Component {
   state = {
@@ -65,13 +65,13 @@ class Form extends Component {
           </section>
           <div className={styles.FormLabel}>Type</div>
           <section>
-            <select
-              onChange={this.changeTypeHandler}
-              className={styles.SelectType}
-            >
-              <option value="">{this.props.defaultType}</option>
-              {this.props.typeList}
-            </select>
+            <DropDown
+              selectClass={styles.SelectType}
+              defaultVal="1"
+              defaultDisplayVal={this.props.defaultType}
+              change={this.changeTypeHandler}
+              vals={this.props.typeList}
+            />
             <input
               type="text"
               onChange={this.changeTypeHandler}
@@ -81,14 +81,13 @@ class Form extends Component {
           </section>
           <div className={styles.FormLabel}>Status</div>
           <section>
-            <select
-              onChange={this.changeStatusHandler}
-              className={styles.SelectStatus}
-              required
-            >
-              <option value="">{this.props.defaultStatus}</option>
-              {this.props.statusList}
-            </select>
+            <DropDown
+              selectClass={styles.SelectStatus}
+              defaultVal="1"
+              defaultDisplayVal={this.props.defaultStatus}
+              change={this.changeStatusHandler}
+              vals={this.props.statusList}
+            />
           </section>
           <div className={styles.FormLabel}>Notes</div>
           <section>

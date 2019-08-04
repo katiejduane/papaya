@@ -20,24 +20,16 @@ class List extends Component {
       "Finished",
       "Accepted"
     ],
-    types: [],
-    error: false
+    error: false,
+    _isMounted: false
   };
 
   componentDidMount() {
     console.log(this.props);
-    // const headers = {
-    //   "Content-type": "application/json"
-    // };
-    // const token = localStorage.getItem("token");
-    // if (token) {
-    //   headers["Authorization"] = token;
-    // }
+    this._isMounted = true;
     axios({
       method: "GET",
       url: "/"
-      // token: token,
-      // headers
     })
       .then(response => {
         console.log(response);
@@ -52,6 +44,11 @@ class List extends Component {
         });
         console.log(error);
       });
+  }
+
+  componentWillUnmount() {
+    console.log("unmount");
+    this._isMounted = false;
   }
 
   render() {

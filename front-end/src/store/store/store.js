@@ -21,6 +21,7 @@ const theStore = middleware(createStore);
 const loadFromLocalStorage = () => {
   try {
     const serializedState = localStorage.getItem("state");
+    console.log(serializedState);
     if (serializedState === null) {
       return undefined;
     }

@@ -20,7 +20,6 @@ module.exports.getIndex = (req, res, next) => {
   })
     .then(projects => {
       res.json(projects);
-      // console.log(projects)
     })
     .catch(err => console.log(err));
 };
@@ -37,8 +36,6 @@ module.exports.getProject = (req, res, next) => {
     }
   })
     .then(project => {
-      // return project;
-      // console.log(project)
       res.json(project);
     })
     .catch(err => console.log(err));
