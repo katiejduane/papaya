@@ -61,11 +61,6 @@ class NewProject extends Component {
             );
           })
         : [];
-    typeList.push(
-      <option key="new" value="new">
-        Add new project type
-      </option>
-    );
 
     const statusList = this.state.stats.map((status, index) => {
       return (

@@ -32,8 +32,13 @@ export const getProjectTypes = () => {
       url: `${window.apiHost}/getTypes`
     })
       .then(response => {
-        console.log(response);
-        dispatch(typeSuccess(response.data, response.data[0].userId));
+        if (response.data.length > 0) {
+          dispatch(typeSuccess(response.data, response.data[0].userId));
+        } else {
+          console.log(
+            "no types yet; here is where I could create a dummy type maybe??"
+          );
+        }
       })
       .catch(err => {
         console.log(err);

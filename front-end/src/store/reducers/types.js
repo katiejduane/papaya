@@ -14,7 +14,6 @@ const typeStart = (state, action) => {
 };
 
 const typeSuccess = (state, action) => {
-  console.log(action.types);
   return updateObject(state, {
     types: action.types,
     userId: action.userId,

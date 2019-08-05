@@ -24,13 +24,8 @@
   font-size: 18pt;
   color: rgb(84, 72, 69);
   margin: 2rem;
+  text-align: center;
 }
-/* 
-.MainNav nav{
-    height: 2rem;
-    width: 100%;
-    margin: 2rem;
-} */
 
 .MainNavLogo {
   height: 1.5rem;

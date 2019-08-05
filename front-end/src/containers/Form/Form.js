@@ -67,7 +67,7 @@ class Form extends Component {
           <section>
             <DropDown
               selectClass={styles.SelectType}
-              defaultVal="1"
+              defaultVal="new"
               defaultDisplayVal={this.props.defaultType}
               change={this.changeTypeHandler}
               vals={this.props.typeList}

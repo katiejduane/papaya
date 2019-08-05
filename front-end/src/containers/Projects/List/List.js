@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import axios from "axios";
 import axios from "../../../axiosInstance";
 import { Redirect } from "react-router-dom";
 
@@ -28,14 +27,17 @@ class List extends Component {
   };
 
   componentDidMount() {
-    this.props.getProjectTypes();
+    if (this.props.types.length < 1) {
+      console.log("requesting types");
+      this.props.getProjectTypes();
+    }
     //get projects from backend
     axios({
       method: "GET",
       url: "/"
     })
       .then(response => {
-        console.log(response);
+        // console.log(response);
         this.setState({
           loading: false,
           miniCards: response.data
@@ -45,7 +47,7 @@ class List extends Component {
         this.setState({
           error: true
         });
-        console.log(error);
+        console.log(error.message);
       });
     this._isMounted = true;
   }

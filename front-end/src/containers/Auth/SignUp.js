@@ -130,7 +130,7 @@ class SignUp extends Component {
         });
       }
 
-      const form = formElementsArray.map(formElem => (
+      let form = formElementsArray.map(formElem => (
         <Input
           key={formElem.id}
           elementType={formElem.config.elementType}
