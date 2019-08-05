@@ -56,6 +56,7 @@ class MainNav extends Component {
               isAuth={this.props.isAuth}
               statuses={statsArray}
               types={typesArray}
+              signOut={this.props.signOut}
             />
           </div>
         </section>
@@ -80,7 +81,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProjectTypes: () => dispatch(actions.getProjectTypes())
+    getProjectTypes: () => dispatch(actions.getProjectTypes()),
+    signOut: () => dispatch(actions.signOut())
   };
 };
 

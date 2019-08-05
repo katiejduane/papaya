@@ -10,12 +10,13 @@ const withAuth = function(req, res, next) {
   if (!token) {
     res.status(401).json({ Unauthorized: "No token provided" });
   } else {
-    console.log("middleware, token: ", req.url, token);
-    console.log("token headers", req.headers);
+    console.log("middleware, token: ", req.url, token, config.secret);
+    // console.log("token headers", req.headers);
     jwt.verify(token, config.secret, function(err, user) {
       if (err) {
         console.log("err", err);
-        res.status(401).json({ Unauthorized: "Invalid token" });
+        res.status(403).json({ Unauthorized: "Invalid token" });
+        // } else if() {
       } else {
         req.user = user;
         next();

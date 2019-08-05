@@ -13,6 +13,24 @@ instance.interceptors.request.use(
     return config;
   },
   function(error) {
+    console.log("interceptor", error);
+    return Promise.reject(error);
+  }
+);
+
+axios.interceptors.response.use(
+  function(response) {
+    console.log(response);
+    if (response.status === 403) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("state");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("firstName");
+    }
+    return response;
+  },
+  function(error) {
+    console.log(error);
     return Promise.reject(error);
   }
 );
