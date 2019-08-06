@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import styles from "./MainNav.module.css";
 import NavItems from "../../components/NavItems/NavItems";
+import NavItem from "../../components/NavItems/NavItem/NavItem";
 import * as actions from "../../store/actions/index";
 
 class MainNav extends Component {
@@ -56,6 +57,7 @@ class MainNav extends Component {
               isAuth={this.props.isAuth}
               statuses={statsArray}
               types={typesArray}
+              signOut={this.props.signOut}
             />
           </div>
         </section>

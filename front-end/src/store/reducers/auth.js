@@ -76,8 +76,9 @@ const signOutSuccess = (state, action) => {
   return updateObject(state, {
     token: null,
     userId: null,
-    authorized: false,
+    firstname: null,
     msg: action.msg,
+    authorized: false,
     loading: false
   });
 };

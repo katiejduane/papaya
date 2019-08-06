@@ -22,8 +22,8 @@ const navItems = props => (
         <NavItem id="ViewAccount">
           <Link to="/account">Me</Link>
         </NavItem>
-        <NavItem id="SignOut">
-          <Link to="/signout">Sign Out</Link>
+        <NavItem clicked={props.signOut} id="SignOut">
+          Sign Out
         </NavItem>
       </ul>
     ) : (

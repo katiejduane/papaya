@@ -160,9 +160,7 @@ export const signOutStart = () => {
 export const signOutSuccess = () => {
   return {
     type: actionTypes.SIGNOUT_SUCCESS,
-    token: null,
-    userId: null,
-    firstname: null
+    msg: "Signed Out"
   };
 };
 
@@ -175,11 +173,7 @@ export const signOut = () => {
     })
       .then(response => {
         console.log(response);
-        localStorage.removeItem("token");
-        localStorage.removeItem("state");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("firstName");
-        // localStorage.clear();
+        localStorage.clear();
         dispatch(signOutSuccess());
       })
       .catch(err => console.log(err));
