@@ -10,6 +10,7 @@ export const SIGNIN_FAIL = "SIGNIN_FAIL";
 
 //signout
 export const SIGNOUT = "SIGNOUT";
+export const SIGNOUT_SUCCESS = "SIGNOUT_SUCCESS";
 
 //token
 export const CHECK_TOKEN = "CHECK_TOKEN";

@@ -1,5 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
+import { signOutSuccess } from "../actions/auth";
 
 const initialState = {
   token: null,
@@ -56,6 +57,10 @@ const signInFail = (state, action) => {
 };
 
 const checkToken = (state, action) => {
+  return updateObject(state, { error: null, loading: true });
+};
+
+const tokenSuccess = (state, action) => {
   if (action.token) {
     localStorage.setItem("token", action.token);
   } else {
@@ -64,15 +69,24 @@ const checkToken = (state, action) => {
   return updateObject(state, {
     token: action.token,
     userId: action.user.id,
-    authorized: true
+    authorized: true,
+    loading: false
   });
 };
 
+const tokenFail = (state, action) => {
+  return updateObject(state, {
+    token: null,
+    userId: null,
+    firstname: null,
+    authorized: false,
+    loading: false
+  });
+};
+
+const checkAuthTimeOut = (state, action) => {};
+
 const signOut = (state, action) => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("expirationTime");
-  localStorage.removeItem("userId");
-  localStorage.removeItem("firstName");
   return updateObject(state, {
     token: null,
     userId: null,
@@ -97,8 +111,14 @@ const reducer = (state = initialState, action) => {
       return signInFail(state, action);
     case actionTypes.CHECK_TOKEN:
       return checkToken(state, action);
+    case actionTypes.TOKEN_SUCCESS:
+      return tokenSuccess(state, action);
+    case actionTypes.TOKEN_FAIL:
+      return tokenFail(state, action);
     case actionTypes.SIGNOUT:
       return signOut(state, action);
+    case actionTypes.SIGNOUT_SUCCESS:
+      return signOutSuccess(state, action);
     default:
       return state;
   }

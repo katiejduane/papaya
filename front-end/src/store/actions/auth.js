@@ -124,18 +124,28 @@ export const signIn = (email, password) => {
 
 // ===================================== CHECK TOKEN ====================================== //
 
+export const checkTokenStart = () => {
+  return {
+    type: actionTypes.CHECK_TOKEN
+  };
+};
+
 export const checkToken = () => {
   const token = localStorage.getItem("token");
   return dispatch => {
+    dispatch(checkTokenStart());
     axios({
       method: "GET",
       url: `${window.apiHost}/users/checkToken`,
       token: token
     })
       .then(response => {
-        console.log(response);
-        dispatch(tokenSuccess(response.data.token, response.data.user.id));
-        dispatch(checkAuthTimeOut(response.data.expiresIn));
+        if (response.status === 200) {
+          dispatch(tokenSuccess(response.data.token, response.data.user.id));
+          dispatch(checkAuthTimeOut(response.data.expiresIn));
+        } else {
+          dispatch(tokenFail("invalid token"));
+        }
       })
       .catch(err => {
         console.log(err);
@@ -156,6 +166,7 @@ export const tokenSuccess = (token, userId) => {
 };
 
 export const tokenFail = error => {
+  if (error === "invalid token") localStorage.clear();
   return {
     type: actionTypes.TOKEN_FAIL,
     error: error
@@ -190,20 +201,31 @@ export const signOutStart = () => {
   };
 };
 
+export const signOutSuccess = () => {
+  return {
+    type: actionTypes.SIGNOUT_SUCCESS,
+    token: null,
+    userId: null,
+    firstname: null
+  };
+};
+
 export const signOut = () => {
   return dispatch => {
+    dispatch(signOutStart());
     axios({
       method: "POST",
       url: `${window.apiHost}/users/signout`
     })
       .then(response => {
         console.log(response);
-        dispatch(signOut);
+        localStorage.removeItem("token");
+        localStorage.removeItem("state");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("firstName");
+        // localStorage.clear();
+        dispatch(signOutSuccess());
       })
       .catch(err => console.log(err));
   };
-
-  // return {
-  //   type: actionTypes.SIGNOUT
-  // };
 };
