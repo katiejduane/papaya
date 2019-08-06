@@ -1,6 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
-import { signOutSuccess } from "../actions/auth";
 
 const initialState = {
   token: null,
@@ -10,6 +9,7 @@ const initialState = {
   loading: false,
   authorized: false,
   registered: false,
+  expiresIn: null,
   msg: ""
 };
 
@@ -41,6 +41,7 @@ const signInStart = (state, action) => {
 const signInSuccess = (state, action) => {
   return updateObject(state, {
     token: action.token,
+    expiresIn: action.expiresIn,
     userId: action.userId,
     firstname: action.firstname,
     error: null,
@@ -56,42 +57,28 @@ const signInFail = (state, action) => {
   });
 };
 
-const checkToken = (state, action) => {
-  return updateObject(state, { error: null, loading: true });
-};
-
-const tokenSuccess = (state, action) => {
-  if (action.token) {
-    localStorage.setItem("token", action.token);
-  } else {
-    localStorage.removeItem("token");
-  }
-  return updateObject(state, {
-    token: action.token,
-    userId: action.user.id,
-    authorized: true,
-    loading: false
-  });
-};
-
-const tokenFail = (state, action) => {
+const checkAuthTimeOut = (state, action) => {
   return updateObject(state, {
     token: null,
     userId: null,
-    firstname: null,
     authorized: false,
     loading: false
   });
 };
 
-const checkAuthTimeOut = (state, action) => {};
+const signOutStart = (state, action) => {
+  return updateObject(state, {
+    loading: true
+  });
+};
 
-const signOut = (state, action) => {
+const signOutSuccess = (state, action) => {
   return updateObject(state, {
     token: null,
     userId: null,
     authorized: false,
-    msg: action.msg
+    msg: action.msg,
+    loading: false
   });
 };
 
@@ -109,14 +96,10 @@ const reducer = (state = initialState, action) => {
       return signInSuccess(state, action);
     case actionTypes.SIGNIN_FAIL:
       return signInFail(state, action);
-    case actionTypes.CHECK_TOKEN:
-      return checkToken(state, action);
-    case actionTypes.TOKEN_SUCCESS:
-      return tokenSuccess(state, action);
-    case actionTypes.TOKEN_FAIL:
-      return tokenFail(state, action);
+    case actionTypes.CHECK_AUTH_TIMEOUT:
+      return checkAuthTimeOut(state, action);
     case actionTypes.SIGNOUT:
-      return signOut(state, action);
+      return signOutStart(state, action);
     case actionTypes.SIGNOUT_SUCCESS:
       return signOutSuccess(state, action);
     default:

@@ -1,2 +1,2 @@
-export { signUp, signIn, signOut, checkToken } from "./auth";
+export { signUp, signIn, signOut, checkAuthTimeOut } from "./auth";
 export { getProjectTypes } from "./types";

@@ -13,24 +13,21 @@ instance.interceptors.request.use(
     return config;
   },
   function(error) {
-    console.log("interceptor", error);
+    console.log("req interceptor", error);
     return Promise.reject(error);
   }
 );
 
 axios.interceptors.response.use(
   function(response) {
-    console.log(response);
+    console.log("res interceptor", response);
     if (response.status === 403) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("state");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("firstName");
+      localStorage.clear();
     }
     return response;
   },
   function(error) {
-    console.log(error);
+    console.log("res interceptor", error);
     return Promise.reject(error);
   }
 );

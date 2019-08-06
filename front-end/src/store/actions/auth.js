@@ -79,14 +79,6 @@ export const signInFail = error => {
   };
 };
 
-export const checkAuthTimeOut = expirationTime => {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(signOut());
-    }, expirationTime * 1000);
-  };
-};
-
 export const signIn = (email, password) => {
   return dispatch => {
     dispatch(signInStart());
@@ -122,58 +114,18 @@ export const signIn = (email, password) => {
   };
 };
 
-// ===================================== CHECK TOKEN ====================================== //
+// ===================================== CHECK AUTH STATE ====================================== //
 
-export const checkTokenStart = () => {
-  return {
-    type: actionTypes.CHECK_TOKEN
-  };
-};
+// i'm honestly not sure if i even need this, as i have middleware on the BE and axios interceptors
+// checking token quality... keep for now just in case...
 
-export const checkToken = () => {
-  const token = localStorage.getItem("token");
+export const checkAuthTimeOut = expirationTime => {
   return dispatch => {
-    dispatch(checkTokenStart());
-    axios({
-      method: "GET",
-      url: `${window.apiHost}/users/checkToken`,
-      token: token
-    })
-      .then(response => {
-        if (response.status === 200) {
-          dispatch(tokenSuccess(response.data.token, response.data.user.id));
-          dispatch(checkAuthTimeOut(response.data.expiresIn));
-        } else {
-          dispatch(tokenFail("invalid token"));
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch(tokenFail(err));
-        // the default error message is useless for users, so pass a string for now, but will need to
-        // figure out how to render the actual error message i'm trying to send from the backend
-      });
+    setTimeout(() => {
+      dispatch(signOut());
+    }, expirationTime * 1000);
   };
 };
-
-export const tokenSuccess = (token, userId) => {
-  console.log(token, userId);
-  return {
-    type: actionTypes.TOKEN_SUCCESS,
-    token: token,
-    userId: userId
-  };
-};
-
-export const tokenFail = error => {
-  if (error === "invalid token") localStorage.clear();
-  return {
-    type: actionTypes.TOKEN_FAIL,
-    error: error
-  };
-};
-
-// ================================ Checking Various Auth States ===============================
 
 export const authCheckState = () => {
   return dispatch => {
@@ -181,13 +133,17 @@ export const authCheckState = () => {
     if (!token) {
       dispatch(signOut());
     } else {
-      const expireTime = localStorage.getItem("expirationTime");
-      if (expireTime <= 0) {
+      const expirationTime = new Date(localStorage.getItem("expiresIn"));
+      if (expirationTime <= new Date()) {
         dispatch(signOut());
       } else {
         const userId = localStorage.getItem("userId");
         dispatch(signInSuccess(token, userId));
-        dispatch(checkAuthTimeOut(expireTime));
+        dispatch(
+          checkAuthTimeOut(
+            (expirationTime.getTime() - new Date().getTime()) / 1000
+          )
+        );
       }
     }
   };

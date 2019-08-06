@@ -126,7 +126,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    checkToken: () => dispatch(actions.checkToken()),
     getProjectTypes: () => dispatch(actions.getProjectTypes())
   };
 };
