@@ -55,8 +55,4 @@ User.prototype.authenticate = async function(value, callback) {
   });
 };
 
-User.prototype.signOut = async function() {
-  sequelize.models.AuthToken.destroy({ where: { token } });
-};
-
 module.exports = User;
