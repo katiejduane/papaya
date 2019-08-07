@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import styles from "./MainNav.module.css";
 import NavItems from "../../components/NavItems/NavItems";
-import NavItem from "../../components/NavItems/NavItem/NavItem";
 import * as actions from "../../store/actions/index";
 
 class MainNav extends Component {

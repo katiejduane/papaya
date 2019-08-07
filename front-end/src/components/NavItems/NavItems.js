@@ -28,10 +28,10 @@ const navItems = props => (
       </ul>
     ) : (
       <ul className="NavItems">
-        <NavItem id="AddNew">
+        <NavItem id="SignInNav">
           <Link to="/signin">Sign In</Link>
         </NavItem>
-        <NavItem id="ViewAll">
+        <NavItem id="SignOutNav">
           <Link to="/signup">SignUp</Link>
         </NavItem>
       </ul>

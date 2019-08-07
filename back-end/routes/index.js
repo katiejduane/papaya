@@ -5,7 +5,6 @@ const withAuth = require("../middleware/withAuth");
 const projectController = require("../controllers/projects");
 
 // GET home page
-
 router.get("/", withAuth, projectController.getIndex);
 
 // GET types to load in dropdown menu
@@ -21,7 +20,7 @@ router.post("/addNew", withAuth, projectController.postNewProject);
 router.get("/view/:projId", withAuth, projectController.getProject);
 
 // // POST deleted project
-// router.post('/delete/:projId', withAuth, projectController.deleteProject);
+router.post("/delete/:projId", withAuth, projectController.deleteProject);
 
 // // GET project to edit
 // router.get('/update/:projId', withAuth, projectController.getUpdateProject);

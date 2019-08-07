@@ -61,10 +61,7 @@ module.exports.getTypes = (req, res, next) => {
 
 // posts new project
 module.exports.postNewProject = (req, res, next) => {
-  // console.log(req)
   const userId = req.user.id;
-  //why doesn't req.user work for me like it did for max? and it's not in the docs anywhere..?
-  //will have to figure out the RIGHT way to pass and get the user id from the req (after i implement auth)
   const name = req.body.name;
   const type = req.body.type;
   const status = req.body.status;
@@ -98,9 +95,6 @@ module.exports.postNewProject = (req, res, next) => {
         res.json(response);
       })
       .catch(err2 => console.log(err2));
-
-    //also, i'm not sure this is the best way... could i do User.createProject() or something like that???
-    //i need to handle the condition for when  a user sends back a NEW TYPE (string, not an int!)
   }
 };
 
@@ -127,36 +121,8 @@ module.exports.deleteProject = (req, res, next) => {
     .then(result => {
       console.log("destroyed project");
       res.json(result);
-      // this will likely have to change...will need to redirect back to list component
-      // so do i even need to res these results?
     })
     .catch(err => console.log(err));
-};
-
-// view projects by status
-module.exports.filterByStatus = (req, res, next) => {
-  // const userId = 1
-  const statusId = "";
-  Project.findAll({
-    include: [{ model: Type }, { model: Status }],
-    where: {
-      userId: userId,
-      statusId: statusId
-    }
-  });
-};
-
-//view projects by type
-module.exports.filterByType = (req, res, next) => {
-  // const userId = 1
-  const typeId = "";
-  Project.findAll({
-    include: [{ model: Type }, { model: Status }],
-    where: {
-      userId: userId,
-      typeId: typeId
-    }
-  });
 };
 
 //view archived projects
