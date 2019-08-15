@@ -17,7 +17,9 @@ class MainNav extends Component {
       { value: "5", displayValue: "Finished" },
       { value: "6", displayValue: "Submitted" },
       { value: "7", displayValue: "Accepted" }
-    ]
+    ],
+    statusFilter: "",
+    typeFilter: ""
   };
 
   componentDidMount() {
@@ -27,28 +29,35 @@ class MainNav extends Component {
     // to 'log out'; rendering this function totally null
   }
 
-  typeChangeHandler() {}
+  typeChangeHandler = event => {
+    this.setState({
+      typeFilter: event.target.value
+    });
+    console.log(this.state);
+  };
 
-  statusChangeHandler() {}
+  statusChangeHandler = event => {
+    this.setState({
+      statusFilter: event.target.value
+    });
+  };
 
   render() {
     let typesArray = this.props.types.map(type => {
       return (
-        <option key={type.id} value={type.id}>
-          {type.typename}
-        </option>
+        <li key={type.id} value={type.id}>
+          <Link to={`/type/${type.typename}`}>{type.typename}</Link>
+        </li>
       );
     });
 
     let statsArray = this.state.stats.map(status => {
       return (
-        <option
-          key={status.value}
-          value={status.value}
-          label={status.displayValue}
-        >
-          {status.displayValue}
-        </option>
+        <li key={status.value} value={status.value} label={status.displayValue}>
+          <Link to={`/status/${status.displayValue}`}>
+            {status.displayValue}
+          </Link>
+        </li>
       );
     });
 
@@ -62,6 +71,8 @@ class MainNav extends Component {
               stats={statsArray}
               types={typesArray}
               signOut={this.props.signOut}
+              changeType={this.typeChangeHandler}
+              changeStatus={this.statusChangeHandler}
             />
           </div>
         </section>

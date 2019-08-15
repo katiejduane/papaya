@@ -22,12 +22,14 @@ const navItems = props => (
           defaultVal="Idea"
           defaultDisplayVal="View by Status"
           vals={props.stats}
+          change={props.changeStatus}
         />
         <DropDown
           selectClass="byType"
           defaultVal={props.types[0]}
           defaultDisplayVal="View by Type"
           vals={props.types}
+          change={props.changeType}
         />
         <NavItem id="ViewArchive">
           <Link to="/archive">Archive</Link>

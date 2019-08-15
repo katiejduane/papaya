@@ -58,21 +58,21 @@ class List extends Component {
   }
 
   render() {
-    let typesArray = this.props.types.map(type => {
-      return (
-        <option key={type.id} value={type.id}>
-          {type.typename}
-        </option>
-      );
-    });
+    // let typesArray = this.props.types.map(type => {
+    //   return (
+    //     <option key={type.id} value={type.id}>
+    //       {type.typename}
+    //     </option>
+    //   );
+    // });
 
-    let statsArray = this.state.status.map(status => {
-      return (
-        <option key={status.value} value={status.value}>
-          {status.displayValue}
-        </option>
-      );
-    });
+    // let statsArray = this.state.status.map(status => {
+    //   return (
+    //     <option key={status.value} value={status.value}>
+    //       {status.displayValue}
+    //     </option>
+    //   );
+    // });
 
     if (this.props.authorized) {
       let miniCardList;
