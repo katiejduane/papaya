@@ -18,6 +18,7 @@
 }
 
 .byType {
+  /* background-color: #fedcda; */
   background-color: rgba(245, 129, 137, 0.872);
   margin: 0.25rem;
   outline: none;

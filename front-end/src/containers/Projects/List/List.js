@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import Aux from "../../../hoc/Aux/Aux";
 import styles from "./List.module.css";
 import MiniCard from "../../../components/Cards/MiniCard/MiniCard";
-import DropDown from "../../../components/UI/Dropdown/DropDown";
+// import DropDown from "../../../components/UI/Dropdown/DropDown";
 import * as actions from "../../../store/actions/index";
 
 class List extends Component {
@@ -31,13 +31,14 @@ class List extends Component {
       console.log("requesting types");
       this.props.getProjectTypes();
     }
+    console.log(this.props);
     //get projects from backend
     axios({
       method: "GET",
       url: "/"
     })
       .then(response => {
-        // console.log(response);
+        console.log(response);
         this.setState({
           loading: false,
           miniCards: response.data
@@ -94,7 +95,7 @@ class List extends Component {
       return (
         <Aux>
           <h1>Your Projects</h1>
-          <DropDown
+          {/* <DropDown
             selectClass="byStatus"
             defaultVal="Idea"
             defaultDisplayVal="View by Status"
@@ -105,7 +106,7 @@ class List extends Component {
             defaultVal={typesArray[0]}
             defaultDisplayVal="View by Type"
             vals={typesArray}
-          />
+          /> */}
           <div className={styles.MiniCardContainer}>{miniCardList}</div>
         </Aux>
       );

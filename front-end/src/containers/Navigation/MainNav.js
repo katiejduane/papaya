@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
 // import axios from "axios";
 
 import styles from "./MainNav.module.css";
@@ -41,7 +42,11 @@ class MainNav extends Component {
 
     let statsArray = this.state.stats.map(status => {
       return (
-        <option key={status.value} value={status.value}>
+        <option
+          key={status.value}
+          value={status.value}
+          label={status.displayValue}
+        >
           {status.displayValue}
         </option>
       );
@@ -54,7 +59,7 @@ class MainNav extends Component {
           <div className={styles.deskTopOnly}>
             <NavItems
               isAuth={this.props.isAuth}
-              statuses={statsArray}
+              stats={statsArray}
               types={typesArray}
               signOut={this.props.signOut}
             />
