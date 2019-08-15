@@ -23,6 +23,7 @@ class List extends Component {
       { value: "7", displayValue: "Accepted" }
     ],
     error: false,
+    filter: "/",
     _isMounted: false
   };
 
@@ -52,6 +53,8 @@ class List extends Component {
       });
     this._isMounted = true;
   }
+
+  componentDidUpdate() {}
 
   componentWillUnmount() {
     this._isMounted = false;
