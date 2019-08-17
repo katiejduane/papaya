@@ -54,7 +54,9 @@ class List extends Component {
     this._isMounted = true;
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    console.log("get query params here to update state? read more on this...");
+  }
 
   componentWillUnmount() {
     this._isMounted = false;

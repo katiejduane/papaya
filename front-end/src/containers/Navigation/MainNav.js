@@ -18,8 +18,8 @@ class MainNav extends Component {
       { value: "6", displayValue: "Submitted" },
       { value: "7", displayValue: "Accepted" }
     ],
-    statusFilter: "",
-    typeFilter: ""
+    statusFilter: null,
+    typeFilter: null
   };
 
   componentDidMount() {
