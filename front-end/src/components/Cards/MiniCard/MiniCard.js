@@ -9,6 +9,9 @@ const miniCard = props => {
     backgroundColor: props.color
   };
 
+  // const projectType = props.type;
+  // const projectStatus = props.status;
+
   return (
     <div className={styles.MiniCard}>
       <h3 className={styles.MiniCardTitle}>{props.title}</h3>

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "../../../axiosInstance";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 import Aux from "../../../hoc/Aux/Aux";
 import styles from "./List.module.css";
 import MiniCard from "../../../components/Cards/MiniCard/MiniCard";
-// import DropDown from "../../../components/UI/Dropdown/DropDown";
 import * as actions from "../../../store/actions/index";
 
 class List extends Component {
@@ -54,33 +53,33 @@ class List extends Component {
     this._isMounted = true;
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     console.log("get query params here to update state? read more on this...");
+    // mayybe i'll have to use some combination of router and render props?
+    console.log(prevProps, this.props);
+    console.log(prevState, this.state);
+    if (prevProps.match.url !== this.props.match.url) {
+      this.setState({
+        filter: this.props.match.url
+      });
+    }
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  getQueryParams = () => {};
+  filterBy = () => {
+    //i think i will need to run this function IN the render statement, saying that if this.state.filter === "/",
+    //to render the entire response from the back end... BUT, if filter !== "/", to instead USE whatever the filter
+    //now is to create an array via filter (and not map) and only show cards with that type or status...
+    //each filter will also have to "clean up" anything previously rendered so start fresh and not have a million
+    //diff filtered results following eachother down the page...
+    //i will need to figure out how to fllter in one function, either by type or status, because i can't render
+    //with two functions doing work without making more reqs to backend, which i want to avoid...
+  };
 
   render() {
-    // let typesArray = this.props.types.map(type => {
-    //   return (
-    //     <option key={type.id} value={type.id}>
-    //       {type.typename}
-    //     </option>
-    //   );
-    // });
-
-    // let statsArray = this.state.status.map(status => {
-    //   return (
-    //     <option key={status.value} value={status.value}>
-    //       {status.displayValue}
-    //     </option>
-    //   );
-    // });
-
     if (this.props.authorized) {
       let miniCardList;
       if (this.state.miniCards.length > 0) {
@@ -138,7 +137,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const ListWithRouter = withRouter(List);
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(List);
+)(ListWithRouter);
