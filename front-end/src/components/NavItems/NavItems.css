@@ -9,22 +9,23 @@
   width: 100%;
 }
 
-.byStatus {
-  background-color: rgba(245, 129, 137, 0.872);
-  margin: 0.25rem;
-  outline: none;
-  border: none;
+/* ul {
+  list-style: none;
   color: rgb(82, 73, 80);
-}
+  text-align: center;
+} */
 
+.byStatus,
 .byType {
-  /* background-color: #fedcda; */
+  list-style: none;
   background-color: rgba(245, 129, 137, 0.872);
+  color: rgb(82, 73, 80);
   margin: 0.25rem;
   outline: none;
   border: none;
-  color: rgb(82, 73, 80);
+  text-align: center;
 }
+/* something about styling the drop down is not working... only works with UL in there, but even then is glitchy */
 
 @media (min-width: 500px) {
   /* .NavItems{

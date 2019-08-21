@@ -32,7 +32,7 @@ class List extends Component {
       console.log("requesting types");
       this.props.getProjectTypes();
     }
-    console.log(this.props);
+
     //get projects from backend
     axios({
       method: "GET",
@@ -61,6 +61,8 @@ class List extends Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
+
+  getQueryParams = () => {};
 
   render() {
     // let typesArray = this.props.types.map(type => {

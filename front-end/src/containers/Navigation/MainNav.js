@@ -24,7 +24,6 @@ class MainNav extends Component {
 
   componentDidMount() {
     this.props.getProjectTypes();
-    console.log(this.props);
     // i can't tell if this is bad or not; i have seen it done in some tutorials, but
     // i get weird errors about memory leaks (from this page i think) when i clear local storage
     // to 'log out'; rendering this function totally null
