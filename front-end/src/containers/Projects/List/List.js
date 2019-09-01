@@ -101,18 +101,6 @@ class List extends Component {
       return (
         <Aux>
           <h1>Your Projects</h1>
-          {/* <DropDown
-            selectClass="byStatus"
-            defaultVal="Idea"
-            defaultDisplayVal="View by Status"
-            vals={statsArray}
-          />
-          <DropDown
-            selectClass="byType"
-            defaultVal={typesArray[0]}
-            defaultDisplayVal="View by Type"
-            vals={typesArray}
-          /> */}
           <div className={styles.MiniCardContainer}>{miniCardList}</div>
         </Aux>
       );
