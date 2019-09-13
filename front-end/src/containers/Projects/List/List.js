@@ -36,6 +36,7 @@ class List extends Component {
     axios({
       method: "GET",
       url: "/"
+      //can the url be executed programmatically, like to include 'current' or 'archive'? can i parse the query string here?
     })
       .then(response => {
         console.log(response);
@@ -70,15 +71,9 @@ class List extends Component {
   }
 
   filterBy = () => {
-    //TRY .filter() and split this function into two; one for type and one for status. will still have to
-    //p arse the query string, tho, or move the dropdowns into this component...???
-    //i think i will need to run this function IN the render statement, saying that if this.state.filter === "/",
-    //to render the entire response from the back end... BUT, if filter !== "/", to instead USE whatever the filter
-    //now is to create an array via filter (and not map) and only show cards with that type or status...
-    //each filter will also have to "clean up" anything previously rendered so start fresh and not have a million
-    //diff filtered results following eachother down the page...
-    //i will need to figure out how to fllter in one function, either by type or status, because i can't render
-    //with two functions doing work without making more reqs to backend, which i want to avoid...
+    // TRY .filter() and split this function into two; one for type and one for status.
+    // I THINK, FOR SANITY'S SAKE: MOVE THE DROP DOWNS INTO THIS COMPONENT AND HAVE THE NAV MAKE TO BE REQUESTS:
+    // ONE FOR THE ARCHIVE, AND ONE FOR CURRENT PROJECTS; BOTH CAN USE LIST COMPONENT TO RENDER (I THINK)
   };
 
   render() {
