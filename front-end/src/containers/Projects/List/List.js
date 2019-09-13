@@ -70,6 +70,8 @@ class List extends Component {
   }
 
   filterBy = () => {
+    //TRY .filter() and split this function into two; one for type and one for status. will still have to
+    //p arse the query string, tho, or move the dropdowns into this component...???
     //i think i will need to run this function IN the render statement, saying that if this.state.filter === "/",
     //to render the entire response from the back end... BUT, if filter !== "/", to instead USE whatever the filter
     //now is to create an array via filter (and not map) and only show cards with that type or status...
