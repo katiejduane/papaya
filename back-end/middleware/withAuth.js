@@ -16,7 +16,6 @@ const withAuth = function(req, res, next) {
       if (err) {
         console.log("err", err);
         res.status(403).json({ Unauthorized: "Invalid token" });
-        // } else if() {
       } else {
         req.user = user;
         next();

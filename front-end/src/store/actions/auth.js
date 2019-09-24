@@ -103,7 +103,6 @@ export const signIn = (email, password) => {
             response.data.user.firstname
           )
         );
-        dispatch(checkAuthTimeOut(response.data.expiresIn));
       })
       .catch(err => {
         console.log(err);
@@ -111,41 +110,6 @@ export const signIn = (email, password) => {
         // the default error message is useless for users, so pass a string for now, but will need to
         // figure out how to render the actual error message i'm trying to send from the backend
       });
-  };
-};
-
-// ===================================== CHECK AUTH STATE ====================================== //
-
-// i'm honestly not sure if i even need this, as i have middleware on the BE and axios interceptors
-// checking token quality... keep for now just in case...
-
-export const checkAuthTimeOut = expirationTime => {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(signOut());
-    }, expirationTime * 1000);
-  };
-};
-
-export const authCheckState = () => {
-  return dispatch => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      dispatch(signOut());
-    } else {
-      const expirationTime = new Date(localStorage.getItem("expiresIn"));
-      if (expirationTime <= new Date()) {
-        dispatch(signOut());
-      } else {
-        const userId = localStorage.getItem("userId");
-        dispatch(signInSuccess(token, userId));
-        dispatch(
-          checkAuthTimeOut(
-            (expirationTime.getTime() - new Date().getTime()) / 1000
-          )
-        );
-      }
-    }
   };
 };
 
