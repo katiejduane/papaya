@@ -8,7 +8,7 @@ const initialState = {
   error: null,
   loading: false,
   authorized: false,
-  registered: false,
+  registered: null,
   expiresIn: null,
   msg: ""
 };
