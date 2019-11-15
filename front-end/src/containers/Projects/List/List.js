@@ -57,8 +57,17 @@ class List extends Component {
   componentDidUpdate(prevProps, prevState) {
     console.log("get query params here to update state? read more on this...");
     // mayybe i'll have to use some combination of router and render props?
-    console.log(prevProps, this.props);
-    console.log(prevState, this.state);
+    console.log("component did update evaluating props", prevProps, this.props);
+    console.log("component did update evaluating state", prevState, this.state);
+
+    // this seems insanely obscure so i think i'm just going to use the dropdowns in the main nav
+    // to make requests to the backend which will make this component update with new array of projects
+    // based on chosen filter... abandon the efforts to get it from the url/router i think...
+
+    // i think i'll have to pass some state from the nav to this component so that it re-renders when
+    // the user changes the filter using the dropdown on the nav, or clicks 'archive'. no sense in having
+    // the archive render another component
+
     if (prevProps.match.url !== this.props.match.url) {
       this.setState({
         filter: this.props.match.url
@@ -124,7 +133,4 @@ const mapDispatchToProps = dispatch => {
 
 const ListWithRouter = withRouter(List);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ListWithRouter);
+export default connect(mapStateToProps, mapDispatchToProps)(ListWithRouter);

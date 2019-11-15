@@ -30,16 +30,19 @@ class MainNav extends Component {
   }
 
   typeChangeHandler = event => {
+    // here make axios req to get projects by selected type in type dropdown
     this.setState({
       typeFilter: event.target.value
     });
-    console.log(this.state);
+    console.log(event.target.value);
   };
 
   statusChangeHandler = event => {
+    // here make axios req to get projects by selected type in status dropdown
     this.setState({
       statusFilter: event.target.value
     });
+    console.log(this.state);
   };
 
   render() {
@@ -57,24 +60,6 @@ class MainNav extends Component {
         </option>
       );
     });
-
-    // let typesArray = this.props.types.map(type => {
-    //   return (
-    //     <li key={type.id} value={type.id}>
-    //       <Link to={`/type/${type.typename}`}>{type.typename}</Link>
-    //     </li>
-    //   );
-    // });
-
-    // let statsArray = this.state.stats.map(status => {
-    //   return (
-    //     <li key={status.value} value={status.value} label={status.displayValue}>
-    //       <Link to={`/status/${status.displayValue}`}>
-    //         {status.displayValue}
-    //       </Link>
-    //     </li>
-    //   );
-    // });
 
     return (
       <header className={styles.MainNav}>
