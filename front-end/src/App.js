@@ -21,7 +21,6 @@ class App extends Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/splash" component={Splash} />
-        <Route exact path="/" component={List} />
         <Redirect to="/splash" />
         {/* // not sure if i need the "/" here or not to allow redirect to 'splash' */}
       </Switch>

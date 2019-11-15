@@ -45,21 +45,36 @@ class MainNav extends Component {
   render() {
     let typesArray = this.props.types.map(type => {
       return (
-        <li key={type.id} value={type.id}>
-          <Link to={`/type/${type.typename}`}>{type.typename}</Link>
-        </li>
+        <option key={type.id} value={type.id}>
+          {type.typename}
+        </option>
+      );
+    });
+    let statsArray = this.state.stats.map(status => {
+      return (
+        <option key={status.value} value={status.value}>
+          {status.displayValue}
+        </option>
       );
     });
 
-    let statsArray = this.state.stats.map(status => {
-      return (
-        <li key={status.value} value={status.value} label={status.displayValue}>
-          <Link to={`/status/${status.displayValue}`}>
-            {status.displayValue}
-          </Link>
-        </li>
-      );
-    });
+    // let typesArray = this.props.types.map(type => {
+    //   return (
+    //     <li key={type.id} value={type.id}>
+    //       <Link to={`/type/${type.typename}`}>{type.typename}</Link>
+    //     </li>
+    //   );
+    // });
+
+    // let statsArray = this.state.stats.map(status => {
+    //   return (
+    //     <li key={status.value} value={status.value} label={status.displayValue}>
+    //       <Link to={`/status/${status.displayValue}`}>
+    //         {status.displayValue}
+    //       </Link>
+    //     </li>
+    //   );
+    // });
 
     return (
       <header className={styles.MainNav}>
@@ -104,7 +119,4 @@ const mapDispatchToProps = dispatch => {
 
 const MainNavWithRouter = withRouter(MainNav);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainNavWithRouter);
+export default connect(mapStateToProps, mapDispatchToProps)(MainNavWithRouter);
