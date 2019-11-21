@@ -34,7 +34,6 @@ class MainNav extends Component {
     this.setState({
       typeFilter: event.target.value
     });
-    console.log(event.target.value);
   };
 
   statusChangeHandler = event => {
@@ -42,10 +41,28 @@ class MainNav extends Component {
     this.setState({
       statusFilter: event.target.value
     });
-    console.log(this.state);
   };
 
   render() {
+    // return these (or something like them) if wanting to use query string to filter?
+    // let typesArray = this.props.types.map(type => {
+    //   return (
+    //     <li key={type.id} value={type.id}>
+    //       <Link to={`/type/${type.typename}`}>{type.typename}</Link>
+    //     </li>
+    //   );
+    // });
+
+    // let statsArray = this.state.stats.map(status => {
+    //   return (
+    //     <li key={status.value} value={status.value} label={status.displayValue}>
+    //       <Link to={`/status/${status.displayValue}`}>
+    //         {status.displayValue}
+    //       </Link>
+    //     </li>
+    //   );
+    // });
+
     let typesArray = this.props.types.map(type => {
       return (
         <option key={type.id} value={type.id}>

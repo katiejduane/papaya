@@ -42,48 +42,48 @@ module.exports.getProject = (req, res, next) => {
 };
 
 // allows the user to filter the projects by type
-module.exports.getByType = (req, res, next) => {
-  const userId = req.user.id;
-  const typeId = req.body.type;
-  Project.findAll({
-    include: [
-      { model: Type },
-      { model: Status }
-      // for the above, use 'attributes' to get only what you need from these models
-    ],
-    where: {
-      userId: userId,
-      typeId: typeId
-    },
-    order: [["updatedAt", "DESC"]]
-  })
-    .then(projects => {
-      res.json(projects);
-    })
-    .catch(err => console.log(err));
-};
+// module.exports.getByType = (req, res, next) => {
+//   const userId = req.user.id;
+//   const typeId = req.body.type;
+//   Project.findAll({
+//     include: [
+//       { model: Type },
+//       { model: Status }
+//       // for the above, use 'attributes' to get only what you need from these models
+//     ],
+//     where: {
+//       userId: userId,
+//       typeId: typeId
+//     },
+//     order: [["updatedAt", "DESC"]]
+//   })
+//     .then(projects => {
+//       res.json(projects);
+//     })
+//     .catch(err => console.log(err));
+// };
 
 // allows the user to filter the projects by status
-module.exports.getByStatus = (req, res, next) => {
-  const userId = req.user.id;
-  const statusId = req.body.status;
-  Project.findAll({
-    include: [
-      { model: Type },
-      { model: Status }
-      // for the above, use 'attributes' to get only what you need from these models
-    ],
-    where: {
-      userId: userId,
-      statusId: statusId
-    },
-    order: [["updatedAt", "DESC"]]
-  })
-    .then(projects => {
-      res.json(projects);
-    })
-    .catch(err => console.log(err));
-};
+// module.exports.getByStatus = (req, res, next) => {
+//   const userId = req.user.id;
+//   const statusId = req.body.status;
+//   Project.findAll({
+//     include: [
+//       { model: Type },
+//       { model: Status }
+//       // for the above, use 'attributes' to get only what you need from these models
+//     ],
+//     where: {
+//       userId: userId,
+//       statusId: statusId
+//     },
+//     order: [["updatedAt", "DESC"]]
+//   })
+//     .then(projects => {
+//       res.json(projects);
+//     })
+//     .catch(err => console.log(err));
+// };
 
 // gets types to load in 'select' drop down menu in add new project form
 module.exports.getTypes = (req, res, next) => {

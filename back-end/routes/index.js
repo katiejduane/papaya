@@ -29,10 +29,10 @@ router.post("/delete/:projId", withAuth, projectController.deleteProject);
 // router.post('/update:projId', withAuth, projectController.postUpdateProject);
 
 // GET projects in list by STATUS // i may not need if i can conditionally render with react router
-router.get("/view/:statusId", withAuth, projectController.getByStatus);
+// router.get("/view/:statusId", withAuth, projectController.getByStatus);
 
 // GET projects in list by TYPE // i may not need if i can conditionally render with react router
-router.get("/view/:typeId", withAuth, projectController.getByType);
+// router.get("/view/:typeId", withAuth, projectController.getByType);
 
 // GET archived projects
 router.get("/archive", withAuth, projectController.getArchive);
