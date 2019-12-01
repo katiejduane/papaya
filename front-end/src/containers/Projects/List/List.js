@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "../../../axiosInstance";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect, withRouter, Link } from "react-router-dom";
 
 import Aux from "../../../hoc/Aux/Aux";
 import styles from "./List.module.css";
@@ -22,13 +22,14 @@ class List extends Component {
       { value: "7", displayValue: "Accepted" }
     ],
     error: false,
-    filter: "/",
+    filter: null,
     _isMounted: false
   };
 
   componentDidMount() {
+    console.log("topo chico");
     if (this.props.types.length < 1) {
-      console.log("requesting types");
+      console.log("requesting types", this.props);
       this.props.getProjectTypes();
     }
 
@@ -55,21 +56,25 @@ class List extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log("get query params here to update state? read more on this...");
-    // mayybe i'll have to use some combination of router and render props?
-    console.log("component did update evaluating props", prevProps, this.props);
-    console.log("component did update evaluating state", prevState, this.state);
-
-    // i think i'll have to pass some state from the nav to this component so that it re-renders when
-    // the user changes the filter using the dropdown on the nav, or clicks 'archive'. no sense in having
-    // the archive render another component. but how can i pass state from one component to another
-    // if they aren't parent/child?? (like this [list] and the main nav) redux again!? :(
-
-    if (prevProps.match.url !== this.props.match.url) {
+    // console.log("component did update evaluating props", prevProps, this.props);
+    // console.log("component did update evaluating state", prevState, this.state);
+    if (
+      this.props.match.params &&
+      this.props.match.params.status &&
+      this.props.match.params.status !== prevProps.match.params.status
+    ) {
       this.setState({
-        filter: this.props.match.url
+        filter: this.props.match.params.status
       });
     }
+    if (
+      this.props.match.params &&
+      this.props.match.params.typeid &&
+      this.props.match.params.typeid !== prevProps.match.params.typeid
+    )
+      this.setState({
+        filter: this.props.match.params.typeid
+      });
   }
 
   componentWillUnmount() {
@@ -91,10 +96,19 @@ class List extends Component {
   };
 
   render() {
+    console.log("stars", this.state.filter);
     if (this.props.authorized) {
       let miniCardList;
       if (this.state.miniCards.length > 0) {
         miniCardList = this.state.miniCards.map(card => {
+          console.log("hiiiiiiiii", this.state.filter);
+          if (
+            this.state.filter !== null &&
+            this.state.filter !== card.status.statusname &&
+            this.state.filter !== card.type.typename
+          ) {
+            return null;
+          }
           return (
             <MiniCard
               key={card.id}

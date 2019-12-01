@@ -44,37 +44,22 @@ class MainNav extends Component {
   };
 
   render() {
-    // return these (or something like them) if wanting to use query string to filter?
-    // let typesArray = this.props.types.map(type => {
-    //   return (
-    //     <li key={type.id} value={type.id}>
-    //       <Link to={`/type/${type.typename}`}>{type.typename}</Link>
-    //     </li>
-    //   );
-    // });
-
-    // let statsArray = this.state.stats.map(status => {
-    //   return (
-    //     <li key={status.value} value={status.value} label={status.displayValue}>
-    //       <Link to={`/status/${status.displayValue}`}>
-    //         {status.displayValue}
-    //       </Link>
-    //     </li>
-    //   );
-    // });
-
+    //return these (or something like them) if wanting to use query string to filter?
     let typesArray = this.props.types.map(type => {
       return (
-        <option key={type.id} value={type.id}>
-          {type.typename}
-        </option>
+        <li key={type.id} value={type.id}>
+          <Link to={`/type/${type.typename}`}>{type.typename}</Link>
+        </li>
       );
     });
+
     let statsArray = this.state.stats.map(status => {
       return (
-        <option key={status.value} value={status.value}>
-          {status.displayValue}
-        </option>
+        <li key={status.value} value={status.value} label={status.displayValue}>
+          <Link to={`/status/${status.displayValue}`}>
+            {status.displayValue}
+          </Link>
+        </li>
       );
     });
 
