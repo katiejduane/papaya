@@ -30,14 +30,12 @@ class MainNav extends Component {
   }
 
   typeChangeHandler = event => {
-    // here make axios req to get projects by selected type in type dropdown
     this.setState({
       typeFilter: event.target.value
     });
   };
 
   statusChangeHandler = event => {
-    // here make axios req to get projects by selected type in status dropdown
     this.setState({
       statusFilter: event.target.value
     });

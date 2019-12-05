@@ -6,8 +6,6 @@ import NavItem from "./NavItem/NavItem";
 import DropDown from "../UI/Dropdown/DropDown";
 
 const navItems = props => (
-  // alone, link to does nothing, must figure out how to re-render list component with updated data from backend
-  // this will have to change hugely anyway, but also don't forget to WRAP the items in the link to, not vice versa
   <nav>
     {props.isAuth ? (
       <ul className="NavItems">

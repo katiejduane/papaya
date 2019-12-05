@@ -131,9 +131,13 @@ module.exports.deleteProject = (req, res, next) => {
 
 //view archived projects
 module.exports.getArchive = (req, res, next) => {
-  const userId = 1;
+  const userId = req.user.id;
   Project.findAll({
-    include: [{ model: Type }, { model: Status }],
+    include: [
+      { model: Type },
+      { model: Status }
+      // for the above, use 'attributes' to get only what you need from these models
+    ],
     where: {
       userId: userId,
       statusId: [5, 6, 7]
@@ -142,7 +146,6 @@ module.exports.getArchive = (req, res, next) => {
   })
     .then(projects => {
       res.json(projects);
-      // console.log(projects)
     })
     .catch(err => console.log(err));
 };
