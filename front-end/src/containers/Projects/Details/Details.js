@@ -14,6 +14,7 @@ class Details extends Component {
     notes: "",
     type: "",
     dateCreated: "",
+    dateUpdated: "",
     color: "",
     error: false
   };

@@ -26,7 +26,7 @@ router.post("/delete/:projId", withAuth, projectController.deleteProject);
 // router.get('/update/:projId', withAuth, projectController.getUpdateProject);
 
 // // POST project to edit
-// router.post('/update:projId', withAuth, projectController.postUpdateProject);
+// router.post('/update/:projId', withAuth, projectController.postUpdateProject);
 
 // GET projects in list by STATUS // i may not need if i can conditionally render with react router
 // router.get("/view/:statusId", withAuth, projectController.getByStatus);

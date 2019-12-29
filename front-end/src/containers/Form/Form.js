@@ -23,6 +23,16 @@ class Form extends Component {
     );
   };
 
+  updateCurrent = event => {
+    event.preventDefault(event);
+    this.props.updateProject(
+      this.state.title,
+      this.state.type,
+      this.state.status,
+      this.state.note
+    );
+  };
+
   changeTitleHandler = event => {
     this.setState({
       title: event.target.value
