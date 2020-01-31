@@ -7,7 +7,8 @@ const navItem = props => (
     className={styles.NavItem}
     id={props.id}
     onSubmit={props.submit}
-    onClick={props.clicked}
+    onClick={props.click}
+    onChange={props.change}
   >
     {props.children}
   </li>

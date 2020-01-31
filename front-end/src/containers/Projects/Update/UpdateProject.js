@@ -6,7 +6,7 @@ import Form from "../../Form/Form";
 import Loader from "../../../components/UI/Loader/Loader";
 import Aux from "../../../hoc/Aux/Aux";
 import * as actions from "../../../store/actions/index";
-import "./UpdateProject.module.css";
+import styles from "../AddNew/NewProject.module.css";
 
 class EditProject extends Component {
   state = {
@@ -32,18 +32,18 @@ class EditProject extends Component {
   };
 
   componentDidMount() {
-    // crap i also need to "get types" so they can exist in the menu drop down... can i do both in this method?
+    const projId = this.props.match.params.id;
     if (!this.props.types) {
       this.props.getProjectTypes();
     }
-    const projId = this.props.match.params.id;
     axios({
       method: "GET",
-      url: `${window.apiHost}/edit/${projId}`
+      url: `${window.apiHost}/update/${projId}`
     })
       .then(response => {
+        console.log("RESPONSE: ", response);
         const projectDetails = response.data[0];
-        console.log(projectDetails);
+        // console.log("project: ", projectDetails);
         this.setState({
           title: projectDetails.name,
           status: projectDetails.status.statusname,
@@ -69,7 +69,7 @@ class EditProject extends Component {
     const id = this.state.projectId;
     axios({
       method: "POST", //do i want to change this to a put? look in sequelize docs for ideas
-      url: `/update/${id}`,
+      url: `${window.apiHost}/update/${id}`,
       data: {
         id: id,
         name: title,
@@ -92,16 +92,16 @@ class EditProject extends Component {
   };
 
   render() {
-    const typeList =
-      this.props.types.length > 0
-        ? this.props.types.map((type, index) => {
-            return (
-              <option key={index + type.id} value={type.id}>
-                {type.typename}
-              </option>
-            );
-          })
-        : [];
+    const typeList = "temp";
+    //   this.props.types.length > 0
+    //     ? this.props.types.map((type, index) => {
+    //         return (
+    //           <option key={index + type.id} value={type.id}>
+    //             {type.typename}
+    //           </option>
+    //         );
+    //       })
+    //     : [];
 
     const statusList = this.state.stats.map((status, index) => {
       return (
@@ -126,7 +126,7 @@ class EditProject extends Component {
     );
 
     if (this.state.loading) {
-      addForm = <Loader />;
+      editForm = <Loader />;
     }
 
     return (
@@ -140,27 +140,19 @@ class EditProject extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     token: state.auth.token,
-//     types: state.type.types,
-//     isAuth: state.auth.token !== null,
-//     loading: state.auth.loading
-//   };
-// };
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+    types: state.type.types,
+    isAuth: state.auth.token !== null,
+    loading: state.auth.loading
+  };
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     getProjectTypes: () => dispatch(actions.getProjectTypes())
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    getProjectTypes: () => dispatch(actions.getProjectTypes())
+  };
+};
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(NewProject);
-
-//   }
-// }
-
-export default EditProject;
+export default connect(mapStateToProps, mapDispatchToProps)(EditProject);

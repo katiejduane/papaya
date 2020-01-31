@@ -13,7 +13,7 @@ instance.interceptors.request.use(
     return config;
   },
   function(error) {
-    console.log("req interceptor", error);
+    console.log("req interceptor error", error);
     return Promise.reject(error);
   }
 );
@@ -27,7 +27,7 @@ axios.interceptors.response.use(
     return response;
   },
   function(error) {
-    console.log("res interceptor", error);
+    console.log("res interceptor error", error);
     return Promise.reject(error);
   }
 );

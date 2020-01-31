@@ -25,6 +25,8 @@
   color: rgb(84, 72, 69);
   margin: 2rem;
   text-align: center;
+  background-color: rgb(245, 129, 141);
+  border-radius: 0;
 }
 
 .MainNavLogo {

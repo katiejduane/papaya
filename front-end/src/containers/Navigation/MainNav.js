@@ -19,7 +19,8 @@ class MainNav extends Component {
       { value: "7", displayValue: "Accepted" }
     ],
     statusFilter: null,
-    typeFilter: null
+    typeFilter: null,
+    archive: false
   };
 
   componentDidMount() {
@@ -39,6 +40,22 @@ class MainNav extends Component {
     this.setState({
       statusFilter: event.target.value
     });
+  };
+
+  getArchive = () => {
+    // this.setState({
+    //   archive: true,
+    //   statusFilter: null,
+    //   typeFilter: null
+    // });
+  };
+
+  clearFilters = () => {
+    // this.setState({
+    //   archive: false,
+    //   statusFilter: null,
+    //   typeFilter: null
+    // });
   };
 
   render() {

@@ -12,26 +12,26 @@ const navItems = props => (
         <NavItem id="AddNew">
           <Link to="/addNew">Add New</Link>
         </NavItem>
-        <NavItem id="ViewAll">
-          <Link to="/">Current</Link>
+        <NavItem id="ViewAll" click={props.clearFilters}>
+          <Link to="/">View All Projects</Link>
         </NavItem>
         <DropDown
           selectClass="byStatus"
           defaultVal="Idea"
           defaultDisplayVal="View by Status"
           vals={props.stats}
-          change={props.changeStatus}
+          click={props.changeStatus}
         />
         <DropDown
           selectClass="byType"
           defaultVal={props.types[0]}
           defaultDisplayVal="View by Type"
           vals={props.types}
-          change={props.changeType}
+          click={props.changeType}
         />
-        <NavItem id="ViewArchive">
+        {/* <NavItem id="ViewArchive" click={props.getArchive}>
           <Link to="/archive">Archive</Link>
-        </NavItem>
+        </NavItem> */}
         <NavItem id="ViewAccount">
           <Link to="/account">Me</Link>
         </NavItem>

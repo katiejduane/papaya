@@ -1,24 +1,31 @@
-.MiniCardContainer{
-    /* position: absolute;
+.pageTitle {
+  padding-top: 1rem;
+  padding-left: 2rem;
+  font-size: 18pt;
+  color: rgb(82, 73, 80);
+}
+
+.MiniCardContainer {
+  /* position: absolute;
     top: 0;
     left: 250px; */
-    box-sizing: border-box;
-    width: 100%;
-    height: auto;
-    padding: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: space-evenly;
-    background-color: rgb(246, 246, 250);
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: space-evenly;
+  background-color: rgb(246, 246, 250);
 }
 
 /* .CardTitle{
     font-family: 'Work Sans', sans-serif;
 } */
 
-.List{
-    color: rgb(84, 72, 69);
-    font-family: 'Work Sans', sans-serif;
+.List {
+  color: rgb(84, 72, 69);
+  font-family: "Work Sans", sans-serif;
 }

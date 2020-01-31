@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "../../components/UI/Button/Button";
 import styles from "./Form.module.css";
-import DropDown from "../../components/UI/Dropdown/DropDown";
+import Select from "../../components/UI/Dropdown/Select";
 
 class Form extends Component {
   state = {
@@ -75,7 +75,7 @@ class Form extends Component {
           </section>
           <div className={styles.FormLabel}>Type</div>
           <section>
-            <DropDown
+            <Select
               selectClass={styles.SelectType}
               defaultVal="new"
               defaultDisplayVal={this.props.defaultType}
@@ -91,7 +91,7 @@ class Form extends Component {
           </section>
           <div className={styles.FormLabel}>Status</div>
           <section>
-            <DropDown
+            <Select
               selectClass={styles.SelectStatus}
               defaultVal="1"
               defaultDisplayVal={this.props.defaultStatus}

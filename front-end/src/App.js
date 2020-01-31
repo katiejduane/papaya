@@ -13,6 +13,7 @@ import Splash from "./components/Splash/Splash";
 import SignUp from "./containers/Auth/SignUp";
 import SignIn from "./containers/Auth/SignIn";
 import SignOut from "./containers/Auth/SignOut";
+import Archive from "./containers/Projects/Archive/Archive";
 
 class App extends Component {
   render() {
@@ -32,11 +33,11 @@ class App extends Component {
           <Switch>
             <Route exact path="/status/:status" component={List} />
             <Route exact path="/type/:typeid" component={List} />
-            <Route exact path="/archive" component={List} />
+            {/* <Route exact path="/archive" component={Archive} /> */}
             <Route exact path="/view/:id" component={Details} />
             <Route exact path="/addNew" component={NewProject} />
-            <Route exact path="/update/:" component={UpdateProject} />
-            <Route exact path="/account/:" component={Account} />
+            <Route exact path="/update/:id" component={UpdateProject} />
+            <Route exact path="/account/:userid" component={Account} />
             <Route exact path="/signout" componet={SignOut} />
             <Route exact path="/" component={List} />
             <Redirect to="/" />

@@ -23,107 +23,79 @@ class List extends Component {
     ],
     error: false,
     filter: null,
-    isArchive: false,
     _isMounted: false
   };
 
   componentDidMount() {
+    // console.log("PROPS: ", this.props);
+    console.log("init state: ", this.state);
     if (this.props.types.length < 1) {
-      console.log("requesting types", this.props);
       this.props.getProjectTypes();
     }
 
     //get projects from backend
-    if (this.state.isArchive === false) {
-      axios({
-        method: "GET",
-        url: "/"
-      })
-        .then(response => {
-          console.log(response);
-          this.setState({
-            loading: false,
-            miniCards: response.data
-          });
-        })
-        .catch(error => {
-          this.setState({
-            error: true
-          });
-          console.log(error.message);
+    axios({
+      method: "GET",
+      url: "/"
+    })
+      .then(response => {
+        // console.log(response);
+        this.setState({
+          loading: false,
+          miniCards: response.data
         });
-      this._isMounted = true;
-    } else {
-      axios({
-        method: "GET",
-        url: "/archive"
       })
-        .then(response => {
-          console.log(response);
-          this.setState({
-            loading: false,
-            miniCards: response.data
-          });
-        })
-        .catch(error => {
-          this.setState({
-            error: true
-          });
-          console.log(error.message);
+      .catch(error => {
+        this.setState({
+          error: true
         });
-      this._isMounted = true;
-    }
+        console.log(error.message);
+      });
+    this._isMounted = true;
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log("component did update evaluating props", prevProps, this.props);
-    // console.log("component did update evaluating state", prevState, this.state);
+    console.log("in update", prevState, this.state, prevProps, this.props);
     if (
-      this.props.match.params &&
-      this.props.match.params.status &&
-      this.props.match.params.status !== prevProps.match.params.status
+      (this.props.match.params.status && this.state.filter === null) ||
+      (this.props.match.params.status &&
+        this.props.match.params.status !== prevProps.match.params.status)
     ) {
       this.setState({
         filter: this.props.match.params.status
       });
     }
     if (
-      this.props.match.params &&
-      this.props.match.params.typeid &&
-      this.props.match.params.typeid !== prevProps.match.params.typeid
+      (this.props.match.params.typeid && this.state.filter === null) ||
+      (this.props.match.params.typeid &&
+        this.props.match.params.typeid !== prevProps.match.params.typeid)
     )
       this.setState({
         filter: this.props.match.params.typeid
       });
+    if (this.props.match.path === "/" && this.state.filter !== null) {
+      console.log("no filter!");
+      this.setState({ filter: null, archive: false });
+    }
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  clearFilter() {
-    //this will be linked to a button somewhere in List and onclick, makes this.state.filter = null
-  }
-
-  viewArchive = () => {
-    //could it be as simple as having some kind of state monitor whether archive is set to true or false???
-    //yes, but the 'archive' button may need to be moved to inside this component? or passed in via props/
-    //query string! :)
-  };
-
   render() {
-    console.log("stars", this.state.filter);
     if (this.props.authorized) {
       let miniCardList;
       if (this.state.miniCards.length > 0) {
         miniCardList = this.state.miniCards.map(card => {
-          console.log("hiiiiiiiii", this.state.filter);
           if (
             this.state.filter !== null &&
             this.state.filter !== card.status.statusname &&
             this.state.filter !== card.type.typename
           ) {
             return null;
+            // what does that above return null do? how/where would i render a little setence
+            // saying 'no projects in this type/at this status' if there aren't any?
           }
           return (
             <MiniCard
@@ -137,11 +109,13 @@ class List extends Component {
           );
         });
       } else {
-        return <h2>You don't have any projects yet!</h2>;
+        return (
+          <h2 className={styles.pageTitle}>You don't have any projects yet!</h2>
+        );
       }
       return (
         <Aux>
-          <h1>Your Projects</h1>
+          <h1 className={styles.pageTitle}>Your Projects</h1>
           <div className={styles.MiniCardContainer}>{miniCardList}</div>
         </Aux>
       );

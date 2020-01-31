@@ -9,6 +9,7 @@ import Button from "../../../components/UI/Button/Button";
 
 class Details extends Component {
   state = {
+    id: "",
     title: "",
     status: "",
     notes: "",
@@ -21,24 +22,15 @@ class Details extends Component {
 
   componentDidMount() {
     const projId = this.props.match.params.id;
-    // const headers = {
-    //   "Content-type": "application/json"
-    // };
-    // const token = localStorage.getItem("token");
-    // if (token) {
-    //   headers["Authorization"] = token;
-    // }
-    // console.log(headers);
     axios({
       method: "GET",
       url: `${window.apiHost}/view/${projId}`
-      // token: token,
-      // headers
     })
       .then(response => {
         const projectDetails = response.data[0];
         console.log(projectDetails);
         this.setState({
+          id: projectDetails.id,
           title: projectDetails.name,
           status: projectDetails.status.statusname,
           notes: projectDetails.notes,
@@ -76,6 +68,7 @@ class Details extends Component {
           color={this.state.color}
           dateCreated={humanizedDateCreated}
           dateUpdated={humanizedDateUpdated}
+          view={this.state.id}
         />
         <Link to="/">
           <Button btnClass="GeneralButton">Back</Button>
