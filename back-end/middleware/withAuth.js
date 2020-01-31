@@ -8,10 +8,11 @@ const withAuth = function(req, res, next) {
     req.headers["authorization"] ||
     req.cookies.token;
   if (!token) {
+    console.log("booooo", req.url, req.params, req.body);
     res.status(401).json({ Unauthorized: "No token provided" });
   } else {
-    console.log("middleware, token: ", req.url, token, config.secret);
-    // console.log("token headers", req.headers);
+    console.log("yaaaayy", req.url, req.params, req.body);
+    // console.log("middleware, token: ", req.url, token, config.secret);
     jwt.verify(token, config.secret, function(err, user) {
       if (err) {
         console.log("err", err);

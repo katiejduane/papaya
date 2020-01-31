@@ -23,18 +23,12 @@ router.get("/view/:projId", withAuth, projectController.getProject);
 router.post("/delete/:projId", withAuth, projectController.deleteProject);
 
 // // GET project to edit
-// router.get('/update/:projId', withAuth, projectController.getUpdateProject);
+router.get("/update/:projId", withAuth, projectController.getProject);
 
 // // POST project to edit
-// router.post('/update/:projId', withAuth, projectController.postUpdateProject);
+router.post("/update/:projId", withAuth, projectController.postUpdateProject);
 
-// GET projects in list by STATUS // i may not need if i can conditionally render with react router
-// router.get("/view/:statusId", withAuth, projectController.getByStatus);
-
-// GET projects in list by TYPE // i may not need if i can conditionally render with react router
-// router.get("/view/:typeId", withAuth, projectController.getByType);
-
-// GET archived projects
-router.get("/archive", withAuth, projectController.getArchive);
+// GET archived projects ---> killing this idea for now. might do later as an extra feature, but it's not on the mvp...
+// router.get("/archive", withAuth, projectController.getArchive);
 
 module.exports = router;

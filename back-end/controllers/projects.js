@@ -13,8 +13,7 @@ module.exports.getIndex = (req, res, next) => {
       // for the above, use 'attributes' to get only what you need from these models
     ],
     where: {
-      userId: userId,
-      statusId: [1, 2, 3, 4]
+      userId: userId
     },
     order: [["updatedAt", "DESC"]]
   })
@@ -26,8 +25,10 @@ module.exports.getIndex = (req, res, next) => {
 
 // gets a single project to see details
 module.exports.getProject = (req, res, next) => {
+  console.log("get proj");
   const userId = req.user.id;
   const projId = req.params.projId;
+  console.log("params", req.params);
   Project.findAll({
     include: [{ model: Type }, { model: Status }],
     where: {
@@ -40,16 +41,6 @@ module.exports.getProject = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
-
-// allows the user to filter the projects by type
-// module.exports.getByType = (req, res, next) => {
-
-// };
-
-// allows the user to filter the projects by status
-// module.exports.getByStatus = (req, res, next) => {
-
-// };
 
 // gets types to load in 'select' drop down menu in add new project form
 module.exports.getTypes = (req, res, next) => {
@@ -99,11 +90,27 @@ module.exports.postNewProject = (req, res, next) => {
         res.json(response);
       })
       .catch(err2 => console.log(err2));
+    // do i want to res.json the error to the FE so I can DO something with it (like display an error message?)
   }
 };
 
-// get project to update
-module.exports.getUpdateProject = (req, res, next) => {};
+// get project to update // AT THE MOMENT THIS IS THE SAME AS THE GET PROJECT BASIC, DO I NEED BOTH?
+module.exports.getUpdateProject = (req, res, next) => {
+  console.log("update");
+  const userId = req.user.id;
+  const projId = req.params.projId;
+  Project.findAll({
+    include: [{ model: Type }, { model: Status }],
+    where: {
+      id: projId,
+      userId: userId
+    }
+  })
+    .then(project => {
+      res.json(project);
+    })
+    .catch(err => console.log(err));
+};
 
 // post updated project
 module.exports.postUpdateProject = (req, res, next) => {};
@@ -130,22 +137,22 @@ module.exports.deleteProject = (req, res, next) => {
 };
 
 //view archived projects
-module.exports.getArchive = (req, res, next) => {
-  const userId = req.user.id;
-  Project.findAll({
-    include: [
-      { model: Type },
-      { model: Status }
-      // for the above, use 'attributes' to get only what you need from these models
-    ],
-    where: {
-      userId: userId,
-      statusId: [5, 6, 7]
-    },
-    order: [["updatedAt", "DESC"]]
-  })
-    .then(projects => {
-      res.json(projects);
-    })
-    .catch(err => console.log(err));
-};
+// module.exports.getArchive = (req, res, next) => {
+//   const userId = req.user.id;
+//   Project.findAll({
+//     include: [
+//       { model: Type },
+//       { model: Status }
+//       // for the above, use 'attributes' to get only what you need from these models
+//     ],
+//     where: {
+//       userId: userId,
+//       statusId: [5, 6, 7]
+//     },
+//     order: [["updatedAt", "DESC"]]
+//   })
+//     .then(projects => {
+//       res.json(projects);
+//     })
+//     .catch(err => console.log(err));
+// };
