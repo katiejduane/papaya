@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+import axios from "../../../axiosInstance";
+
 import { connect } from "react-redux";
 
 import Form from "../../Form/Form";
@@ -41,9 +42,8 @@ class EditProject extends Component {
       url: `${window.apiHost}/update/${projId}`
     })
       .then(response => {
-        console.log("RESPONSE: ", response);
         const projectDetails = response.data[0];
-        // console.log("project: ", projectDetails);
+        console.log("project: ", projectDetails);
         this.setState({
           title: projectDetails.name,
           status: projectDetails.status.statusname,
@@ -115,8 +115,9 @@ class EditProject extends Component {
       <Form
         formTitle="Add new idea or project"
         addNewProject={this.addNewProject}
-        titleholder="Project title"
-        defaultType="Choose type"
+        titleholder={this.state.title}
+        //this needs to NOT be placeholder text!
+        defaultType={this.state.type}
         typeList={typeList}
         typeholder="Or add a new type..."
         defaultStatus="Choose status"

@@ -13,7 +13,7 @@ import Splash from "./components/Splash/Splash";
 import SignUp from "./containers/Auth/SignUp";
 import SignIn from "./containers/Auth/SignIn";
 import SignOut from "./containers/Auth/SignOut";
-import Archive from "./containers/Projects/Archive/Archive";
+// import Archive from "./containers/Projects/Archive/Archive";
 
 class App extends Component {
   render() {

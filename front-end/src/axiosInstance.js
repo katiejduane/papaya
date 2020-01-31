@@ -18,15 +18,18 @@ instance.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use(
+instance.interceptors.response.use(
   function(response) {
-    console.log("res interceptor", response);
+    // console.log("res interceptor", response);
     if (response.status === 403) {
       localStorage.clear();
     }
     return response;
   },
   function(error) {
+    // add something here to check error type, and only clear local storage if needed
+    // otherwise handle error some other way
+    localStorage.clear();
     console.log("res interceptor error", error);
     return Promise.reject(error);
   }
