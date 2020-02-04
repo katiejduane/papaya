@@ -12,17 +12,14 @@ const middleware = applyMiddleware(thunk);
 
 const theStore = middleware(createStore);
 
-// SOMETHING IS WRONG WITH THIS... IT PERSISTS IN LOCAL STORAGE BASICALLY FOREVER UNLESS MANUALLY CLEARED
-// WHICH IS NOT GOOD! THE AUTH STUFF IS SET TO NULL BECAUSE THE SIGNOUT ACTION DOES THAT, BUT THE TYPE
-// DATA STAYS. FIX!!! i think the issue may be with how loadFromLocalStorage creates 'persistedState'
-// which is in the store??? idk... ALSO... if token 'dies' and isnt explicitly signed out, i think
-// this also causes issues because of how this file works, other parts of auth are intact...
+// i think i want to do this differently, i don't want to save all the application state in local storage
+// instead just choose one thing to load/persist... come back to this later
 
 const loadFromLocalStorage = () => {
   try {
     const serializedState = localStorage.getItem("state");
-    // console.log(serializedState);
     if (serializedState === null) {
+      console.log("no hay nada");
       return undefined;
     }
     return JSON.parse(serializedState);

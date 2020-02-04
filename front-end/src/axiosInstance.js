@@ -1,4 +1,6 @@
 import axios from "axios";
+import { createBrowserHistory } from "history"; // or createBrowserHistory
+const history = createBrowserHistory();
 
 const instance = axios.create({
   baseURL: `${window.apiHost}`,
@@ -23,6 +25,8 @@ instance.interceptors.response.use(
     // console.log("res interceptor", response);
     if (response.status === 403) {
       localStorage.clear();
+      history.push("/splash");
+      //so now it IS clearing the local storage, but it's not redirecting... can i do that here?
     }
     return response;
   },
@@ -30,6 +34,7 @@ instance.interceptors.response.use(
     // add something here to check error type, and only clear local storage if needed
     // otherwise handle error some other way
     localStorage.clear();
+    history.push("/splash");
     console.log("res interceptor error", error);
     return Promise.reject(error);
   }
