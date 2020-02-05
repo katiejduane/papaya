@@ -73,14 +73,17 @@ class NewProject extends Component {
     let addForm = (
       <Form
         formTitle="Add new idea or project"
-        addNewProject={this.addNewProject}
+        addProject={this.addNewProject}
         titleholder="Project title"
         defaultType="Choose type"
+        defaultTypeId="new"
         typeList={typeList}
         typeholder="Or add a new type..."
         defaultStatus="Choose status"
+        defaultStatusId="1"
         statusList={statusList}
         noteholder="Details about your project..."
+        btnText="Add Project"
       />
     );
 

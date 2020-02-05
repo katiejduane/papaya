@@ -14,8 +14,10 @@ class EditProject extends Component {
     projectId: null,
     title: "",
     status: "",
+    statusId: null,
     notes: "",
     type: "",
+    typeId: null,
     dateCreated: "",
     dateUpdated: "",
     color: "",
@@ -47,8 +49,10 @@ class EditProject extends Component {
         this.setState({
           title: projectDetails.name,
           status: projectDetails.status.statusname,
+          statusId: projectDetails.statusId,
           notes: projectDetails.notes,
           type: projectDetails.type.typename,
+          typeId: projectDetails.typeId,
           dateCreated: projectDetails.createdAt,
           dateUpdated: projectDetails.updatedAt,
           color: projectDetails.status.color,
@@ -68,8 +72,8 @@ class EditProject extends Component {
   updateProject = (title, type, status, notes) => {
     const id = this.state.projectId;
     axios({
-      method: "POST", //do i want to change this to a put? look in sequelize docs for ideas
-      url: `${window.apiHost}/update/${id}`,
+      method: "PUT", //do i want to change this to a put? look in sequelize docs for ideas
+      url: `/update/${id}`,
       data: {
         id: id,
         name: title,
@@ -92,37 +96,53 @@ class EditProject extends Component {
   };
 
   render() {
-    const typeList = "temp";
-    //   this.props.types.length > 0
-    //     ? this.props.types.map((type, index) => {
-    //         return (
-    //           <option key={index + type.id} value={type.id}>
-    //             {type.typename}
-    //           </option>
-    //         );
-    //       })
-    //     : [];
+    console.log("STATE: ", this.state);
+    const typeList =
+      this.props.types.length > 0
+        ? this.props.types.map((type, index) => {
+            if (this.state.type === type.typename) {
+              return;
+            } else {
+              return (
+                <option key={index + type.id} value={type.id}>
+                  {type.typename}
+                </option>
+              );
+            }
+          })
+        : [];
 
     const statusList = this.state.stats.map((status, index) => {
-      return (
-        <option key={index + status.value} value={status.value}>
-          {status.displayValue}
-        </option>
-      );
+      if (this.state.status === status.displayValue) {
+        return;
+      } else {
+        return (
+          <option key={index + status.value} value={status.value}>
+            {status.displayValue}
+          </option>
+        );
+      }
     });
 
     let editForm = (
       <Form
         formTitle="Add new idea or project"
-        addNewProject={this.addNewProject}
-        titleholder={this.state.title}
+        addProject={this.updateProject}
+        editableValues={{
+          title: this.state.title,
+          note: this.state.notes,
+          type: this.state.type,
+          status: this.state.status
+        }}
         //this needs to NOT be placeholder text!
         defaultType={this.state.type}
+        defaultTypeId={this.state.typeId}
         typeList={typeList}
         typeholder="Or add a new type..."
-        defaultStatus="Choose status"
         statusList={statusList}
-        noteholder="Details about your project..."
+        defaultStatus={this.state.status}
+        defaultStatusId={this.state.statusId}
+        btnText="Submit Edits"
       />
     );
 

@@ -26,7 +26,7 @@ router.post("/delete/:projId", withAuth, projectController.deleteProject);
 router.get("/update/:projId", withAuth, projectController.getProject);
 
 // // POST project to edit
-router.post("/update/:projId", withAuth, projectController.postUpdateProject);
+router.put("/update/:projId", withAuth, projectController.postUpdateProject);
 
 // GET archived projects ---> killing this idea for now. might do later as an extra feature, but it's not on the mvp...
 // router.get("/archive", withAuth, projectController.getArchive);

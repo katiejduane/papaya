@@ -94,26 +94,54 @@ module.exports.postNewProject = (req, res, next) => {
   }
 };
 
-// get project to update // AT THE MOMENT THIS IS THE SAME AS THE GET PROJECT BASIC, DO I NEED BOTH?
-module.exports.getUpdateProject = (req, res, next) => {
-  console.log("update");
-  const userId = req.user.id;
-  const projId = req.params.projId;
-  Project.findAll({
-    include: [{ model: Type }, { model: Status }],
-    where: {
-      id: projId,
-      userId: userId
-    }
-  })
-    .then(project => {
-      res.json(project);
-    })
-    .catch(err => console.log(err));
-};
-
 // post updated project
-module.exports.postUpdateProject = (req, res, next) => {};
+module.exports.postUpdateProject = (req, res, next) => {
+  const userId = req.user.id;
+  const name = req.body.name;
+  const type = req.body.type;
+  const status = req.body.status;
+  const notes = req.body.notes;
+  console.log(
+    "UPDATING... NAME",
+    name,
+    "TYPE",
+    type,
+    "STATUS",
+    status,
+    "NOTES",
+    notes
+  );
+  if (isNaN(parseInt(type))) {
+    Type.create({ typename: type, userId: userId })
+      .then(type => {
+        Project.update({
+          userId: userId,
+          name: name,
+          notes: notes,
+          statusId: status,
+          typeId: type.id
+        })
+          .then(response => {
+            res.json(response);
+          })
+          .catch(err2 => console.log(err2));
+      })
+      .catch(err => console.log(err));
+  } else {
+    Project.update({
+      userId: userId,
+      name: name,
+      notes: notes,
+      statusId: status,
+      typeId: type
+    })
+      .then(response => {
+        res.json(response);
+      })
+      .catch(err2 => console.log(err2));
+    // do i want to res.json the error to the FE so I can DO something with it (like display an error message?)
+  }
+};
 
 // delete project
 module.exports.deleteProject = (req, res, next) => {

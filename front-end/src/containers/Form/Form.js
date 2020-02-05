@@ -13,9 +13,22 @@ class Form extends Component {
     note: ""
   };
 
-  postNew = event => {
+  componentDidMount() {
+    console.log("FORM PROPS", this.props);
+    if (this.props.editableValues) {
+      console.log("editing");
+      this.setState({
+        title: this.props.editableValues.title,
+        status: this.props.editableValues.status,
+        type: this.props.editableValues.type,
+        note: this.props.editableValues.note
+      });
+    }
+  }
+
+  submitProject = event => {
     event.preventDefault(event);
-    this.props.addNewProject(
+    this.props.addProject(
       this.state.title,
       this.state.type,
       this.state.status,
@@ -23,15 +36,15 @@ class Form extends Component {
     );
   };
 
-  updateCurrent = event => {
-    event.preventDefault(event);
-    this.props.updateProject(
-      this.state.title,
-      this.state.type,
-      this.state.status,
-      this.state.note
-    );
-  };
+  // updateCurrent = event => {
+  //   event.preventDefault(event);
+  //   this.props.updateProject(
+  //     this.state.title,
+  //     this.state.type,
+  //     this.state.status,
+  //     this.state.note
+  //   );
+  // };
 
   changeTitleHandler = event => {
     this.setState({
@@ -61,12 +74,14 @@ class Form extends Component {
     // do i need two way binding here with values set to this.state? it's working as is, without it...
     return (
       <div className={styles.FormContainer}>
-        <form onSubmit={this.postNew} className={styles.Form}>
+        <form onSubmit={this.submitProject} className={styles.Form}>
           <div className={styles.FormLabel}>Title</div>
           <section>
             <input
               type="text"
               onChange={this.changeTitleHandler}
+              value={this.state.title}
+              text={this.props.titleVal}
               className={styles.TitleInput}
               placeholder={this.props.titleholder}
               maxLength="25"
@@ -77,10 +92,11 @@ class Form extends Component {
           <section>
             <Select
               selectClass={styles.SelectType}
-              defaultVal="new"
+              defaultVal={this.props.defaultTypeId}
               defaultDisplayVal={this.props.defaultType}
               change={this.changeTypeHandler}
               vals={this.props.typeList}
+              value={this.state.type}
             />
             <input
               type="text"
@@ -93,10 +109,11 @@ class Form extends Component {
           <section>
             <Select
               selectClass={styles.SelectStatus}
-              defaultVal="1"
+              defaultVal={this.props.defaultStatusId}
               defaultDisplayVal={this.props.defaultStatus}
               change={this.changeStatusHandler}
               vals={this.props.statusList}
+              value={this.state.status}
             />
           </section>
           <div className={styles.FormLabel}>Notes</div>
@@ -109,7 +126,7 @@ class Form extends Component {
             />
           </section>
           <Button type="submit" btnClass="Submit">
-            Add
+            {this.props.btnText}
           </Button>
         </form>
       </div>
