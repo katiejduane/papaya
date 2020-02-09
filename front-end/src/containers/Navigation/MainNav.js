@@ -20,7 +20,9 @@ class MainNav extends Component {
     ],
     statusFilter: null,
     typeFilter: null,
-    archive: false
+    archive: false,
+    showTypes: false,
+    showStatuses: false
   };
 
   componentDidMount() {
@@ -50,12 +52,10 @@ class MainNav extends Component {
     // });
   };
 
-  clearFilters = () => {
-    // this.setState({
-    //   archive: false,
-    //   statusFilter: null,
-    //   typeFilter: null
-    // });
+  showDropDown = event => {
+    console.log("dropdown clicked");
+    // how can i use this function to update BOTH the status and the type dropdown
+    // to change visibility/state to show/hide the div that contains the ul/li elems?
   };
 
   render() {
@@ -84,6 +84,7 @@ class MainNav extends Component {
           <div className={styles.Welcome}>Hi, {this.props.name}</div>
           <div className={styles.deskTopOnly}>
             <NavItems
+              showDropDown={this.showDropDown}
               isAuth={this.props.isAuth}
               stats={statsArray}
               types={typesArray}

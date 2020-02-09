@@ -15,17 +15,17 @@ const navItems = props => (
         <NavItem id="ViewAll" click={props.clearFilters}>
           <Link to="/">View All Projects</Link>
         </NavItem>
+        <NavItem click={props.showDropDown}>View by Status</NavItem>
         <DropDown
+          visible={false}
           selectClass="byStatus"
-          defaultVal="Idea"
-          defaultDisplayVal="View by Status"
           vals={props.stats}
           click={props.changeStatus}
         />
+        <NavItem click={props.showDropDown}>View by Type</NavItem>
         <DropDown
           selectClass="byType"
-          defaultVal={props.types[0]}
-          defaultDisplayVal="View by Type"
+          visible={false}
           vals={props.types}
           click={props.changeType}
         />
