@@ -16,9 +16,9 @@ class Form extends Component {
   };
 
   componentDidMount() {
-    console.log("FORM PROPS", this.props);
+    // console.log("FORM PROPS", this.props);
     if (this.props.editableValues) {
-      console.log("editing");
+      // console.log("editing");
       this.setState({
         title: this.props.editableValues.title,
         status: this.props.defaultStatusId,
@@ -58,14 +58,12 @@ class Form extends Component {
     this.setState({
       type: event.target.value
     });
-    console.log("TYPE: ", this.state.type);
   };
 
   changeStatusHandler = event => {
     this.setState({
       status: event.target.value
     });
-    console.log("STATUS: ", this.state.status);
   };
 
   changeNotesHandler = event => {

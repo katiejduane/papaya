@@ -45,7 +45,7 @@ class EditProject extends Component {
     })
       .then(response => {
         const projectDetails = response.data[0];
-        console.log("project: ", projectDetails);
+        // console.log("project: ", projectDetails);
         this.setState({
           title: projectDetails.name,
           status: projectDetails.status.statusname,
@@ -83,7 +83,7 @@ class EditProject extends Component {
       }
     })
       .then(response => {
-        console.log("UPDATE RES: ", response);
+        // console.log("UPDATE RES: ", response);
         if (response.status === 200) {
           this.props.history.push("/");
         }
@@ -97,7 +97,7 @@ class EditProject extends Component {
   };
 
   render() {
-    console.log("STATE: ", this.state);
+    // console.log("STATE: ", this.state);
     const typeList =
       this.props.types.length > 0
         ? this.props.types.map((type, index) => {
@@ -135,7 +135,6 @@ class EditProject extends Component {
           type: this.state.type,
           status: this.state.status
         }}
-        //this needs to NOT be placeholder text!
         defaultType={this.state.type}
         defaultTypeId={this.state.typeId}
         typeList={typeList}

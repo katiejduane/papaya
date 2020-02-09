@@ -94,16 +94,6 @@ module.exports.postNewProject = (req, res, next) => {
   }
 };
 
-// // update all pugs whose age is 7 to have an adoptedStatus of true
-// // because we return a promise for an array, destructuring is recommended
-// const [numberOfAffectedRows, affectedRows] = await Pug.update({
-//   adoptedStatus: true
-// }, {
-//   where: {age: 7},
-//   returning: true, // needed for affectedRows to be populated
-//   plain: true // makes sure that the returned instances are just plain objects
-// })
-
 // post updated project
 module.exports.postUpdateProject = (req, res, next) => {
   const projId = req.params.projId;
@@ -162,24 +152,27 @@ module.exports.postUpdateProject = (req, res, next) => {
 
 // delete project
 module.exports.deleteProject = (req, res, next) => {
-  const projId = req.body.projectId;
+  const projId = req.params.projId;
   const userId = req.user.id;
   // above i might use req.params instead, idk yet
-  Project.findByPk({
+  Project.destroy({
     where: {
-      id: projId,
-      userId: userId
+      id: projId
+      // userId: userId
     }
   })
-    .then(project => {
-      return project.destroy();
-    })
     .then(result => {
       console.log("destroyed project");
       res.json(result);
     })
     .catch(err => console.log(err));
 };
+
+// const numAffectedRows = await Pug.destroy({
+//   where: {
+//     age: 7 // deletes all pugs whose age is 7
+//   }
+// });
 
 //view archived projects
 // module.exports.getArchive = (req, res, next) => {

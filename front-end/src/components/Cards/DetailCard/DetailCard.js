@@ -34,7 +34,7 @@ const DetailCard = props => {
         <Button btnClass="UpdateBtn">
           <Link to={`/update/${props.view}`}>Update</Link>
         </Button>
-        <Button btnClass="DeleteBtn">
+        <Button btnClass="DeleteBtn" clicked={props.destroyProject}>
           <Link to={`/delete/${props.view}`}>Delete</Link>
         </Button>
       </div>

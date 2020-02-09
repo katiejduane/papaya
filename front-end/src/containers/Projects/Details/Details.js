@@ -28,7 +28,7 @@ class Details extends Component {
     })
       .then(response => {
         const projectDetails = response.data[0];
-        console.log(projectDetails);
+        // console.log(projectDetails);
         this.setState({
           id: projectDetails.id,
           title: projectDetails.name,
@@ -48,7 +48,28 @@ class Details extends Component {
       });
   }
 
-  deleteProject() {}
+  destroyProject = () => {
+    const projId = this.state.id;
+    axios({
+      method: "POST", //do i want to change this to a put? look in sequelize docs for ideas
+      url: `/delete/${projId}`,
+      data: {
+        id: projId
+      }
+    })
+      .then(response => {
+        console.log("DELETE RES: ", response);
+        if (response.status === 200) {
+          this.props.history.push("/");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          error: true
+        });
+      });
+  };
 
   render() {
     const humanizedDateCreated = new Date(
@@ -69,6 +90,7 @@ class Details extends Component {
           dateCreated={humanizedDateCreated}
           dateUpdated={humanizedDateUpdated}
           view={this.state.id}
+          destroyProject={this.destroyProject}
         />
         <Link to="/">
           <Button btnClass="GeneralButton">Back</Button>
