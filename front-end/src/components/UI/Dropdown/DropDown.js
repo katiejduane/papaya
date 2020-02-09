@@ -8,7 +8,6 @@ const dropdown = props => {
       className={props.selectClass}
       isVisible={props.visible}
     >
-      <div>{props.defaultDisplayVal}</div>
       {props.vals}
     </ul>
   );
