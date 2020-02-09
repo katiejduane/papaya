@@ -70,12 +70,12 @@ class EditProject extends Component {
   }
 
   updateProject = (title, type, status, notes) => {
-    const id = this.state.projectId;
+    const projId = this.state.projectId;
     axios({
       method: "PUT", //do i want to change this to a put? look in sequelize docs for ideas
-      url: `/update/${id}`,
+      url: `/update/${projId}`,
       data: {
-        id: id,
+        id: projId,
         name: title,
         type: type,
         status: status,
@@ -83,6 +83,7 @@ class EditProject extends Component {
       }
     })
       .then(response => {
+        console.log("UPDATE RES: ", response);
         if (response.status === 200) {
           this.props.history.push("/");
         }

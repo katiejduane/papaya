@@ -26,6 +26,7 @@ instance.interceptors.response.use(
     if (response.status === 403) {
       localStorage.clear();
       history.push("/splash");
+      // this works but it doesn't 'refresh' so nothign happens...
       //so now it IS clearing the local storage, but it's not redirecting... can i do that here?
     }
     return response;
@@ -35,6 +36,7 @@ instance.interceptors.response.use(
     // otherwise handle error some other way
     localStorage.clear();
     history.push("/splash");
+    // this works but it doesn't 'refresh' so nothign happens...
     console.log("res interceptor error", error);
     return Promise.reject(error);
   }

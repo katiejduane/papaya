@@ -9,7 +9,9 @@ class Form extends Component {
     loading: false,
     title: "",
     type: "",
+    typeId: "",
     status: "",
+    statusId: "",
     note: ""
   };
 
@@ -19,8 +21,8 @@ class Form extends Component {
       console.log("editing");
       this.setState({
         title: this.props.editableValues.title,
-        status: this.props.editableValues.status,
-        type: this.props.editableValues.type,
+        status: this.props.defaultStatusId,
+        type: this.props.defaultTypeId,
         note: this.props.editableValues.note
       });
     }
@@ -56,12 +58,14 @@ class Form extends Component {
     this.setState({
       type: event.target.value
     });
+    console.log("TYPE: ", this.state.type);
   };
 
   changeStatusHandler = event => {
     this.setState({
       status: event.target.value
     });
+    console.log("STATUS: ", this.state.status);
   };
 
   changeNotesHandler = event => {

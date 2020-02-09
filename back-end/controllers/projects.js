@@ -94,8 +94,19 @@ module.exports.postNewProject = (req, res, next) => {
   }
 };
 
+// // update all pugs whose age is 7 to have an adoptedStatus of true
+// // because we return a promise for an array, destructuring is recommended
+// const [numberOfAffectedRows, affectedRows] = await Pug.update({
+//   adoptedStatus: true
+// }, {
+//   where: {age: 7},
+//   returning: true, // needed for affectedRows to be populated
+//   plain: true // makes sure that the returned instances are just plain objects
+// })
+
 // post updated project
 module.exports.postUpdateProject = (req, res, next) => {
+  const projId = req.params.projId;
   const userId = req.user.id;
   const name = req.body.name;
   const type = req.body.type;
@@ -114,13 +125,16 @@ module.exports.postUpdateProject = (req, res, next) => {
   if (isNaN(parseInt(type))) {
     Type.create({ typename: type, userId: userId })
       .then(type => {
-        Project.update({
-          userId: userId,
-          name: name,
-          notes: notes,
-          statusId: status,
-          typeId: type.id
-        })
+        Project.update(
+          {
+            userId: userId,
+            name: name,
+            notes: notes,
+            statusId: status,
+            typeId: type.id
+          },
+          { where: { id: projId } }
+        )
           .then(response => {
             res.json(response);
           })
@@ -128,13 +142,16 @@ module.exports.postUpdateProject = (req, res, next) => {
       })
       .catch(err => console.log(err));
   } else {
-    Project.update({
-      userId: userId,
-      name: name,
-      notes: notes,
-      statusId: status,
-      typeId: type
-    })
+    Project.update(
+      {
+        userId: userId,
+        name: name,
+        notes: notes,
+        statusId: status,
+        typeId: type
+      },
+      { where: { id: projId } }
+    )
       .then(response => {
         res.json(response);
       })
