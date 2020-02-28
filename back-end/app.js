@@ -68,7 +68,7 @@ sequelize
   // })
   // .then(user => {
   //     if (!user) {
-  //         User.create({ firstname: 'Katie', lastname: 'Duane', email: 'katiejduane@gmail.com', hash:'xxxxxx' })
+  //         User.create({ firstname: 'Katie', lastname: 'Duane', email: 'katiejduane@gmail.com', hash:'xxxxxx', artistType: 'Writer', projectTypes: 'Essays, poems' })
   //     }
   //     return Status.findByPk(1);
   // })

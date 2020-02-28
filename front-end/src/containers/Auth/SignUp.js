@@ -64,6 +64,32 @@ class SignUp extends Component {
         },
         valid: false,
         touched: false
+      },
+      artistType: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "What kind of artist are you?"
+        },
+        value: "",
+        validation: {
+          required: false
+        },
+        valid: false,
+        touched: false
+      },
+      preferredProjs: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "What are your preferred project types?"
+        },
+        value: "",
+        validation: {
+          required: false
+        },
+        valid: false,
+        touched: false
       }
     }
   };
@@ -115,7 +141,16 @@ class SignUp extends Component {
     const lastname = this.state.controls.lastname.value;
     const email = this.state.controls.email.value;
     const pass = this.state.controls.password.value;
-    this.props.onSignUp(firstname, lastname, email, pass);
+    const artistType = this.state.controls.artistType.value;
+    const preferredProjs = this.state.controls.preferredProjs.value;
+    this.props.onSignUp(
+      firstname,
+      lastname,
+      email,
+      pass,
+      artistType,
+      preferredProjs
+    );
   };
 
   render() {
@@ -186,7 +221,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

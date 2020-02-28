@@ -3,7 +3,7 @@
 import axios from "../../axiosInstance";
 
 import * as actionTypes from "./actionTypes";
-
+import { clearProjectTypes } from "./types";
 // ======================================== SIGNUP ======================================== //
 
 export const signUpStart = () => {
@@ -42,7 +42,7 @@ export const signUp = (firstname, lastname, email, password) => {
       data: authData
     })
       .then(response => {
-        console.log(response);
+        // console.log(response);
         dispatch(signUpSuccess(response.data));
       })
       .catch(err => {
@@ -92,10 +92,11 @@ export const signIn = (email, password) => {
       data: authData
     })
       .then(response => {
-        console.log(response);
+        console.log("auth res", response);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.user.id);
         localStorage.setItem("firstName", response.data.user.firstname);
+        localStorage.setItem("expiresIn", "100000");
         dispatch(
           signInSuccess(
             response.data.token,
@@ -116,6 +117,7 @@ export const signIn = (email, password) => {
 // ======================================== SIGNOUT ======================================== //
 
 export const signOutStart = () => {
+  // localStorage.clear();
   return {
     type: actionTypes.SIGNOUT
   };
@@ -139,9 +141,10 @@ export const signOut = () => {
         console.log(response);
         localStorage.clear();
         dispatch(signOutSuccess());
+        dispatch(clearProjectTypes());
       })
       .catch(err => console.log(err));
   };
 };
 
-//someday i want to finish this little baby... :/
+// ==================================== CHECK AUTH TIMEOUT =================================== //

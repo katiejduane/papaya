@@ -18,7 +18,5 @@ router.get("/checkToken", withAuth, userController.checkToken);
 //need a way to handle log out if token is expired!! (current issue)
 
 router.post("/signout", userController.signOut);
-// do i need to send the above with auth middleware? experiment and find out! :)
-// something with this is not working...
 
 module.exports = router;

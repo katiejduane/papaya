@@ -28,7 +28,7 @@ class List extends Component {
 
   componentDidMount() {
     // console.log("PROPS: ", this.props);
-    console.log("init state: ", this.state);
+    // console.log("init state: ", this.state);
     if (this.props.types.length < 1) {
       this.props.getProjectTypes();
     }
@@ -55,7 +55,7 @@ class List extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log("in update", prevState, this.state, prevProps, this.props);
+    // console.log("in update", prevState, this.state, prevProps, this.props);
     if (
       (this.props.match.params.status && this.state.filter === null) ||
       (this.props.match.params.status &&

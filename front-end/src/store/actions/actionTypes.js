@@ -18,7 +18,9 @@ export const CHECK_AUTH_TIMEOUT = "CHECK_AUTH_TIMEOUT";
 //redirect path
 export const SET_AUTH_REDIRECT_PATH = "SET_AUTH_REDIRECT_PATH";
 
-// get project types
+//project types
 export const TYPE_START = "TYPE_START";
 export const TYPE_SUCCESS = "TYPE_SUCCESS";
 export const TYPE_FAIL = "TYPE_FAIL";
+export const TYPES_NONE = "TYPES_NONE";
+export const TYPES_CLEAR = "TYPES_CLEAR";

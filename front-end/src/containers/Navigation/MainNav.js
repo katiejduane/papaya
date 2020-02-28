@@ -32,6 +32,11 @@ class MainNav extends Component {
     // to 'log out'; rendering this function totally null
   }
 
+  componentDidUpdate() {
+    // needed because if a user adds another type, this component needs to re-render with updated
+    // types list from BE!
+  }
+
   typeChangeHandler = event => {
     this.setState({
       typeFilter: event.target.value
@@ -59,6 +64,7 @@ class MainNav extends Component {
   };
 
   render() {
+    console.log("in man nav: ", this.props.types);
     //return these (or something like them) if wanting to use query string to filter?
     let typesArray = this.props.types.map(type => {
       return (
@@ -109,14 +115,15 @@ const mapStateToProps = state => {
     loading: state.auth.loading,
     name: state.auth.firstname,
     types: state.type.types,
-    isAuth: state.auth.token !== null
+    isAuth: state.auth.token !== null // this is bad, i need to check something else because a malformed token IS NOT NULL
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getProjectTypes: () => dispatch(actions.getProjectTypes()),
-    signOut: () => dispatch(actions.signOut())
+    signOut: () => dispatch(actions.signOut()),
+    clearTypes: () => dispatch(actions.clearProjectTypes())
   };
 };
 

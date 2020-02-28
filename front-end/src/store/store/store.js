@@ -38,7 +38,6 @@ export const saveToLocalStorage = state => {
 };
 
 const persistedState = loadFromLocalStorage();
-// console.log(persistedState);
 
 export const store = theStore(
   rootReducer,

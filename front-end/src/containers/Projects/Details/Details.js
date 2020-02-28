@@ -58,7 +58,7 @@ class Details extends Component {
       }
     })
       .then(response => {
-        console.log("DELETE RES: ", response);
+        // console.log("DELETE RES: ", response);
         if (response.status === 200) {
           this.props.history.push("/");
         }

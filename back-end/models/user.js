@@ -26,6 +26,14 @@ const User = sequelize.define("user", {
   hash: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  artistType: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  projectTypes: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 });
 

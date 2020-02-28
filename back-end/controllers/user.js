@@ -10,6 +10,8 @@ module.exports.postSignUp = (req, res, next) => {
   const lastname = req.body.lastname;
   const email = req.body.email.toLowerCase();
   const password = req.body.password;
+  const artistType = req.body.artistType;
+  const preferredProjs = req.body.preferredProjs;
   User.findOne({
     where: {
       email: email
@@ -21,7 +23,9 @@ module.exports.postSignUp = (req, res, next) => {
           firstname: firstname,
           lastname: lastname,
           email: email,
-          hash: password
+          hash: password,
+          artistType: artistType,
+          projectTypes: preferredProjs
         })
           .then(response => {
             res.json({

@@ -6,7 +6,7 @@ const dropdown = props => {
       onChange={props.change}
       onClick={props.click}
       className={props.selectClass}
-      isVisible={props.visible}
+      isvisible={props.visible}
     >
       {props.vals}
     </ul>
