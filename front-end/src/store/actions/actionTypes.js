@@ -13,7 +13,7 @@ export const SIGNOUT = "SIGNOUT";
 export const SIGNOUT_SUCCESS = "SIGNOUT_SUCCESS";
 
 //check auth timeout
-export const CHECK_AUTH_TIMEOUT = "CHECK_AUTH_TIMEOUT";
+export const AUTH_CHECK_STATE = "AUTH_CHECK_STATE";
 
 //redirect path
 export const SET_AUTH_REDIRECT_PATH = "SET_AUTH_REDIRECT_PATH";

@@ -10,7 +10,7 @@ const initialState = {
   authorized: false,
   registered: null,
   expiresIn: null,
-  msg: ""
+  msg: "",
 };
 
 const signUpStart = (state, action) => {
@@ -22,7 +22,7 @@ const signUpSuccess = (state, action) => {
   return updateObject(state, {
     msg: "signup success",
     loading: false,
-    registered: true
+    registered: true,
   });
 };
 
@@ -30,7 +30,7 @@ const signUpFail = (state, action) => {
   return updateObject(state, {
     msg: "signup error",
     error: action.error,
-    loading: false
+    loading: false,
   });
 };
 
@@ -46,29 +46,20 @@ const signInSuccess = (state, action) => {
     firstname: action.firstname,
     error: null,
     loading: false,
-    authorized: true
+    authorized: true,
   });
 };
 
 const signInFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
-    loading: false
-  });
-};
-
-const checkAuthTimeOut = (state, action) => {
-  return updateObject(state, {
-    token: null,
-    userId: null,
-    authorized: false,
-    loading: false
+    loading: false,
   });
 };
 
 const signOutStart = (state, action) => {
   return updateObject(state, {
-    loading: true
+    loading: true,
   });
 };
 
@@ -79,7 +70,28 @@ const signOutSuccess = (state, action) => {
     firstname: null,
     msg: action.msg,
     authorized: false,
-    loading: false
+    loading: false,
+  });
+};
+
+const checkAuthState = (state, action) => {
+  return updateObject(state, {
+    token: null,
+    userId: null,
+    firstname: null,
+    authorized: false,
+    loading: false,
+  });
+};
+
+const tokenCheck = (state, action) => {
+  return updateObject(state, {
+    token: null,
+    userId: null,
+    firstname: null,
+    msg: action.msg,
+    authorized: false,
+    loading: false,
   });
 };
 
@@ -97,8 +109,8 @@ const reducer = (state = initialState, action) => {
       return signInSuccess(state, action);
     case actionTypes.SIGNIN_FAIL:
       return signInFail(state, action);
-    case actionTypes.CHECK_AUTH_TIMEOUT:
-      return checkAuthTimeOut(state, action);
+    case actionTypes.AUTH_CHECK_STATE:
+      return checkAuthState(state, action);
     case actionTypes.SIGNOUT:
       return signOutStart(state, action);
     case actionTypes.SIGNOUT_SUCCESS:

@@ -1,20 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
+import { createBrowserHistory } from "history";
 
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { store, saveToLocalStorage } from "./store/store/store";
 
+export const history = createBrowserHistory();
 store.subscribe(() => saveToLocalStorage(store.getState()));
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>
 );
 

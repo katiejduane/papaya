@@ -13,9 +13,14 @@ import Splash from "./components/Splash/Splash";
 import SignUp from "./containers/Auth/SignUp";
 import SignIn from "./containers/Auth/SignIn";
 import SignOut from "./containers/Auth/SignOut";
+import * as actions from "./store/actions/index";
 // import Archive from "./containers/Projects/Archive/Archive";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.tokenCheck();
+  }
+
   render() {
     let routes = (
       <Switch>
@@ -50,10 +55,16 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.token !== null //make this have to do with expiresIn instead
+    isAuth: state.auth.authorized === true,
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    tokenCheck: () => dispatch(actions.authCheckState()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
