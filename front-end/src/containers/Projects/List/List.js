@@ -6,6 +6,7 @@ import { Redirect, withRouter, Link } from "react-router-dom";
 import Aux from "../../../hoc/Aux/Aux";
 import styles from "./List.module.css";
 import MiniCard from "../../../components/Cards/MiniCard/MiniCard";
+import Loader from "../../../components/UI/Loader/Loader";
 import * as actions from "../../../store/actions/index";
 
 class List extends Component {
@@ -19,11 +20,11 @@ class List extends Component {
       { value: "4", displayValue: "Revision" },
       { value: "5", displayValue: "Finished" },
       { value: "6", displayValue: "Submitted" },
-      { value: "7", displayValue: "Accepted" }
+      { value: "7", displayValue: "Accepted" },
     ],
     error: false,
     filter: null,
-    _isMounted: false
+    _isMounted: false,
   };
 
   componentDidMount() {
@@ -36,18 +37,18 @@ class List extends Component {
     //get projects from backend
     axios({
       method: "GET",
-      url: "/"
+      url: "/",
     })
-      .then(response => {
-        // console.log(response);
+      .then((response) => {
+        console.log("component did mount");
         this.setState({
           loading: false,
-          miniCards: response.data
+          miniCards: response.data,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
-          error: true
+          error: true,
         });
         console.log(error.message);
       });
@@ -55,6 +56,7 @@ class List extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log("component did update");
     // console.log("in update", prevState, this.state, prevProps, this.props);
     if (
       (this.props.match.params.status && this.state.filter === null) ||
@@ -62,7 +64,7 @@ class List extends Component {
         this.props.match.params.status !== prevProps.match.params.status)
     ) {
       this.setState({
-        filter: this.props.match.params.status
+        filter: this.props.match.params.status,
       });
     }
     if (
@@ -71,7 +73,7 @@ class List extends Component {
         this.props.match.params.typeid !== prevProps.match.params.typeid)
     )
       this.setState({
-        filter: this.props.match.params.typeid
+        filter: this.props.match.params.typeid,
       });
     if (this.props.match.path === "/" && this.state.filter !== null) {
       console.log("no filter!");
@@ -84,59 +86,58 @@ class List extends Component {
   }
 
   render() {
-    if (this.props.authorized) {
-      let miniCardList;
-      if (this.state.miniCards.length > 0) {
-        miniCardList = this.state.miniCards.map(card => {
-          if (
-            this.state.filter !== null &&
-            this.state.filter !== card.status.statusname &&
-            this.state.filter !== card.type.typename
-          ) {
-            return null;
-            // what does that above return null do? how/where would i render a little setence
-            // saying 'no projects in this type/at this status' if there aren't any?
-          }
-          return (
-            <MiniCard
-              key={card.id}
-              title={card.name}
-              type={card.type.typename}
-              color={card.status.color}
-              status={card.status.statusname}
-              view={card.id}
-            />
-          );
-        });
-      } else {
-        return (
-          <h2 className={styles.pageTitle}>You don't have any projects yet!</h2>
-        );
-      }
-      return (
-        <Aux>
-          <h1 className={styles.pageTitle}>Your Projects</h1>
-          <div className={styles.MiniCardContainer}>{miniCardList}</div>
-        </Aux>
-      );
-    } else {
-      return <Redirect to="/splash" />;
+    let miniCardList;
+    if (this.state.loading) {
+      miniCardList = <Loader />;
     }
+    if (this.state.miniCards.length > 0) {
+      miniCardList = this.state.miniCards.map((card) => {
+        if (
+          this.state.filter !== null &&
+          this.state.filter !== card.status.statusname &&
+          this.state.filter !== card.type.typename
+        ) {
+          return null;
+          // what does that above return null do? how/where would i render a little setence
+          // saying 'no projects in this type/at this status' if there aren't any?
+        }
+        return (
+          <MiniCard
+            key={card.id}
+            title={card.name}
+            type={card.type.typename}
+            color={card.status.color}
+            status={card.status.statusname}
+            view={card.id}
+          />
+        );
+      });
+    } else {
+      return (
+        <h2 className={styles.pageTitle}>You don't have any projects yet!</h2>
+      );
+    }
+    return (
+      <Aux>
+        <h1 className={styles.pageTitle}>Your Projects</h1>
+        <div className={styles.MiniCardContainer}>{miniCardList}</div>
+      </Aux>
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     authorized: state.auth.authorized,
     loading: state.auth.loading,
-    types: state.type.types
+    types: state.type.types,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getProjectTypes: () => dispatch(actions.getProjectTypes())
+    getProjectTypes: () => dispatch(actions.getProjectTypes()),
   };
 };
 

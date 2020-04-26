@@ -177,16 +177,17 @@ export const authCheckState = () => {
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
       if (expirationDate <= new Date()) {
         dispatch(signOut());
-      } else {
-        const userId = localStorage.getItem("userId");
-        const firstName = localStorage.getItem("firstName");
-        dispatch(signInSuccess(token, userId, firstName));
-        dispatch(
-          checkAuthTimeout(
-            (expirationDate.getTime() - new Date().getTime()) / 1000
-          )
-        );
       }
+      // else {
+      //   const userId = localStorage.getItem("userId");
+      //   const firstName = localStorage.getItem("firstName");
+      //   dispatch(signInSuccess(token, userId, firstName)); // this won't work with a JWT. the token can't be reused/extended
+      //   dispatch(
+      //     checkAuthTimeout(
+      //       (expirationDate.getTime() - new Date().getTime()) / 1000
+      //     )
+      //   );
+      // }
     }
   };
 };
