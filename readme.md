@@ -33,7 +33,7 @@ I made this project for a few reasons:
 
 ## Status:
 
-This project is about 97% done. There is some styling that needs to be completed in the side nav, and it needs to be deployed. BUT: I've been working on it on-and-off for over a year and have grown a lot in my skills, and have decided to leave it at 97% so I can move on to learning and building new things. I'm grateful for all this project taught me, which was A LOT. If I have the free time in the future, I'd love to fix the styling issue and learn Heroku in order to deploy it :)
+This project is about 97% done. There is some styling that needs to be completed, and it needs to be deployed. BUT: I've been working on it on-and-off for over a year and have grown a lot in my skills, and have decided to leave it at 97% so I can move on to learning and building new things. I'm grateful for all this project taught me, which was A LOT. If I have the free time in the future, I'd love to finish the styling and learn Heroku in order to deploy it :)
 
 ## What it looks like:
 
