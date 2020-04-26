@@ -1,12 +1,13 @@
 import React from "react";
 
-const dropdown = props => {
+const dropdown = (props) => {
+  console.log("dd", props);
   return (
     <ul
       onChange={props.change}
       onClick={props.click}
       className={props.selectClass}
-      isvisible={props.visible}
+      // show={props.show}
     >
       {props.vals}
     </ul>

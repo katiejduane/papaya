@@ -16,20 +16,16 @@ class MainNav extends Component {
       { value: "4", displayValue: "Revision" },
       { value: "5", displayValue: "Finished" },
       { value: "6", displayValue: "Submitted" },
-      { value: "7", displayValue: "Accepted" }
+      { value: "7", displayValue: "Accepted" },
     ],
     statusFilter: null,
     typeFilter: null,
     archive: false,
-    showTypes: false,
-    showStatuses: false
+    showDropDown: null,
   };
 
   componentDidMount() {
     this.props.getProjectTypes();
-    // i can't tell if this is bad or not; i have seen it done in some tutorials, but
-    // i get weird errors about memory leaks (from this page i think) when i clear local storage
-    // to 'log out'; rendering this function totally null
   }
 
   componentDidUpdate() {
@@ -37,36 +33,42 @@ class MainNav extends Component {
     // types list from BE!
   }
 
-  typeChangeHandler = event => {
+  typeChangeHandler = (event) => {
     this.setState({
-      typeFilter: event.target.value
+      typeFilter: event.target.value,
     });
   };
 
-  statusChangeHandler = event => {
+  statusChangeHandler = (event) => {
     this.setState({
-      statusFilter: event.target.value
+      statusFilter: event.target.value,
     });
   };
 
-  getArchive = () => {
-    // this.setState({
-    //   archive: true,
-    //   statusFilter: null,
-    //   typeFilter: null
-    // });
+  // getArchive = () => {
+  // this.setState({
+  //   archive: true,
+  //   statusFilter: null,
+  //   typeFilter: null
+  // });
+  // };
+
+  showTypes = (event) => {
+    console.log("click dropdown", event.target.id);
+    this.setState({
+      showStatuses: true,
+    });
   };
 
-  showDropDown = event => {
-    console.log("dropdown clicked");
-    // how can i use this function to update BOTH the status and the type dropdown
-    // to change visibility/state to show/hide the div that contains the ul/li elems?
+  showStatuses = (event) => {
+    console.log("click dropdown", event.target.id);
+    this.setState({
+      showTypes: true,
+    });
   };
 
   render() {
-    console.log("in man nav: ", this.props.types);
-    //return these (or something like them) if wanting to use query string to filter?
-    let typesArray = this.props.types.map(type => {
+    let typesArray = this.props.types.map((type) => {
       return (
         <li key={type.id} value={type.id}>
           <Link to={`/type/${type.typename}`}>{type.typename}</Link>
@@ -74,7 +76,7 @@ class MainNav extends Component {
       );
     });
 
-    let statsArray = this.state.stats.map(status => {
+    let statsArray = this.state.stats.map((status) => {
       return (
         <li key={status.value} value={status.value} label={status.displayValue}>
           <Link to={`/status/${status.displayValue}`}>
@@ -90,7 +92,8 @@ class MainNav extends Component {
           <div className={styles.Welcome}>Hi, {this.props.name}</div>
           <div className={styles.deskTopOnly}>
             <NavItems
-              showDropDown={this.showDropDown}
+              // showStatuses={this.showStatuses}
+              // showTypes={this.showTypes}
               isAuth={this.props.isAuth}
               stats={statsArray}
               types={typesArray}
@@ -108,22 +111,22 @@ class MainNav extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     authorized: state.auth.authorized,
     loading: state.auth.loading,
     name: state.auth.firstname,
     types: state.type.types,
-    isAuth: state.auth.token !== null // this is bad, i need to check something else because a malformed token IS NOT NULL
+    isAuth: state.auth.token !== null, // this is bad, i need to check something else because a malformed token IS NOT NULL
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getProjectTypes: () => dispatch(actions.getProjectTypes()),
     signOut: () => dispatch(actions.signOut()),
-    clearTypes: () => dispatch(actions.clearProjectTypes())
+    clearTypes: () => dispatch(actions.clearProjectTypes()),
   };
 };
 

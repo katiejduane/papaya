@@ -17,16 +17,16 @@ class Details extends Component {
     dateCreated: "",
     dateUpdated: "",
     color: "",
-    error: false
+    error: false,
   };
 
   componentDidMount() {
     const projId = this.props.match.params.id;
     axios({
       method: "GET",
-      url: `${window.apiHost}/view/${projId}`
+      url: `${window.apiHost}/view/${projId}`,
     })
-      .then(response => {
+      .then((response) => {
         const projectDetails = response.data[0];
         // console.log(projectDetails);
         this.setState({
@@ -37,12 +37,12 @@ class Details extends Component {
           type: projectDetails.type.typename,
           dateCreated: projectDetails.createdAt,
           dateUpdated: projectDetails.updatedAt,
-          color: projectDetails.status.color
+          color: projectDetails.status.color,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
-          error: true
+          error: true,
         });
         console.log(error);
       });
@@ -54,19 +54,18 @@ class Details extends Component {
       method: "POST", //do i want to change this to a put? look in sequelize docs for ideas
       url: `/delete/${projId}`,
       data: {
-        id: projId
-      }
+        id: projId,
+      },
     })
-      .then(response => {
-        // console.log("DELETE RES: ", response);
+      .then((response) => {
         if (response.status === 200) {
           this.props.history.push("/");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         this.setState({
-          error: true
+          error: true,
         });
       });
   };

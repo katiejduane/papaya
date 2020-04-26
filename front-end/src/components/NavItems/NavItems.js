@@ -14,17 +14,19 @@ const navItems = (props) => (
       <NavItem id="ViewAll" click={props.clearFilters}>
         <Link to="/">View All Projects</Link>
       </NavItem>
-      <NavItem click={props.showDropDown}>View by Status</NavItem>
+      <NavItem click={props.showStatuses} id="status">
+        View by Status
+      </NavItem>
       <DropDown
-        visible={false}
         selectClass="byStatus"
         vals={props.stats}
         click={props.changeStatus}
       />
-      <NavItem click={props.showDropDown}>View by Type</NavItem>
+      <NavItem click={props.showTypes} id="type">
+        View by Type
+      </NavItem>
       <DropDown
         selectClass="byType"
-        visible={false}
         vals={props.types}
         click={props.changeType}
       />

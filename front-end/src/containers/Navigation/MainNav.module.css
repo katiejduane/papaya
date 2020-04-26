@@ -1,6 +1,5 @@
 .MainNav {
   position: fixed;
-  /* background-color: rgb(249, 211, 197); */
   background-color: rgb(254, 220, 218);
   display: flex;
   flex-direction: column;
@@ -9,7 +8,6 @@
   padding: 1rem;
   box-sizing: border-box;
   z-index: 90;
-  /* box-shadow: 1px 5px 15px 1px rgba(201, 190, 190, 0.495); */
 }
 
 .NavTop {

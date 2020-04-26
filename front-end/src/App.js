@@ -13,14 +13,8 @@ import Splash from "./components/Splash/Splash";
 import SignUp from "./containers/Auth/SignUp";
 import SignIn from "./containers/Auth/SignIn";
 import SignOut from "./containers/Auth/SignOut";
-import * as actions from "./store/actions/index";
-// import Archive from "./containers/Projects/Archive/Archive";
 
 class App extends Component {
-  componentDidMount() {
-    this.props.tokenCheck();
-  }
-
   render() {
     let routes = (
       <Switch>
@@ -28,7 +22,6 @@ class App extends Component {
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/splash" component={Splash} />
         <Redirect to="/splash" />
-        {/* // not sure if i need the "/" here or not to allow redirect to 'splash' */}
       </Switch>
     );
 
@@ -38,7 +31,6 @@ class App extends Component {
           <Switch>
             <Route exact path="/status/:status" component={List} />
             <Route exact path="/type/:typeid" component={List} />
-            {/* <Route exact path="/archive" component={Archive} /> */}
             <Route exact path="/view/:id" component={Details} />
             <Route exact path="/addNew" component={NewProject} />
             <Route exact path="/update/:id" component={UpdateProject} />
@@ -57,14 +49,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.authorized === true,
+    isAuth: state.auth.token !== null,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    tokenCheck: () => dispatch(actions.authCheckState()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

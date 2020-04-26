@@ -12,12 +12,17 @@
 .byStatus,
 .byType {
   list-style: none;
-  /* background-color: rgba(245, 182, 187, 0.872); */
+  background-color: rgba(245, 182, 187, 0.872);
   color: rgb(82, 73, 80);
   margin: 0.25rem;
   outline: none;
   border: none;
   text-align: center;
+}
+
+.byStatus > li,
+.byType > li {
+  margin: 0.25rem;
 }
 
 .byStatus > div,
