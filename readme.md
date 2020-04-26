@@ -1,14 +1,14 @@
 ## About Papaya!
 
-I'm made this project for a few reasons:
+I made this project for a few reasons:
 
-1. I thought it might be nice to have a project organizer for my excessive amounts of projects, spanning poetry, paintings, and web development. (I was wrong, once I was finished, it just felt like one more thing to manage!)
+1. I thought it might be nice to have a project organizer for my excessive amounts of projects, spanning poetry, paintings, and web development. (I was wrong, once I was finished with this, using it just felt like one more thing to manage!)
 
 2. I wanted more practice with React and Redux
 
 3. I wanted a deeper understanding of Auth, and to do it from scratch myself, using JWT.
 
-4. To learn an ORM, Sequelize!
+4. To learn Sequelize!
 
 ## Functionality includes:
 
