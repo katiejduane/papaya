@@ -14,10 +14,10 @@ module.exports.postSignUp = (req, res, next) => {
   const preferredProjs = req.body.preferredProjs;
   User.findOne({
     where: {
-      email: email
-    }
+      email: email,
+    },
   })
-    .then(user => {
+    .then((user) => {
       if (!user) {
         User.create({
           firstname: firstname,
@@ -25,21 +25,21 @@ module.exports.postSignUp = (req, res, next) => {
           email: email,
           hash: password,
           artistType: artistType,
-          projectTypes: preferredProjs
+          projectTypes: preferredProjs,
         })
-          .then(response => {
+          .then((response) => {
             res.json({
-              response
+              response,
             });
           })
-          .catch(err => console.log(err));
+          .catch((err) => console.log(err));
       } else {
         res.json({
-          msg: "User already exists!"
+          msg: "User already exists!",
         });
       }
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 // sign in
@@ -48,51 +48,50 @@ module.exports.postSignIn = (req, res, next) => {
   const password = req.body.password;
   User.findOne({
     where: {
-      email: email
-    }
+      email: email,
+    },
   })
-    .then(function(user, err) {
+    .then(function (user, err) {
       if (err) {
         console.log(err);
         res.status(500).json({
           error: "Internal error please try again",
-          auth: false
+          auth: false,
         });
       } else if (!user) {
         res.status(401).json({
           error: "User email does not exist",
-          auth: false
+          auth: false,
         });
       } else {
-        user.authenticate(password, function(err, same) {
+        user.authenticate(password, function (err, same) {
           if (err) {
             res.status(500).json({
               error: "Internal error please try again",
-              auth: false
+              auth: false,
             });
           } else if (!same) {
             res.status(401).json({
               error: "That password is incorrect",
-              auth: false
+              auth: false,
             });
           } else {
             const token = jwt.sign({ id: user.id }, config.secret, {
-              expiresIn: 36000
+              expiresIn: "1h",
             });
             res.json({
               token: token,
-              expiresIn: 36000,
-              // above is just a temporary solution
+              expiresIn: 3600,
               msg: "Welcome!",
               user: user,
               error: false,
-              auth: true
+              auth: true,
             });
           }
         });
       }
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 // check token
@@ -102,17 +101,17 @@ module.exports.checkToken = (req, res, next) => {
     return res.status(401).json({ msg: "Must pass token" });
   }
   // Check token that was passed by decoding token using secret
-  jwt.verify(token, config.secret, function(err, user) {
+  jwt.verify(token, config.secret, function (err, user) {
     if (err) throw err;
     //return user using the id from w/in JWTToken
     User.findByPk(user.id)
-      .then(user => {
+      .then((user) => {
         res.json({
           user: user,
-          token: token
+          token: token,
         });
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   });
 };
 
@@ -123,7 +122,7 @@ module.exports.signOut = (req, res, next) => {
     token: null,
     msg: "Logged out!",
     auth: false,
-    user: null
+    user: null,
   });
 };
 
