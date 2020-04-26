@@ -98,6 +98,7 @@ class List extends Component {
           this.state.filter !== card.type.typename
         ) {
           return null;
+          // return <div>No projects with this status!</div>;
           // what does that above return null do? how/where would i render a little setence
           // saying 'no projects in this type/at this status' if there aren't any?
         }
@@ -113,10 +114,11 @@ class List extends Component {
         );
       });
     } else {
-      return (
-        <h2 className={styles.pageTitle}>You don't have any projects yet!</h2>
+      miniCardList = (
+        <h2 className={styles.subtitle}>You don't have any projects yet!</h2>
       );
     }
+
     return (
       <Aux>
         <h1 className={styles.pageTitle}>Your Projects</h1>

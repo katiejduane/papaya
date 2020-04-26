@@ -5,6 +5,12 @@
   color: rgb(82, 73, 80);
 }
 
+.subtitle {
+  padding: 1rem;
+  font-size: 16pt;
+  color: rgb(82, 73, 80);
+}
+
 .MiniCardContainer {
   /* position: absolute;
     top: 0;
