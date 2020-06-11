@@ -41,7 +41,7 @@ Sign Up:
 ![paypaya image](screenshots/signup.png)
 
 View All Projects:
-![paypaya image](screenshots/view-all.png)
+![paypaya image](screenshots/view-all2.png)
 
 View Project Details:
 ![paypaya image](screenshots/details.png)
@@ -50,7 +50,7 @@ Add New Project:
 ![paypaya image](screenshots/add-new.png)
 
 View By Type:
-![paypaya image](screenshots/by-type.png)
+![paypaya image](screenshots/by-type2.png)
 
 View By Status:
-![paypaya image](screenshots/by-status.png)
+![paypaya image](screenshots/by-status2.png)
