@@ -38,15 +38,18 @@ This project is about 97% done. There is some styling that needs to be completed
 ## What it looks like:
 
 Sign Up:
+(Or sign in!)
 ![paypaya image](screenshots/signup.png)
 
 View All Projects:
 ![paypaya image](screenshots/view-all2.png)
 
 View Project Details:
+(From here yoy also UPDATE or DELETE a project)
 ![paypaya image](screenshots/details.png)
 
 Add New Project:
+(You can CHOOSE project type from drop down or ADD a new project type in the input field adjacent to it)
 ![paypaya image](screenshots/add-new.png)
 
 View By Type:
