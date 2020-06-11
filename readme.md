@@ -21,14 +21,14 @@ I made this project for a few reasons:
 - Delete Project
 - View All Projects
 - View Projects by Type
-- View Project by Status
+- View Projects by Status
 
 ## Technology Used:
 
 - React & Redux
 - HTML, CSS
 - Node, Express
-- PostreSQL with Sequelize
+- PostgreSQL with Sequelize
 - JSON Web Tokens for Auth
 
 ## Status:
